@@ -1,4 +1,4 @@
-import type { User } from '@prisma/client';
+import type { Account } from '@prisma/client';
 import type { FC } from 'react';
 
 import { SignboardContainer } from '@/common/SignboardContainer';
@@ -8,11 +8,11 @@ import { useForm } from 'react-hook-form';
 
 type Props = {
   email: string;
-  onSubmit: (data: User) => void;
+  onSubmit: (data: Account) => void;
 };
 
 export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
-  const { register, handleSubmit, setValue } = useForm<User>();
+  const { register, handleSubmit, setValue } = useForm<Account>();
 
   useEffect(() => {
     setValue('email', email);

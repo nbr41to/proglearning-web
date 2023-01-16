@@ -13,6 +13,7 @@ import {
   BsTwitter as TwitterIcon,
   BsYoutube as YouTubeIcon,
   BsChatText as ChatTextIcon,
+  BsFillCaretDownFill as CaretDownIcon,
 } from 'react-icons/bs';
 import { CgDanger as DangerIcon } from 'react-icons/cg';
 import {
@@ -57,6 +58,7 @@ export {
   ArrowCircleUpIcon,
   AtIcon,
   BookIcon,
+  CaretDownIcon,
   ChatBubblesIcon,
   ChatTextIcon,
   CheckedBoxIcon,

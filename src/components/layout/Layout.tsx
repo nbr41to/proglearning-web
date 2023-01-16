@@ -1,37 +1,104 @@
+import type { User } from '@supabase/supabase-js';
 import type { FC, ReactNode } from 'react';
 
+import { CaretDownIcon, LogoutIcon, SearchIcon } from '@/common/icons';
+import { signOut } from '@/utils/supabase/auth';
+import { Avatar, Button, clsx, Menu } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type Props = {
   children: ReactNode;
+  user?: User | null;
 };
 
-export const Layout: FC<Props> = ({ children }) => {
+export const Layout: FC<Props> = ({ children, user }) => {
+  const router = useRouter();
+
   return (
     <div className="">
-      <header className="fixed z-50 flex w-full items-center gap-4 bg-white/50 py-2 px-4 shadow backdrop-blur">
-        <Link className="a-reset flex items-center gap-2" href="/">
-          <Image
-            src="/logo.png"
-            alt="site logo"
-            width={48}
-            height={48}
-            priority
-          />
-          <h1 className="font-baloo">progLearning</h1>
-        </Link>
+      <header className="fixed z-50 flex w-full items-center justify-between gap-4 bg-white/50 py-2 px-4 shadow backdrop-blur">
+        <div className="flex items-center gap-4">
+          <Link className="a-reset flex items-center gap-2" href="/">
+            <Image
+              src="/logo.png"
+              alt="site logo"
+              width={48}
+              height={48}
+              priority
+            />
+            <h1 className="font-baloo">progLearning</h1>
+          </Link>
 
-        <nav className="flex gap-4">
-          <Link href="/">Home</Link>
-          <Link href="/test">Test</Link>
-          <Link href="/contact">Contact</Link>
-          <Link href="/entry">Entry</Link>
-          <Link href="/dashboard">dashboard</Link>
-          <Link href="/learning">learning</Link>
-          <Link href="/output">output</Link>
-          <Link href="/user-id-123">user-id-123</Link>
-        </nav>
+          <nav className="flex gap-4">
+            <Link href="/contact">Contact</Link>
+            <Link href="/dashboard">dashboard</Link>
+            <Link href="/learning">learning</Link>
+            <Link href="/getting-started">getting-started</Link>
+            <Link href="/output">output</Link>
+            <Link href="/user-id-123">user-id-123</Link>
+          </nav>
+        </div>
+
+        {user ? (
+          <Menu
+            shadow="md"
+            width={200}
+            withArrow
+            arrowSize={10}
+            arrowRadius={2}
+            transition="pop-top-right"
+          >
+            <Menu.Target>
+              <div
+                className={clsx(
+                  'flex cursor-pointer items-center gap-1 rounded-md py-1.5 px-4',
+                  'transition-colors duration-200 hover:bg-gray-200'
+                )}
+              >
+                <Avatar
+                  src={user.user_metadata.avatar_url}
+                  size={32}
+                  radius={100}
+                  className="ml-auto cursor-pointer"
+                />
+                <CaretDownIcon size={14} />
+              </div>
+            </Menu.Target>
+
+            <Menu.Dropdown>
+              <Menu.Label>{user.email}</Menu.Label>
+              <Menu.Item
+                icon={<SearchIcon size={14} />}
+                onClick={() => router.push('/getting-started')}
+              >
+                Getting Started
+              </Menu.Item>
+              <Menu.Item icon={<SearchIcon size={14} />}>Lessons</Menu.Item>
+              <Menu.Item
+                icon={<SearchIcon size={14} />}
+                onClick={() => router.push('/dashboard')}
+              >
+                Dashboard
+              </Menu.Item>
+              <Menu.Item icon={<SearchIcon size={14} />}>Output</Menu.Item>
+              <Menu.Item
+                icon={<SearchIcon size={14} />}
+                rightSection={<div>⌘K</div>}
+              >
+                Search
+              </Menu.Item>
+              <Menu.Item icon={<SearchIcon size={14} />}>Setting</Menu.Item>
+              <Menu.Divider />
+              <Menu.Item icon={<LogoutIcon size={16} />} onClick={signOut}>
+                ログアウト
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
+        ) : (
+          <Button onClick={() => router.push('entry')}>登録する</Button>
+        )}
       </header>
 
       <main className="relative z-10 mb-36 min-h-[calc(100vh-32px)] w-full bg-white pt-20">
@@ -54,7 +121,7 @@ export const Layout: FC<Props> = ({ children }) => {
             </Link>
           </div>
           <div className="mt-2 text-xs">
-            ゆるく始めるプログラミング学習コミュニティ
+            ゆるく始めるプログラミング学習コミュニティ。
           </div>
         </div>
         <div className="py-2 text-center text-xs font-bold text-slate-200">

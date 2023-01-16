@@ -1,6 +1,18 @@
-import { createClient } from '@supabase/supabase-js';
+import type {
+  GetServerSidePropsContext,
+  NextApiRequest,
+  NextApiResponse,
+} from 'next';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+import {
+  createBrowserSupabaseClient,
+  createServerSupabaseClient,
+} from '@supabase/auth-helpers-nextjs';
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+/* Browser Client */
+export const supabase = createBrowserSupabaseClient();
+
+/* Create Server Client */
+export const getServerSupabaseClient = (
+  ctx: GetServerSidePropsContext | { req: NextApiRequest; res: NextApiResponse }
+) => createServerSupabaseClient(ctx);

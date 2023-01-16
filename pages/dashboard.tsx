@@ -1,16 +1,22 @@
 import type { GetServerSideProps } from 'next';
+import type { FC, ReactNode } from 'react';
 
 import { getServerSideSession } from '@/utils/supabase/auth';
 
-const GettingStarted = () => {
+type Props = {
+  children: ReactNode;
+};
+
+const DashboardPage: FC<Props> = () => {
   return (
     <div>
-      <h2>Getting Started</h2>
+      <h2>Dashboard Page</h2>
+      <div></div>
     </div>
   );
 };
 
-export default GettingStarted;
+export default DashboardPage;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getServerSideSession(ctx);

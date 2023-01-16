@@ -1,34 +1,38 @@
-import type { User } from '@prisma/client';
+import type { Account } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { prisma } from '@/utils/prisma/client';
 import { createCustomer } from '@/utils/stripe/customer';
 import { createSession } from '@/utils/stripe/session';
+import { getServerSideSession } from '@/utils/supabase/auth';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const session = getServerSideSession({ req, res });
+  if (!session) return res.status(401).end('Unauthorized');
+
   if (req.method === 'POST') {
-    const user = req.body.user as User;
+    const account = req.body.account as Account;
     try {
-      let consumerId = user.stripe_customer_id;
+      let consumerId = account.stripe_customer_id;
 
       if (!consumerId) {
         /* customerの新規作成 */
         const customer = await createCustomer({
-          name: user.name || '',
-          email: user.email || '',
+          name: account.name || '',
+          email: account.email || '',
           metadata: {
-            uid: user.uid || '',
+            uid: account.uid || '',
           },
         });
 
         consumerId = customer.id;
 
-        await prisma.user.update({
+        await prisma.account.update({
           where: {
-            uid: user.uid as string,
+            uid: account.uid as string,
           },
           data: {
             stripe_customer_id: consumerId,

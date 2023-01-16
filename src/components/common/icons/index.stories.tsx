@@ -4,6 +4,7 @@ import {
   ArrowCircleUpIcon,
   AtIcon,
   BookIcon,
+  CaretDownIcon,
   ChatBubblesIcon,
   ChatTextIcon,
   CheckedBoxIcon,
@@ -59,6 +60,7 @@ export const Default: StoryObj<{ size: number }> = {
       <ArrowCircleUpIcon size={args.size} />
       <AtIcon size={args.size} />
       <BookIcon size={args.size} />
+      <CaretDownIcon size={args.size} />
       <ChatBubblesIcon size={args.size} />
       <ChatTextIcon size={args.size} />
       <CheckedBoxIcon size={args.size} />

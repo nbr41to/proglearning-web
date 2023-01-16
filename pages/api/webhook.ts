@@ -47,7 +47,7 @@ export default async function handler(
         const subscription = event.data.object as Stripe.Subscription;
         const customerId = subscription.customer;
         /* DBの決済Statusを変更 */
-        await prisma.user.update({
+        await prisma.account.update({
           where: {
             stripe_customer_id: customerId as string,
           },
@@ -63,7 +63,7 @@ export default async function handler(
         if (session.mode === 'subscription') {
           const customerId = session.customer;
           /* DBの決済Statusを変更 */
-          const user = await prisma.user.update({
+          const user = await prisma.account.update({
             where: {
               stripe_customer_id: customerId as string,
             },

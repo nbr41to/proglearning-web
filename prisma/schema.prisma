@@ -8,7 +8,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
+model Account {
   id                         Int     @id @default(autoincrement())
   uid                        String  @unique
   email                      String  @unique
@@ -18,4 +18,5 @@ model User {
   stripe_customer_id         String? @unique
   stripe_checkout_status     String? // 初回のcheckoutのステータス
   stripe_subscription_status String? // subscriptionの更新ステータス
+  slack_user_id              String? @unique
 }

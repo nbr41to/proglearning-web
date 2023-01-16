@@ -1,28 +1,27 @@
-import type { User } from '@prisma/client';
+import type { Account } from '@prisma/client';
+import type { User } from '@supabase/supabase-js';
+import type { FC } from 'react';
 
 import { CheckoutForm } from '@/features/entry/CheckoutForm';
 import { Completed } from '@/features/entry/Completed';
 import { Confirmation } from '@/features/entry/Confirmation';
 import { EntryForm } from '@/features/entry/EntryForm';
-import { useAuthUser } from '@/hooks/apiHook/useAuthUser';
-import { useUser } from '@/hooks/apiHook/useUser';
 import { getStripe } from '@/utils/stripe/client';
 import { createUser } from '@/utils/supabase/database';
 import { Stepper } from '@mantine/core';
-import { useCounter, useLocalStorage } from '@mantine/hooks';
+import { useCounter } from '@mantine/hooks';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-export const EntryTemplate = () => {
+type Props = {
+  user: User | null;
+  account: Account | null;
+};
+
+export const EntryTemplate: FC<Props> = ({ user, account }) => {
   const router = useRouter();
   const [step, stepHandlers] = useCounter(0, { min: 0, max: 3 });
-  const [savedSessionId, setSavedSessionId] = useLocalStorage({
-    key: 'checkout_session_id',
-  });
-
-  const user = useAuthUser();
-  const account = useUser(user?.id);
 
   useEffect(() => {
     if (typeof user === 'undefined') return;
@@ -40,9 +39,9 @@ export const EntryTemplate = () => {
 
       return;
     }
-  }, [user, account, router, savedSessionId, setSavedSessionId, stepHandlers]);
+  }, [user, account, router, stepHandlers]);
 
-  const submitHandler = async (data: User) => {
+  const submitHandler = async (data: Account) => {
     if (!user) return;
 
     const res = await createUser({
@@ -56,11 +55,9 @@ export const EntryTemplate = () => {
 
   const checkoutHandler = async () => {
     const response = await axios.post('/api/create-checkout-session', {
-      user: account,
+      account,
     });
     const { sessionId } = response.data;
-    setSavedSessionId(sessionId);
-
     const stripe = await getStripe();
     stripe?.redirectToCheckout({ sessionId });
   };

@@ -1,3 +1,9 @@
+import {
+  GitHubIcon,
+  ProfileIcon,
+  TwitterIcon,
+  YouTubeIcon,
+} from '@/common/icons';
 import Image from 'next/image';
 
 export const Introduction = () => {
@@ -22,11 +28,46 @@ export const Introduction = () => {
           <Image
             className="rounded-full"
             src="/profile.png"
+            alt="nob photo"
             width={64}
             height={64}
-            alt="nob photo"
+            priority
           />
         </div>
+      </div>
+      <div className="mx-auto flex w-fit items-center gap-2">
+        <a
+          className="text-gray-800 transition-colors hover:text-gray-600"
+          href="https://www.nbr41.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <ProfileIcon />
+        </a>
+        <a
+          className="text-gray-800 transition-colors hover:text-gray-600"
+          href="https://twitter.com/Knob_nbr41to"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <TwitterIcon />
+        </a>
+        <a
+          className="text-gray-800 transition-colors hover:text-gray-600"
+          href="https://github.com/nbr41to"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <GitHubIcon />
+        </a>
+        <a
+          className="text-gray-800 transition-colors hover:text-gray-600"
+          href="https://www.youtube.com/channel/UCPcjWvYIfvqGPP4x30kEkMA"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <YouTubeIcon />
+        </a>
       </div>
     </div>
   );
