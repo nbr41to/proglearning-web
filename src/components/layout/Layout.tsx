@@ -2,14 +2,19 @@ import type { Account } from '@prisma/client';
 import type { User } from '@supabase/supabase-js';
 import type { FC, ReactNode } from 'react';
 
-import { CaretDownIcon, LogoutIcon, SearchIcon } from '@/common/icons';
-import { sha256 } from '@/utils/hash';
+import {
+  CaretDownIcon,
+  DetailIcon,
+  LogoutIcon,
+  MailIcon,
+  SearchIcon,
+} from '@/common/icons';
+import { isCheckedOut } from '@/utils/isCheckedOut';
 import { signOut } from '@/utils/supabase/auth';
 import { Avatar, Button, clsx, Menu } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
 type Props = {
   children: ReactNode;
@@ -17,26 +22,17 @@ type Props = {
   account?: Account | null;
 };
 
-export const Layout: FC<Props> = ({ children, user }) => {
+export const Layout: FC<Props> = ({ children, user, account }) => {
   const router = useRouter();
-  const [hash, setHash] = useState<string>();
-
-  useEffect(() => {
-    (async () => {
-      if (user?.email) {
-        const hash = await sha256(user.id);
-        setHash(hash);
-      } else {
-        setHash(undefined);
-      }
-    })();
-  }, [user]);
 
   return (
     <div className="">
       <header className="fixed z-50 flex w-full items-center justify-between gap-4 bg-white/50 py-2 px-4 shadow backdrop-blur">
-        <div className="flex items-center gap-4">
-          <Link className="a-reset flex items-center gap-2" href="/">
+        <div className="flex items-center gap-8">
+          <Link
+            className="a-reset flex items-center gap-2 transition-shadow hover:text-gray-700 hover:drop-shadow"
+            href="/"
+          >
             <Image
               src="/logo.png"
               alt="site logo"
@@ -48,22 +44,39 @@ export const Layout: FC<Props> = ({ children, user }) => {
           </Link>
 
           <nav className="flex gap-4">
-            <Link href="/contact">Contact</Link>
-            <Link href={`/${hash}/dashboard`}>dashboard</Link>
-            <Link href="/lessons">lessons</Link>
-            <Link href="/getting-started">getting-started</Link>
-            {/* <Link href="/output">output</Link> */}
+            <Link
+              href="/about"
+              className={clsx(
+                'a-reset mt-2 flex items-center gap-2 font-baloo text-xl',
+                'transition-color transition-transform hover:-translate-y-0.5 hover:text-gray-700 hover:drop-shadow-sm'
+              )}
+            >
+              <DetailIcon size={22} />
+              About
+            </Link>
+            <Link
+              href="/contact"
+              className={clsx(
+                'a-reset mt-2 flex items-center gap-2 font-baloo text-xl',
+                'transition-color transition-transform hover:-translate-y-0.5 hover:text-gray-700 hover:drop-shadow-sm'
+              )}
+            >
+              <MailIcon size={22} />
+              Contact
+            </Link>
           </nav>
         </div>
 
-        {user ? (
+        {user && account && isCheckedOut(account) ? (
           <Menu
             shadow="md"
             width={200}
             withArrow
             arrowSize={10}
             arrowRadius={2}
+            arrowPosition="center"
             transition="pop-top-right"
+            position="bottom-end"
           >
             <Menu.Target>
               <div
@@ -93,7 +106,7 @@ export const Layout: FC<Props> = ({ children, user }) => {
               <Menu.Item icon={<SearchIcon size={14} />}>Lessons</Menu.Item>
               <Menu.Item
                 icon={<SearchIcon size={14} />}
-                onClick={() => router.push(`/${hash}/dashboard`)}
+                onClick={() => router.push(`/dashboard`)}
               >
                 Dashboard
               </Menu.Item>

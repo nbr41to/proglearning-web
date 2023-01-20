@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { getPublicChannelList } from '@/utils/slack/conversations';
+import { getPublicChannelList } from '@/server/slack/conversations';
 
 export default async function handler(
   req: NextApiRequest,

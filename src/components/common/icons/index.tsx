@@ -3,6 +3,7 @@ import {
   AiOutlineBlock as OutlineBlockIcon,
   AiFillHome as HomeIcon,
 } from 'react-icons/ai';
+import { BiDetail as DetailIcon } from 'react-icons/bi';
 import {
   BsFillPersonLinesFill as ProfileIcon,
   BsFilterCircleFill as FilterIcon,
@@ -65,6 +66,7 @@ export {
   ColorGoogleIcon,
   CowIcon,
   DangerIcon,
+  DetailIcon,
   DummyIcon,
   ExperimentIcon,
   FilterIcon,

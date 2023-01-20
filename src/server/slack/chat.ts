@@ -1,6 +1,6 @@
 import type { ChatPostMessageArguments } from '@slack/web-api';
 
-import { slack } from '@/utils/slack/client';
+import { slack } from '@/server/slack/client';
 
 /**
  * chat.postMessage

@@ -1,8 +1,9 @@
-import type { NotionRichTextItemRequest } from '@/types/notion';
 import type { FC } from 'react';
 
 import { AtIcon, SendIcon, TouchIcon } from '@/common/icons';
 import { RichTextEditor } from '@/common/RichTextEditor';
+import { contactSchema } from '@/validations/scheme/contact';
+import { validate } from '@/validations/varidate';
 import { Button, clsx, Input } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { Link } from '@mantine/tiptap';
@@ -13,12 +14,13 @@ import StarterKit from '@tiptap/starter-kit';
 import { useReducer, useState } from 'react';
 
 type Props = {
-  onSubmit: (rich_text: NotionRichTextItemRequest[]) => Promise<void>;
+  onSubmit: (text: string) => Promise<void>;
 };
 
 export const ContactForm: FC<Props> = ({ onSubmit }) => {
   const [openForm, startAnimation] = useReducer(() => true, false);
   const [visibleCover, hiddenCover] = useReducer(() => false, true);
+  const [email, setEmail] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
   const editor = useEditor({
@@ -30,29 +32,37 @@ export const ContactForm: FC<Props> = ({ onSubmit }) => {
     ],
     content: '',
   });
-  const disabled = isLoading || !editor || !editor.getText();
+  const disabled = isLoading || !email || !editor || !editor.getText();
 
   const handleSubmit = async () => {
     if (disabled) return;
-    setIsLoading(true);
+    const content = editor.getText();
+    const validated = validate(contactSchema, { email, content });
+    if (!validated) return;
 
-    const completed = false;
-    if (completed) {
-      // eslint-disable-next-line no-console
-      console.log(onSubmit);
-    } else {
-      showNotification({
-        title: 'フォーム機能は現在準備中です。',
-        message: 'すんまそん🥹',
-      });
-    }
+    setIsLoading(true);
+    await onSubmit(
+      `お問い合わせがありました！\n${validated.content}\n\nEmail: ${validated.email}`
+    );
+    showNotification({
+      title: '送信完了しました！',
+      message: 'メールにてご連絡いたします。',
+    });
+    editor.commands.setContent('');
+    setEmail('');
     setIsLoading(false);
   };
 
   return (
     <div className="relative">
       <div className="space-y-2 p-2">
-        <Input type="email" icon={<AtIcon />} placeholder="メールアドレス" />
+        <Input
+          type="email"
+          icon={<AtIcon />}
+          placeholder="メールアドレス"
+          value={email}
+          onChange={(e) => setEmail(e.currentTarget.value)}
+        />
         <RichTextEditor
           editor={editor}
           hotkey="mod+Enter"

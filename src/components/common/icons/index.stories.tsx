@@ -11,6 +11,7 @@ import {
   ColorGoogleIcon,
   CowIcon,
   DangerIcon,
+  DetailIcon,
   DummyIcon,
   ExperimentIcon,
   FilterIcon,
@@ -67,6 +68,7 @@ export const Default: StoryObj<{ size: number }> = {
       <ColorGoogleIcon size={args.size} />
       <CowIcon size={args.size} />
       <DangerIcon size={args.size} />
+      <DetailIcon size={args.size} />
       <DummyIcon size={args.size} />
       <ExperimentIcon size={args.size} />
       <FilterIcon size={args.size} />

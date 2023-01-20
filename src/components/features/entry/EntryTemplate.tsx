@@ -7,6 +7,7 @@ import { Completed } from '@/features/entry/Completed';
 import { Confirmation } from '@/features/entry/Confirmation';
 import { EntryForm } from '@/features/entry/EntryForm';
 import { getStripe } from '@/server/stripe/client';
+import { isCheckedOut } from '@/utils/isCheckedOut';
 import { createUser } from '@/utils/supabase/database';
 import { Stepper } from '@mantine/core';
 import { useCounter } from '@mantine/hooks';
@@ -26,12 +27,8 @@ export const EntryTemplate: FC<Props> = ({ user, account }) => {
   useEffect(() => {
     if (typeof user === 'undefined') return;
 
-    if (account?.stripe_checkout_status === 'complete') {
-      stepHandlers.set(3);
-
-      return;
-    } else if (account) {
-      stepHandlers.set(2);
+    if (account) {
+      stepHandlers.set(isCheckedOut(account) ? 3 : 2);
 
       return;
     } else if (user) {

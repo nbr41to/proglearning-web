@@ -2,16 +2,16 @@ import type { Account } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { prisma } from '@/server/prisma/client';
-import { createCustomer } from '@/utils/stripe/customer';
-import { createSession } from '@/utils/stripe/session';
-import { getServerSideSession } from '@/utils/supabase/auth';
+import { createCustomer } from '@/server/stripe/customer';
+import { createSession } from '@/server/stripe/session';
+import { getSessionUser } from '@/server/supabase/auth';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = getServerSideSession({ req, res });
-  if (!session) return res.status(401).end('Unauthorized');
+  const user = await getSessionUser({ req, res });
+  if (!user) return res.status(401).end('Unauthorized');
 
   if (req.method === 'POST') {
     const account = req.body.account as Account;

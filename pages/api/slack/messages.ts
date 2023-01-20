@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { sendMessage } from '@/utils/slack/chat';
+import { sendMessage } from '@/server/slack/chat';
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,10 +8,11 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     try {
-      const { name, email, os } = req.body;
+      const { text } = req.body;
       const response = await sendMessage({
-        channel: 'G01NLM1CJK1',
-        text: `お申し込みがありました！\n名前: ${name}\n${email}\nOS: ${os}`,
+        channel: process.env.SLACK_NOTI_FORM_CHANNEL_ID || '',
+        mrkdwn: true,
+        text,
       });
 
       if (!response.ok) {

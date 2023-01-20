@@ -1,4 +1,5 @@
 import '@/styles/globals.css';
+import '@/utils/axios/client';
 
 import type { Account } from '@prisma/client';
 import type { Session } from '@supabase/auth-helpers-nextjs';

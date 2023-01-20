@@ -4,7 +4,8 @@ import type { GetServerSideProps } from 'next';
 import type { FC } from 'react';
 
 import { EntryTemplate } from '@/features/entry/EntryTemplate';
-import { getServerSupabaseClient } from '@/server/supabase/client';
+import { getAccount } from '@/server/prisma/account';
+import { getSessionUser } from '@/server/supabase/auth';
 import Head from 'next/head';
 
 type Props = {
@@ -12,7 +13,7 @@ type Props = {
   account: Account | null;
 };
 
-const EntryPage: FC<Props> = ({ user, account }) => {
+const Entry: FC<Props> = ({ user, account }) => {
   return (
     <>
       <Head>
@@ -23,13 +24,11 @@ const EntryPage: FC<Props> = ({ user, account }) => {
   );
 };
 
-export default EntryPage;
+export default Entry;
 
 export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
-  const supabase = getServerSupabaseClient(ctx);
-  /* Sessionの取得 */
-  const sessionRes = await supabase.auth.getSession();
-  if (!sessionRes.data.session) {
+  const user = await getSessionUser(ctx);
+  if (!user) {
     return {
       props: {
         user: null,
@@ -37,16 +36,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
       },
     };
   }
-  /* アカウント情報の取得 */
-  const accountRes = await supabase
-    .from('Account')
-    .select()
-    .eq('uid', sessionRes.data.session.user.id);
+  const account = await getAccount(user.id);
 
   return {
     props: {
-      user: sessionRes.data.session.user,
-      account: accountRes.data?.length ? (accountRes.data[0] as Account) : null,
+      user,
+      account,
     },
   };
 };

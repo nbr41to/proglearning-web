@@ -3,8 +3,8 @@ import type { Readable } from 'node:stream';
 import type { Stripe } from 'stripe';
 
 import { prisma } from '@/server/prisma/client';
-import { sendMessage } from '@/utils/slack/chat';
-import { stripe } from '@/utils/stripe/client';
+import { sendMessage } from '@/server/slack/chat';
+import { stripe } from '@/server/stripe/client';
 
 /* request.bodyを自前でparseする */
 async function buffer(readable: Readable) {
