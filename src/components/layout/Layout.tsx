@@ -1,20 +1,36 @@
+import type { Account } from '@prisma/client';
 import type { User } from '@supabase/supabase-js';
 import type { FC, ReactNode } from 'react';
 
 import { CaretDownIcon, LogoutIcon, SearchIcon } from '@/common/icons';
+import { sha256 } from '@/utils/hash';
 import { signOut } from '@/utils/supabase/auth';
 import { Avatar, Button, clsx, Menu } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 type Props = {
   children: ReactNode;
   user?: User | null;
+  account?: Account | null;
 };
 
 export const Layout: FC<Props> = ({ children, user }) => {
   const router = useRouter();
+  const [hash, setHash] = useState<string>();
+
+  useEffect(() => {
+    (async () => {
+      if (user?.email) {
+        const hash = await sha256(user.id);
+        setHash(hash);
+      } else {
+        setHash(undefined);
+      }
+    })();
+  }, [user]);
 
   return (
     <div className="">
@@ -33,11 +49,10 @@ export const Layout: FC<Props> = ({ children, user }) => {
 
           <nav className="flex gap-4">
             <Link href="/contact">Contact</Link>
-            <Link href="/dashboard">dashboard</Link>
-            <Link href="/learning">learning</Link>
+            <Link href={`/${hash}/dashboard`}>dashboard</Link>
+            <Link href="/lessons">lessons</Link>
             <Link href="/getting-started">getting-started</Link>
-            <Link href="/output">output</Link>
-            <Link href="/user-id-123">user-id-123</Link>
+            {/* <Link href="/output">output</Link> */}
           </nav>
         </div>
 
@@ -78,7 +93,7 @@ export const Layout: FC<Props> = ({ children, user }) => {
               <Menu.Item icon={<SearchIcon size={14} />}>Lessons</Menu.Item>
               <Menu.Item
                 icon={<SearchIcon size={14} />}
-                onClick={() => router.push('/dashboard')}
+                onClick={() => router.push(`/${hash}/dashboard`)}
               >
                 Dashboard
               </Menu.Item>

@@ -6,3 +6,4 @@
 - Slack を使ったリアルタイムチャット機能
 - 一時的なリンクを Slack に通知し Supabase の Realtime DB をつかってもいいかも
 - Slack の Question を Supabase に保存
+- Notion の PageId を登録したら普通にページになる仕組みを実装

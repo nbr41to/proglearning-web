@@ -23,7 +23,7 @@
       "@/templates/*": ["./src/components/templates/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/utils/*": ["./src/utils/*"],
-      "@/server/*": ["src/utils/stripe/*"],
+      "@/server/*": ["src/server/*"],
       "@/mocks/*": ["./src/__mocks__/*"],
       "@/*": ["./src/*"]
     },

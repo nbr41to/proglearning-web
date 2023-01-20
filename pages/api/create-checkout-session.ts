@@ -1,7 +1,7 @@
 import type { Account } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { prisma } from '@/utils/prisma/client';
+import { prisma } from '@/server/prisma/client';
 import { createCustomer } from '@/utils/stripe/customer';
 import { createSession } from '@/utils/stripe/session';
 import { getServerSideSession } from '@/utils/supabase/auth';

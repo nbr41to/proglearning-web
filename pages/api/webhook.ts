@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import type { Readable } from 'node:stream';
 import type { Stripe } from 'stripe';
 
-import { prisma } from '@/utils/prisma/client';
+import { prisma } from '@/server/prisma/client';
 import { sendMessage } from '@/utils/slack/chat';
 import { stripe } from '@/utils/stripe/client';
 

@@ -4,7 +4,7 @@ import type { GetServerSideProps } from 'next';
 import type { FC } from 'react';
 
 import { EntryTemplate } from '@/features/entry/EntryTemplate';
-import { getServerSupabaseClient } from '@/utils/supabase/client';
+import { getServerSupabaseClient } from '@/server/supabase/client';
 import Head from 'next/head';
 
 type Props = {
@@ -27,19 +27,26 @@ export default EntryPage;
 
 export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   const supabase = getServerSupabaseClient(ctx);
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  const response = await supabase
+  /* Sessionの取得 */
+  const sessionRes = await supabase.auth.getSession();
+  if (!sessionRes.data.session) {
+    return {
+      props: {
+        user: null,
+        account: null,
+      },
+    };
+  }
+  /* アカウント情報の取得 */
+  const accountRes = await supabase
     .from('Account')
     .select()
-    .eq('uid', session?.user.id);
+    .eq('uid', sessionRes.data.session.user.id);
 
   return {
     props: {
-      user: session?.user || null,
-      account: response.data?.length ? (response.data[0] as Account) : null,
+      user: sessionRes.data.session.user,
+      account: accountRes.data?.length ? (accountRes.data[0] as Account) : null,
     },
   };
 };

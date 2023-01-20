@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import type { FC, ReactNode } from 'react';
 
-import { getServerSideSession } from '@/utils/supabase/auth';
+import { getServerSupabaseClient } from '@/server/supabase/client';
 
 type Props = {
   children: ReactNode;
@@ -19,9 +19,9 @@ const DashboardPage: FC<Props> = () => {
 export default DashboardPage;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getServerSideSession(ctx);
-
-  if (!session)
+  const supabase = getServerSupabaseClient(ctx);
+  const response = await supabase.auth.getSession();
+  if (!response.data.session)
     return {
       redirect: {
         destination: '/login',
@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   return {
     props: {
-      user: session.user,
+      user: response.data.session.user,
     },
   };
 };

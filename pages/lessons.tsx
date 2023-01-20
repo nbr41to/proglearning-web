@@ -2,15 +2,15 @@ import type { GetServerSideProps } from 'next';
 
 import { getServerSupabaseClient } from '@/server/supabase/client';
 
-const GettingStarted = () => {
+const Lessons = () => {
   return (
     <div>
-      <h2>Getting Started</h2>
+      <h2>Lessons</h2>
     </div>
   );
 };
 
-export default GettingStarted;
+export default Lessons;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const supabase = getServerSupabaseClient(ctx);

@@ -6,7 +6,7 @@ import { CheckoutForm } from '@/features/entry/CheckoutForm';
 import { Completed } from '@/features/entry/Completed';
 import { Confirmation } from '@/features/entry/Confirmation';
 import { EntryForm } from '@/features/entry/EntryForm';
-import { getStripe } from '@/utils/stripe/client';
+import { getStripe } from '@/server/stripe/client';
 import { createUser } from '@/utils/supabase/database';
 import { Stepper } from '@mantine/core';
 import { useCounter } from '@mantine/hooks';
