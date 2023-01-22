@@ -6,6 +6,7 @@ import type { User } from '@supabase/supabase-js';
 import type { AppProps } from 'next/app';
 
 import { Layout } from '@/layout/Layout';
+import { SpotlightProvider } from '@/layout/SpotlightProvider';
 import { NotificationsProvider } from '@mantine/notifications';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
@@ -72,9 +73,11 @@ export default function App({
       >
         <RecoilRoot>
           <NotificationsProvider position="top-center">
-            <Layout {...pageProps}>
-              <Component {...pageProps} />
-            </Layout>
+            <SpotlightProvider>
+              <Layout {...pageProps}>
+                <Component {...pageProps} />
+              </Layout>
+            </SpotlightProvider>
           </NotificationsProvider>
         </RecoilRoot>
       </SessionContextProvider>

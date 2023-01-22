@@ -4,6 +4,7 @@ import {
   ArrowCircleUpIcon,
   AtIcon,
   BookIcon,
+  BookOpenIcon,
   CaretDownIcon,
   ChatBubblesIcon,
   ChatTextIcon,
@@ -11,6 +12,7 @@ import {
   ColorGoogleIcon,
   CowIcon,
   DangerIcon,
+  DashboardIcon,
   DetailIcon,
   DummyIcon,
   ExperimentIcon,
@@ -30,8 +32,10 @@ import {
   OutlineBlockIcon,
   ProfileIcon,
   QrCodeIcon,
+  QuillPenIcon,
   SearchIcon,
   SendIcon,
+  SettingIcon,
   StopIcon,
   TbExternalLinkIcon,
   TouchIcon,
@@ -62,6 +66,7 @@ export const Default: StoryObj<{ size: number }> = {
       <ArrowCircleUpIcon size={args.size} />
       <AtIcon size={args.size} />
       <BookIcon size={args.size} />
+      <BookOpenIcon size={args.size} />
       <CaretDownIcon size={args.size} />
       <ChatBubblesIcon size={args.size} />
       <ChatTextIcon size={args.size} />
@@ -69,6 +74,7 @@ export const Default: StoryObj<{ size: number }> = {
       <ColorGoogleIcon size={args.size} />
       <CowIcon size={args.size} />
       <DangerIcon size={args.size} />
+      <DashboardIcon size={args.size} />
       <DetailIcon size={args.size} />
       <DummyIcon size={args.size} />
       <ExperimentIcon size={args.size} />
@@ -88,8 +94,10 @@ export const Default: StoryObj<{ size: number }> = {
       <OutlineBlockIcon size={args.size} />
       <ProfileIcon size={args.size} />
       <QrCodeIcon size={args.size} />
+      <QuillPenIcon size={args.size} />
       <SearchIcon size={args.size} />
       <SendIcon size={args.size} />
+      <SettingIcon size={args.size} />
       <StopIcon size={args.size} />
       <TbExternalLinkIcon size={args.size} />
       <TouchIcon size={args.size} />

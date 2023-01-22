@@ -2,6 +2,7 @@ import {
   AiTwotoneExperiment as ExperimentIcon,
   AiOutlineBlock as OutlineBlockIcon,
   AiFillHome as HomeIcon,
+  AiOutlineSetting as SettingIcon,
 } from 'react-icons/ai';
 import { BiDetail as DetailIcon } from 'react-icons/bi';
 import {
@@ -25,9 +26,11 @@ import {
 import { FcGoogle as ColorGoogleIcon } from 'react-icons/fc';
 import { FiSearch as SearchIcon } from 'react-icons/fi';
 import { GiCow as CowIcon } from 'react-icons/gi';
+import { GoDashboard as DashboardIcon } from 'react-icons/go';
 import {
   HiArrowCircleUp as ArrowCircleUpIcon,
   HiMail as MailIcon,
+  HiOutlineBookOpen as BookOpenIcon,
 } from 'react-icons/hi';
 import {
   ImCheckboxChecked as CheckedBoxIcon,
@@ -43,6 +46,7 @@ import {
   MdNotInterested as StopIcon,
   MdTouchApp as TouchIcon,
 } from 'react-icons/md';
+import { RiQuillPenLine as QuillPenIcon } from 'react-icons/ri';
 import { RxUpdate as UpdateIcon } from 'react-icons/rx';
 import {
   SiLine as LineIcon,
@@ -60,6 +64,7 @@ export {
   ArrowCircleUpIcon,
   AtIcon,
   BookIcon,
+  BookOpenIcon,
   CaretDownIcon,
   ChatBubblesIcon,
   ChatTextIcon,
@@ -67,6 +72,7 @@ export {
   ColorGoogleIcon,
   CowIcon,
   DangerIcon,
+  DashboardIcon,
   DetailIcon,
   DummyIcon,
   ExperimentIcon,
@@ -86,8 +92,10 @@ export {
   OutlineBlockIcon,
   ProfileIcon,
   QrCodeIcon,
+  QuillPenIcon,
   SearchIcon,
   SendIcon,
+  SettingIcon,
   StopIcon,
   TbExternalLinkIcon,
   TouchIcon,

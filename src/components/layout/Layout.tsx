@@ -1,17 +1,10 @@
 import type { User } from '@supabase/supabase-js';
 import type { FC, ReactNode } from 'react';
 
-import {
-  BookIcon,
-  CaretDownIcon,
-  DetailIcon,
-  LogoutIcon,
-  MailIcon,
-  SearchIcon,
-} from '@/common/icons';
-import { useAccountStatus } from '@/hooks/useAccountStatus';
-import { signOut } from '@/utils/supabase/auth';
-import { Avatar, Button, clsx, Menu } from '@mantine/core';
+import { BookIcon, DetailIcon, MailIcon } from '@/common/icons';
+import { DropdownMenu } from '@/layout/DropdownMenu';
+import { SearchButton } from '@/layout/SearchButton';
+import { Button, clsx, UnstyledButton } from '@mantine/core';
 import { useUser } from '@supabase/auth-helpers-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,8 +18,6 @@ type Props = {
 export const Layout: FC<Props> = ({ children }) => {
   const router = useRouter();
   const user = useUser();
-  const { data: userStatus } = useAccountStatus();
-  const isCheckedOut = userStatus?.checked_out;
 
   return (
     <div className="">
@@ -81,82 +72,23 @@ export const Layout: FC<Props> = ({ children }) => {
         </div>
 
         {user ? (
-          <Menu
-            shadow="md"
-            width={200}
-            withArrow
-            arrowSize={10}
-            arrowRadius={2}
-            arrowPosition="center"
-            transition="pop-top-right"
-            position="bottom-end"
-          >
-            <Menu.Target>
-              <div
-                className={clsx(
-                  'flex cursor-pointer items-center gap-1 rounded-md py-1.5 px-4',
-                  'transition-colors duration-200 hover:bg-gray-200'
-                )}
-              >
-                <Avatar
-                  src={user.user_metadata.avatar_url}
-                  size={32}
-                  radius={100}
-                  className="ml-auto cursor-pointer"
-                />
-                <CaretDownIcon size={14} />
-              </div>
-            </Menu.Target>
-
-            <Menu.Dropdown>
-              <Menu.Label>{user.email}</Menu.Label>
-              <Menu.Item
-                icon={<SearchIcon size={14} />}
-                disabled={!isCheckedOut}
-                onClick={() => router.push('/getting-started')}
-              >
-                Getting Started
-              </Menu.Item>
-              <Menu.Item
-                icon={<SearchIcon size={14} />}
-                onClick={() => router.push('/lessons')}
-              >
-                Lessons
-              </Menu.Item>
-              <Menu.Item
-                icon={<SearchIcon size={14} />}
-                disabled={!isCheckedOut}
-                onClick={() => router.push(`/dashboard`)}
-              >
-                Dashboard
-              </Menu.Item>
-              <Menu.Item
-                icon={<SearchIcon size={14} />}
-                disabled={!isCheckedOut}
-              >
-                Output
-              </Menu.Item>
-              <Menu.Item
-                icon={<SearchIcon size={14} />}
-                disabled={!isCheckedOut}
-                rightSection={<div>⌘K</div>}
-              >
-                Search
-              </Menu.Item>
-              <Menu.Item
-                icon={<SearchIcon size={14} />}
-                disabled={!isCheckedOut}
-              >
-                Setting
-              </Menu.Item>
-              <Menu.Divider />
-              <Menu.Item icon={<LogoutIcon size={16} />} onClick={signOut}>
-                ログアウト
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
+          <div className="flex items-center gap-4">
+            <SearchButton />
+            <DropdownMenu
+              email={user.email || ''}
+              avatarUrl={user.user_metadata.avatar_url}
+            />
+          </div>
         ) : (
-          <Button onClick={() => router.push('entry')}>登録する</Button>
+          <div className="flex items-center gap-4">
+            <UnstyledButton
+              className="text-sm"
+              onClick={() => router.push('/login')}
+            >
+              ログイン
+            </UnstyledButton>
+            <Button onClick={() => router.push('/entry')}>登録する</Button>
+          </div>
         )}
       </header>
 
