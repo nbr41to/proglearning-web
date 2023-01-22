@@ -17,8 +17,8 @@ import { RecoilRoot } from 'recoil';
 const meta = {
   title: 'progLearning',
   description: 'ゆるく始めるプログラミング学習コミュニティ。',
-  url: 'https://www.nbr41.com/',
-  image: 'https://www.nbr41.com/noblog.png',
+  url: 'https://www.proglearning.org',
+  image: 'https://www.proglearning.org/ogp.png',
 };
 
 export default function App({
