@@ -2,9 +2,10 @@
 
 ## Description
 
-FW: Next.js
-CSS: tailwindCSS で作ったサイトです。
-DB 定義: `prisma/schema.prisma`
+- FW: Next.js
+- CSS: tailwindCSS
+- UI Library: Mantine UI
+- DB 定義: `prisma/schema.prisma`
 
 ## Todo
 
@@ -12,6 +13,7 @@ DB 定義: `prisma/schema.prisma`
 - Slack を使ったリアルタイムチャット機能
 - 一時的なリンクを Slack に通知し Supabase の Realtime DB をつかってもいいかも
 - Slack の Question を Supabase に保存
+- Lessons での質問が Slack の Question に投稿される DB にも保存される
 - Notion の PageId を登録したら普通にページになる仕組みを実装
 
 ## Rules
@@ -20,8 +22,9 @@ DB 定義: `prisma/schema.prisma`
 - Component は余白を持たない
 - Component は`className`を受け取らない
 - ユーザ情報はサーバーサイドで取得する
-- フロントエンドでの DB 操作は supabase
+- フロントエンドでの DB 操作は RLS 付きの supabase
 - バックエンドでの DB 操作は prisma
+- 認証関連は Supabase の Helper を使う
 
 ## Stripe イベントの受け取り
 
@@ -30,7 +33,7 @@ stripe login
 ```
 
 ```sh
-stripe listen --forward-to localhost:3000/api/webhook
+stripe listen --forward-to localhost:3000/api/stripe/webhook
 ```
 
 （`checkout.session.completed`イベントの場合）

@@ -1,25 +1,23 @@
-import type { Account } from '@prisma/client';
-import type { User } from '@supabase/supabase-js';
+import type { Payment } from '@prisma/client';
 import type { GetServerSideProps } from 'next';
 import type { FC } from 'react';
 
 import { EntryTemplate } from '@/features/entry/EntryTemplate';
-import { getAccount } from '@/server/prisma/account';
+import { prisma } from '@/server/prisma/client';
 import { getSessionUser } from '@/server/supabase/auth';
 import Head from 'next/head';
 
 type Props = {
-  user: User | null;
-  account: Account | null;
+  payment: Payment | null;
 };
 
-const Entry: FC<Props> = ({ user, account }) => {
+const Entry: FC<Props> = ({ payment }) => {
   return (
     <>
       <Head>
         <title>お申し込み | progLearning</title>
       </Head>
-      <EntryTemplate user={user} account={account} />
+      <EntryTemplate payment={payment} />
     </>
   );
 };
@@ -31,17 +29,22 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   if (!user) {
     return {
       props: {
-        user: null,
-        account: null,
+        payment: null,
       },
     };
   }
-  const account = await getAccount(user.id);
+
+  const response = await prisma.payment.findUnique({
+    where: {
+      id: user.id,
+    },
+  });
+  // ignore serialized error
+  const payment = JSON.parse(JSON.stringify(response)) as Payment;
 
   return {
     props: {
-      user,
-      account,
+      payment,
     },
   };
 };

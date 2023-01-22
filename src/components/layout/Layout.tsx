@@ -1,17 +1,18 @@
-import type { Account } from '@prisma/client';
 import type { User } from '@supabase/supabase-js';
 import type { FC, ReactNode } from 'react';
 
 import {
+  BookIcon,
   CaretDownIcon,
   DetailIcon,
   LogoutIcon,
   MailIcon,
   SearchIcon,
 } from '@/common/icons';
-import { isCheckedOut } from '@/utils/isCheckedOut';
+import { useAccountStatus } from '@/hooks/useAccountStatus';
 import { signOut } from '@/utils/supabase/auth';
 import { Avatar, Button, clsx, Menu } from '@mantine/core';
+import { useUser } from '@supabase/auth-helpers-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -19,11 +20,13 @@ import { useRouter } from 'next/router';
 type Props = {
   children: ReactNode;
   user?: User | null;
-  account?: Account | null;
 };
 
-export const Layout: FC<Props> = ({ children, user, account }) => {
+export const Layout: FC<Props> = ({ children }) => {
   const router = useRouter();
+  const user = useUser();
+  const { data: userStatus } = useAccountStatus();
+  const isCheckedOut = userStatus?.checked_out;
 
   return (
     <div className="">
@@ -55,6 +58,16 @@ export const Layout: FC<Props> = ({ children, user, account }) => {
               About
             </Link>
             <Link
+              href="/lessons"
+              className={clsx(
+                'a-reset mt-2 flex items-center gap-2 font-baloo text-xl',
+                'transition-color transition-transform hover:-translate-y-0.5 hover:text-gray-700 hover:drop-shadow-sm'
+              )}
+            >
+              <BookIcon size={20} />
+              Lessons
+            </Link>
+            <Link
               href="/contact"
               className={clsx(
                 'a-reset mt-2 flex items-center gap-2 font-baloo text-xl',
@@ -67,7 +80,7 @@ export const Layout: FC<Props> = ({ children, user, account }) => {
           </nav>
         </div>
 
-        {user && account && isCheckedOut(account) ? (
+        {user ? (
           <Menu
             shadow="md"
             width={200}
@@ -99,25 +112,43 @@ export const Layout: FC<Props> = ({ children, user, account }) => {
               <Menu.Label>{user.email}</Menu.Label>
               <Menu.Item
                 icon={<SearchIcon size={14} />}
+                disabled={!isCheckedOut}
                 onClick={() => router.push('/getting-started')}
               >
                 Getting Started
               </Menu.Item>
-              <Menu.Item icon={<SearchIcon size={14} />}>Lessons</Menu.Item>
               <Menu.Item
                 icon={<SearchIcon size={14} />}
+                onClick={() => router.push('/lessons')}
+              >
+                Lessons
+              </Menu.Item>
+              <Menu.Item
+                icon={<SearchIcon size={14} />}
+                disabled={!isCheckedOut}
                 onClick={() => router.push(`/dashboard`)}
               >
                 Dashboard
               </Menu.Item>
-              <Menu.Item icon={<SearchIcon size={14} />}>Output</Menu.Item>
               <Menu.Item
                 icon={<SearchIcon size={14} />}
+                disabled={!isCheckedOut}
+              >
+                Output
+              </Menu.Item>
+              <Menu.Item
+                icon={<SearchIcon size={14} />}
+                disabled={!isCheckedOut}
                 rightSection={<div>⌘K</div>}
               >
                 Search
               </Menu.Item>
-              <Menu.Item icon={<SearchIcon size={14} />}>Setting</Menu.Item>
+              <Menu.Item
+                icon={<SearchIcon size={14} />}
+                disabled={!isCheckedOut}
+              >
+                Setting
+              </Menu.Item>
               <Menu.Divider />
               <Menu.Item icon={<LogoutIcon size={16} />} onClick={signOut}>
                 ログアウト

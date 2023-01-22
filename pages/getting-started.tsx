@@ -1,21 +1,32 @@
-import type { GetServerSideProps } from 'next';
+import type { NotionBlockObjectResponse } from '@/types/notion';
+import type { GetServerSideProps, NextPage } from 'next';
 
-import { getServerSupabaseClient } from '@/server/supabase/client';
+import { PageTitle } from '@/common/PageTitle';
+import { blockToJsx } from '@/components/notion/blockToJsx';
+import { getChildrenAllInBlock } from '@/server/notion/blocks';
+import { getSessionUser } from '@/server/supabase/auth';
 
-const GettingStarted = () => {
+type Props = {
+  blocks: NotionBlockObjectResponse[];
+};
+
+/* Using Notion Page */
+const GettingStarted: NextPage<Props> = ({ blocks }) => {
   return (
     <div>
-      <h2>Getting Started</h2>
+      <PageTitle title="Getting Started" />
+      <div className="w-main mx-auto">
+        {blocks.map((block) => blockToJsx(block))}
+      </div>
     </div>
   );
 };
 
 export default GettingStarted;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const supabase = getServerSupabaseClient(ctx);
-  const response = await supabase.auth.getSession();
-  if (!response.data.session)
+export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
+  const user = await getSessionUser(ctx);
+  if (!user)
     return {
       redirect: {
         destination: '/login',
@@ -23,9 +34,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       },
     };
 
+  const blocks = (await getChildrenAllInBlock(
+    process.env.NOTION_GETTING_STARTED_PAGE_ID || ''
+  )) as NotionBlockObjectResponse[];
+
   return {
     props: {
-      user: response.data.session.user,
+      user,
+      blocks,
     },
   };
 };

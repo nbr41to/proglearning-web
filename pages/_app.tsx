@@ -1,7 +1,6 @@
 import '@/styles/globals.css';
 import '@/utils/axios/client';
 
-import type { Account } from '@prisma/client';
 import type { Session } from '@supabase/auth-helpers-nextjs';
 import type { User } from '@supabase/supabase-js';
 import type { AppProps } from 'next/app';
@@ -27,7 +26,6 @@ export default function App({
 }: AppProps<{
   initialSession: Session;
   user?: User | null;
-  account?: Account | null;
 }>) {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
 

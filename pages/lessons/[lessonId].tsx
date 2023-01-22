@@ -1,15 +1,9 @@
-import { Case } from '@/components/features/Landing/Case';
-import { Hero } from '@/components/features/Landing/Hero';
-import { Introduction } from '@/components/features/Landing/Introduction';
-
-const Home = () => {
+const LessonDetail = () => {
   return (
     <div className="w-main mx-auto">
-      <Hero />
-      <Introduction />
-      <Case />
+      <h1>Lesson Detail</h1>
     </div>
   );
 };
 
-export default Home;
+export default LessonDetail;

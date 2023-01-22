@@ -1,4 +1,4 @@
-import type { Account } from '@prisma/client';
+import type { Payment } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { prisma } from '@/server/prisma/client';
@@ -14,25 +14,34 @@ export default async function handler(
   if (!user) return res.status(401).end('Unauthorized');
 
   if (req.method === 'POST') {
-    const account = req.body.account as Account;
+    const payment = req.body.payment as Payment;
     try {
-      let consumerId = account.stripe_customer_id;
+      if (payment.stripe_checkout_status === 'completed') {
+        res.status(400).json({
+          error: {
+            statusCode: 400,
+            message: 'Already checked out.',
+          },
+        });
+      }
+
+      let consumerId = payment?.stripe_customer_id;
 
       if (!consumerId) {
         /* customerの新規作成 */
         const customer = await createCustomer({
-          name: account.name || '',
-          email: account.email || '',
+          name: user.user_metadata.name || '',
+          email: user.email || '',
           metadata: {
-            uid: account.uid || '',
+            uid: user.id || '',
           },
         });
 
         consumerId = customer.id;
 
-        await prisma.account.update({
+        await prisma.payment.update({
           where: {
-            uid: account.uid as string,
+            id: payment.id as string,
           },
           data: {
             stripe_customer_id: consumerId,

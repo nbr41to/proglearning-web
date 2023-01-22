@@ -1,5 +1,4 @@
-import type { Account } from '@prisma/client';
-import type { User } from '@supabase/supabase-js';
+import type { Account, Payment } from '@prisma/client';
 import type { FC } from 'react';
 
 import { CheckoutForm } from '@/features/entry/CheckoutForm';
@@ -7,28 +6,29 @@ import { Completed } from '@/features/entry/Completed';
 import { Confirmation } from '@/features/entry/Confirmation';
 import { EntryForm } from '@/features/entry/EntryForm';
 import { getStripe } from '@/server/stripe/client';
+import { createAccount } from '@/utils/axios/account';
 import { isCheckedOut } from '@/utils/isCheckedOut';
-import { createUser } from '@/utils/supabase/database';
 import { Stepper } from '@mantine/core';
 import { useCounter } from '@mantine/hooks';
+import { useUser } from '@supabase/auth-helpers-react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 type Props = {
-  user: User | null;
-  account: Account | null;
+  payment: Payment | null;
 };
 
-export const EntryTemplate: FC<Props> = ({ user, account }) => {
+export const EntryTemplate: FC<Props> = ({ payment }) => {
   const router = useRouter();
   const [step, stepHandlers] = useCounter(0, { min: 0, max: 3 });
+  const user = useUser();
 
   useEffect(() => {
     if (typeof user === 'undefined') return;
 
-    if (account) {
-      stepHandlers.set(isCheckedOut(account) ? 3 : 2);
+    if (payment) {
+      stepHandlers.set(isCheckedOut(payment) ? 3 : 2);
 
       return;
     } else if (user) {
@@ -36,23 +36,24 @@ export const EntryTemplate: FC<Props> = ({ user, account }) => {
 
       return;
     }
-  }, [user, account, router, stepHandlers]);
+  }, [user, payment, router, stepHandlers]);
 
   const submitHandler = async (data: Account) => {
     if (!user) return;
 
-    const res = await createUser({
+    const res = await createAccount({
       ...data,
       uid: user.id,
     });
     if (res.status === 200) {
-      stepHandlers.set(2);
+      // stepHandlers.set(2);
+      window.location.reload();
     }
   };
 
   const checkoutHandler = async () => {
-    const response = await axios.post('/api/create-checkout-session', {
-      account,
+    const response = await axios.post('/api/stripe/create-checkout-session', {
+      payment,
     });
     const { sessionId } = response.data;
     const stripe = await getStripe();

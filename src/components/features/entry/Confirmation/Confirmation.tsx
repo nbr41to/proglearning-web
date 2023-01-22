@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { ColorGoogleIcon } from '@/common/icons';
 import { SignboardContainer } from '@/common/SignboardContainer';
 import { signInWithGoogle } from '@/utils/supabase/auth';
+import { baseUrl } from '@/utils/url';
 import { Button, Checkbox } from '@mantine/core';
 import { useMemo, useState } from 'react';
 
@@ -34,7 +35,7 @@ export const Confirmation: FC = () => {
           variant="outline"
           fullWidth
           leftIcon={<ColorGoogleIcon size={20} />}
-          onClick={() => signInWithGoogle()}
+          onClick={() => signInWithGoogle(baseUrl + '/entry')}
         >
           Googleアカウントで登録
         </Button>

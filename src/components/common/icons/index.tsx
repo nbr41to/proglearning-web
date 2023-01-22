@@ -20,6 +20,7 @@ import { CgDanger as DangerIcon } from 'react-icons/cg';
 import {
   FaBook as BookIcon,
   FaTheaterMasks as DummyIcon,
+  FaLeaf as LeafIcon,
 } from 'react-icons/fa';
 import { FcGoogle as ColorGoogleIcon } from 'react-icons/fc';
 import { FiSearch as SearchIcon } from 'react-icons/fi';
@@ -77,6 +78,7 @@ export {
   HomeIcon,
   InformationIcon,
   JsonIcon,
+  LeafIcon,
   LineIcon,
   ListIcon,
   LogoutIcon,

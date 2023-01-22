@@ -47,7 +47,7 @@ export default async function handler(
         const subscription = event.data.object as Stripe.Subscription;
         const customerId = subscription.customer;
         /* DBの決済Statusを変更 */
-        await prisma.account.update({
+        await prisma.payment.update({
           where: {
             stripe_customer_id: customerId as string,
           },
@@ -63,18 +63,29 @@ export default async function handler(
         if (session.mode === 'subscription') {
           const customerId = session.customer;
           /* DBの決済Statusを変更 */
-          const user = await prisma.account.update({
+          const payment = await prisma.payment.update({
             where: {
               stripe_customer_id: customerId as string,
             },
             data: {
               stripe_checkout_status: session.status,
             },
+            include: {
+              account: true,
+            },
+          });
+          await prisma.status.update({
+            where: {
+              id: payment.id,
+            },
+            data: {
+              checked_out: true,
+            },
           });
           /* Slackに通知 */
-          const { name, email, os } = user;
+          const { name, email, os } = payment.account;
           await sendMessage({
-            channel: 'G01NLM1CJK1',
+            channel: process.env.SLACK_NOTI_FORM_CHANNEL_ID || '',
             text: `お申し込みがありました！\n名前: ${name}\n${email}\nOS: ${os}`,
           });
         }

@@ -22,6 +22,7 @@ import {
   HomeIcon,
   InformationIcon,
   JsonIcon,
+  LeafIcon,
   LineIcon,
   ListIcon,
   LogoutIcon,
@@ -79,6 +80,7 @@ export const Default: StoryObj<{ size: number }> = {
       <HomeIcon size={args.size} />
       <InformationIcon size={args.size} />
       <JsonIcon size={args.size} />
+      <LeafIcon size={args.size} />
       <LineIcon size={args.size} />
       <ListIcon size={args.size} />
       <LogoutIcon size={args.size} />
