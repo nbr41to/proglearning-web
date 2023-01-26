@@ -39,7 +39,7 @@ export default async function handler(
     console.log('sig', sig);
     try {
       if (!sig || !webhookSecret) return;
-      event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
+      event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
     } catch (err: any) {
       // eslint-disable-next-line no-console
       console.error(`❌ Error message: ${err.message}`);

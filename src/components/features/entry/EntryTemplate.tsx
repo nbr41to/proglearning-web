@@ -26,6 +26,11 @@ export const EntryTemplate: FC<Props> = ({ payment }) => {
 
   useEffect(() => {
     if (typeof user === 'undefined') return;
+    if (router.query.redirect) {
+      router.push({
+        query: {},
+      });
+    }
 
     if (payment) {
       stepHandlers.set(isCheckedOut(payment) ? 3 : 2);
@@ -46,7 +51,6 @@ export const EntryTemplate: FC<Props> = ({ payment }) => {
       uid: user.id,
     });
     if (res.status === 200) {
-      // stepHandlers.set(2);
       window.location.reload();
     }
   };

@@ -35,7 +35,7 @@ export const Confirmation: FC = () => {
           variant="outline"
           fullWidth
           leftIcon={<ColorGoogleIcon size={20} />}
-          onClick={() => signInWithGoogle(baseUrl + '/entry')}
+          onClick={() => signInWithGoogle(baseUrl + '/entry?redirect=true')}
         >
           Googleアカウントで登録
         </Button>
