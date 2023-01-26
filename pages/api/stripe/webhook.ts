@@ -4,7 +4,7 @@ import type { Stripe } from 'stripe';
 import { prisma } from '@/server/prisma/client';
 import { sendMessage } from '@/server/slack/chat';
 import { stripe } from '@/server/stripe/client';
-import { buffer } from 'micro';
+// import { buffer } from 'micro';
 // import type { Readable } from 'node:stream';
 
 /* request.bodyを自前でparseする */
@@ -17,6 +17,17 @@ import { buffer } from 'micro';
 //   return Buffer.concat(chunks);
 // }
 
+const webhookPayloadParser = (req: NextApiRequest): Promise<string | Buffer> =>
+  new Promise((resolve) => {
+    let data = '';
+    req.on('data', (chunk: string) => {
+      data += chunk;
+    });
+    req.on('end', () => {
+      resolve(Buffer.from(data).toString());
+    });
+  });
+
 export const config = {
   api: {
     bodyParser: false,
@@ -28,7 +39,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const buf = await buffer(req);
+    // const buf = await buffer(req);
+    const buf = await webhookPayloadParser(req);
     const sig = req.headers['stripe-signature'];
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
     let event: Stripe.Event;
@@ -37,9 +49,14 @@ export default async function handler(
     console.log('buf', buf);
     // eslint-disable-next-line no-console
     console.log('sig', sig);
+    // eslint-disable-next-line no-console
+    console.log('webhookSecret', webhookSecret);
+
     try {
-      if (!sig || !webhookSecret) return;
-      event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
+      if (!buf) throw new Error('No body provided');
+      if (!sig) throw new Error('No signature provided');
+      if (!webhookSecret) throw new Error('No webhook secret provided');
+      event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
     } catch (err: any) {
       // eslint-disable-next-line no-console
       console.error(`❌ Error message: ${err.message}`);
