@@ -19,7 +19,7 @@ export default async function handler(
   }
   switch (req.method) {
     /* Sessionを更新 */
-    case 'PUT':
+    case 'PATCH':
       try {
         const ts = req.query.ts as string;
         const response = await prisma.discordLearningSession.update({
@@ -63,7 +63,7 @@ export default async function handler(
       break;
 
     default:
-      res.setHeader('Allow', ['PUT', 'DELETE']);
+      res.setHeader('Allow', ['PATCH', 'DELETE']);
       res.status(405).end('Method Not Allowed');
 
       break;
