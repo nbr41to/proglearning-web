@@ -10,8 +10,8 @@ import { SpotlightProvider } from '@/layout/SpotlightProvider';
 import { NotificationsProvider } from '@mantine/notifications';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
-import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
+import { DefaultSeo } from 'next-seo';
 import { useState } from 'react';
 import { RecoilRoot } from 'recoil';
 const meta = {
