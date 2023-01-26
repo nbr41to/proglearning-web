@@ -15,6 +15,7 @@
 - Slack の Question を Supabase に保存
 - Lessons での質問が Slack の Question に投稿される DB にも保存される
 - Notion の PageId を登録したら普通にページになる仕組みを実装
+- ローカルの環境では Docker で立ち上げた Postgres に接続するようにする
 
 ## Rules
 

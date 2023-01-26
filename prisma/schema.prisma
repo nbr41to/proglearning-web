@@ -51,3 +51,9 @@ model Status {
   updatedAt        DateTime @updatedAt
   account          Account  @relation(fields: [id], references: [uid], onDelete: NoAction, onUpdate: NoAction)
 }
+
+model DiscordLearningSession {
+  slack_timestamp   String   @id @unique
+  joined_member_ids String[]
+  created_at        DateTime @default(now())
+}
