@@ -1,32 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import type { Readable } from 'node:stream';
 import type { Stripe } from 'stripe';
 
 import { prisma } from '@/server/prisma/client';
 import { sendMessage } from '@/server/slack/chat';
 import { stripe } from '@/server/stripe/client';
 // import { buffer } from 'micro';
-// import type { Readable } from 'node:stream';
 
 /* request.bodyを自前でparseする */
-// async function buffer(readable: Readable) {
-//   const chunks = [];
-//   for await (const chunk of readable) {
-//     chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
-//   }
+async function buffer(readable: Readable) {
+  const chunks = [];
+  for await (const chunk of readable) {
+    chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+  }
 
-//   return Buffer.concat(chunks);
-// }
-
-const webhookPayloadParser = (req: NextApiRequest): Promise<string | Buffer> =>
-  new Promise((resolve) => {
-    let data = '';
-    req.on('data', (chunk: string) => {
-      data += chunk;
-    });
-    req.on('end', () => {
-      resolve(Buffer.from(data).toString());
-    });
-  });
+  return Buffer.concat(chunks);
+}
 
 export const config = {
   api: {
@@ -39,18 +28,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    // const buf = await buffer(req);
-    const buf = await webhookPayloadParser(req);
+    const buf = await buffer(req);
     const sig = req.headers['stripe-signature'];
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
     let event: Stripe.Event;
-
-    // eslint-disable-next-line no-console
-    console.log('buf', buf);
-    // eslint-disable-next-line no-console
-    console.log('sig', sig);
-    // eslint-disable-next-line no-console
-    console.log('webhookSecret', webhookSecret);
 
     try {
       if (!buf) throw new Error('No body provided');
