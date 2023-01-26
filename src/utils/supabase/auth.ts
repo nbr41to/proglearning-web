@@ -5,7 +5,7 @@ export const signInWithGoogle = async (redirectTo?: string) => {
   await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: redirectTo || baseUrl + '/dashboard',
+      redirectTo: baseUrl + (redirectTo ? redirectTo : '/dashboard'),
     },
   });
 };
