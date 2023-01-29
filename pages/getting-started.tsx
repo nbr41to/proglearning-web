@@ -16,7 +16,9 @@ const GettingStarted: NextPage<Props> = ({ blocks }) => {
     <div>
       <PageTitle title="Getting Started" />
       <div className="w-main mx-auto">
-        {blocks.map((block) => blockToJsx(block))}
+        {blocks.map((block) => (
+          <div key={block.id}>{blockToJsx(block)}</div>
+        ))}
       </div>
     </div>
   );

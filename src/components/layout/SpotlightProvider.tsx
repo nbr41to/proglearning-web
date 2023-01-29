@@ -5,18 +5,19 @@ import {
   DashboardIcon,
   LeafIcon,
   MailIcon,
-  QuillPenIcon,
   SearchIcon,
   SettingIcon,
 } from '@/components/common/icons';
 import { useAccountStatus } from '@/hooks/useAccountStatus';
 import { SpotlightProvider as MantineSpotlightProvider } from '@mantine/spotlight';
+import { useUser } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
 export const SpotlightProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
-  const { data: userStatus } = useAccountStatus();
+  const user = useUser();
+  const { data: userStatus } = useAccountStatus(user?.id);
   const disabled = !userStatus?.checked_out;
 
   const actions = useMemo(
@@ -32,8 +33,8 @@ export const SpotlightProvider = ({ children }: { children: ReactNode }) => {
         title: 'Dashboard',
         description: 'ダッシュボード',
         icon: <DashboardIcon size={26} />,
-        onTrigger: () => router.push('/dashboard'),
         disabled,
+        onTrigger: () => router.push('/dashboard'),
       },
       {
         title: 'Lessons',
@@ -41,12 +42,14 @@ export const SpotlightProvider = ({ children }: { children: ReactNode }) => {
         icon: <BookIcon size={26} />,
         onTrigger: () => router.push('/lessons'),
       },
-      {
-        title: 'Output',
-        description: '勉強したことをアウトプットできます',
-        icon: <QuillPenIcon size={26} />,
-        onTrigger: () => router.push('/output'),
-      },
+      // {
+      //   title: 'Output',
+      //   description: '勉強したことをアウトプットできます',
+      //   icon: <QuillPenIcon size={26} />,
+      //   disabled: true,
+      //   // disabled,
+      //   onTrigger: () => router.push('/output'),
+      // },
       {
         title: 'Contact',
         description: 'お問い合わせはこちら',

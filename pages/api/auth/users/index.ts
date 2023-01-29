@@ -30,6 +30,7 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
     }
   }
 
+  /* 新規Accountの作成 */
   if (method === 'POST') {
     try {
       /* Initial User */
@@ -62,10 +63,39 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
     }
   }
 
-  res.status(405).json({
-    error: 'method_not_allowed',
-    description: 'The method is not allowed for the requested URL',
-  });
+  /* Accountの更新 */
+  if (method === 'PATCH') {
+    try {
+      await prisma.account.update({
+        where: {
+          uid: user.id,
+        },
+        data: {
+          os: req.body.os,
+          github_id: req.body.github_id,
+          zenn_id: req.body.zenn_id,
+        },
+      });
+      await prisma.profile.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          name: req.body.name,
+          introduction: req.body.introduction,
+        },
+      });
+      res.json(true);
+    } catch (error) {
+      res.status(500).json({
+        error: 'internal_server_error',
+        description: 'An internal server error occurred',
+      });
+    }
+  }
+
+  res.setHeader('Allow', ['GET', 'POST', 'PATCH']);
+  res.status(405).end('Method Not Allowed');
 };
 
 export default ProtectedRoute;

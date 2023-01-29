@@ -2,13 +2,15 @@ import type { User } from '@supabase/supabase-js';
 import type { FC, ReactNode } from 'react';
 
 import { BookIcon, DetailIcon, MailIcon } from '@/common/icons';
+import useLoading from '@/hooks/useLoading';
 import { DropdownMenu } from '@/layout/DropdownMenu';
 import { SearchButton } from '@/layout/SearchButton';
-import { Button, clsx, UnstyledButton } from '@mantine/core';
+import { Button, clsx, LoadingOverlay, UnstyledButton } from '@mantine/core';
 import { useUser } from '@supabase/auth-helpers-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 type Props = {
   children: ReactNode;
@@ -19,9 +21,33 @@ export const Layout: FC<Props> = ({ children }) => {
   const router = useRouter();
   const user = useUser();
 
+  const [isLoading, setIsLoading] = useState(false);
+  const loading = useLoading(isLoading);
+
+  useEffect(() => {
+    const handleStart = (url: string) => {
+      if (url !== router.asPath) {
+        setIsLoading(true);
+      }
+    };
+    const handleComplete = () => {
+      setIsLoading(false);
+    };
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleComplete);
+    router.events.on('routeChangeError', handleComplete);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleComplete);
+      router.events.off('routeChangeError', handleComplete);
+    };
+  }, []);
+
   return (
-    <div className="">
-      <header className="fixed z-50 flex w-full items-center justify-between gap-4 bg-white/50 py-2 px-4 shadow backdrop-blur">
+    <div className="relative">
+      <header className="fixed z-40 flex w-full items-center justify-between gap-4 bg-white/50 py-2 px-4 shadow backdrop-blur">
         <div className="flex items-center gap-8">
           <Link
             className="a-reset flex items-center gap-2 transition-shadow hover:text-gray-700 hover:drop-shadow"
@@ -77,6 +103,7 @@ export const Layout: FC<Props> = ({ children }) => {
             <DropdownMenu
               email={user.email || ''}
               avatarUrl={user.user_metadata.avatar_url}
+              uid={user.id}
             />
           </div>
         ) : (
@@ -119,6 +146,7 @@ export const Layout: FC<Props> = ({ children }) => {
           © 2021 progLearning
         </div>
       </footer>
+      <LoadingOverlay visible={loading} overlayBlur={4} overlayColor="#999" />
     </div>
   );
 };

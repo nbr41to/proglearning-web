@@ -17,16 +17,17 @@ import { useRouter } from 'next/router';
 type Props = {
   email: string;
   avatarUrl: string;
+  uid: string;
 };
-export const DropdownMenu: FC<Props> = ({ email, avatarUrl }) => {
+export const DropdownMenu: FC<Props> = ({ email, avatarUrl, uid }) => {
   const router = useRouter();
-  const { data: userStatus } = useAccountStatus();
+  const { data: userStatus } = useAccountStatus(uid);
   const isCheckedOut = userStatus?.checked_out;
 
   return (
     <Menu
       shadow="md"
-      width={200}
+      width={240}
       withArrow
       arrowSize={10}
       arrowRadius={2}
@@ -62,10 +63,11 @@ export const DropdownMenu: FC<Props> = ({ email, avatarUrl }) => {
         </Menu.Item>
         <Menu.Item
           icon={<DashboardIcon size={16} />}
-          disabled={!isCheckedOut}
-          onClick={() => router.push(`/dashboard`)}
+          disabled={true}
+          // disabled={!isCheckedOut} TODO: 未実装
+          // onClick={() => router.push(`/dashboard`)}
         >
-          Dashboard
+          Dashboard (Coming Soon)
         </Menu.Item>
         <Menu.Item
           icon={<BookOpenIcon size={16} />}
@@ -75,10 +77,11 @@ export const DropdownMenu: FC<Props> = ({ email, avatarUrl }) => {
         </Menu.Item>
         <Menu.Item
           icon={<QuillPenIcon size={16} />}
-          disabled={!isCheckedOut}
-          onClick={() => router.push(`/output`)}
+          disabled={true}
+          // disabled={!isCheckedOut} TODO: 未実装
+          // onClick={() => router.push(`/output`)}
         >
-          Output
+          Output (Coming Soon)
         </Menu.Item>
         <Menu.Item
           icon={<SettingIcon size={16} />}

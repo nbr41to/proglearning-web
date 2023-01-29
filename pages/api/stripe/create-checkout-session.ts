@@ -1,4 +1,3 @@
-import type { Payment } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { prisma } from '@/server/prisma/client';
@@ -14,7 +13,14 @@ export default async function handler(
   if (!user) return res.status(401).end('Unauthorized');
 
   if (req.method === 'POST') {
-    const payment = req.body.payment as Payment;
+    const uid = req.body.uid as string;
+    const payment = await prisma.payment.findUnique({
+      where: {
+        id: uid,
+      },
+    });
+    if (!payment) return res.status(404).end('Not Found Account');
+
     try {
       if (payment.stripe_checkout_status === 'completed') {
         res.status(400).json({

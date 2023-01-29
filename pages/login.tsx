@@ -1,14 +1,10 @@
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 
 import { ColorGoogleIcon } from '@/common/icons';
 import { signInWithGoogle } from '@/utils/supabase/auth';
 import { Button } from '@mantine/core';
 
-type Props = {
-  children: ReactNode;
-};
-
-const LoginPage: FC<Props> = () => {
+const LoginPage: FC = () => {
   return (
     <div className="flex h-[800px] items-center justify-center">
       <div className="flex h-80 w-80 items-center justify-center rounded border border-solid p-8">
