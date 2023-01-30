@@ -8,3 +8,11 @@ export const isLoadingAtom = atom<boolean>({
   key: 'isLoadingAtom',
   default: false,
 });
+export const accountLoginState = atom({
+  key: 'accountLoginState',
+  default: {
+    isLoggedIn: false,
+    user: null,
+    role: null,
+  },
+});

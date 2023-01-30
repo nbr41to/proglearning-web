@@ -13,7 +13,7 @@ export const Confirmation: FC = () => {
 
   return (
     <SignboardContainer>
-      <div className="mx-auto w-fit space-y-4 py-8">
+      <div className="mx-auto w-fit space-y-4 p-8">
         <Checkbox.Group
           defaultValue={[]}
           label="確認事項"

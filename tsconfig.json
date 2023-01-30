@@ -19,7 +19,7 @@
       "@/pages/*": ["./pages/*"],
       "@/features/*": ["./src/components/features/*"],
       "@/common/*": ["./src/components/common/*"],
-      "@/layout/*": ["./src/components/layout/*"],
+      "@/layouts/*": ["src/components/layouts/*"],
       "@/templates/*": ["./src/components/templates/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/utils/*": ["./src/utils/*"],

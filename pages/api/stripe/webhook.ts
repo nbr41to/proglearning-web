@@ -77,6 +77,14 @@ export default async function handler(
               account: true,
             },
           });
+          await prisma.account.update({
+            where: {
+              uid: payment.id,
+            },
+            data: {
+              role: 'closer',
+            },
+          });
           await prisma.status.update({
             where: {
               id: payment.id,

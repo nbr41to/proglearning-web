@@ -11,10 +11,11 @@ type Props = {
 export const CheckoutForm: FC<Props> = ({ onClick }) => {
   return (
     <SignboardContainer>
-      <div className="mx-auto w-fit py-8">
+      <div className="mx-auto w-fit p-8">
         <Button leftIcon={<ColorGoogleIcon size={20} />} onClick={onClick}>
           クレジットカードを登録
         </Button>
+        <p className="mt-3 text-center text-sm">別のページへ移動します。</p>
       </div>
     </SignboardContainer>
   );

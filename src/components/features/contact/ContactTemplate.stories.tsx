@@ -1,13 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { EntryForm as Component } from './EntryForm';
+import { ContactTemplate as Component } from './ContactTemplate';
 
 export default {
+  title: 'Template/ContactTemplate',
   component: Component,
 } as Meta<typeof Component>;
 
 export const Default: StoryObj<typeof Component> = {
-  args: {
-    email: 'sample@exsample.com',
-  },
+  args: {},
 };

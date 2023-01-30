@@ -6,15 +6,9 @@ import { getSessionUser } from '@/server/supabase/auth';
 const ProtectedRoute: NextApiHandler = async (req, res) => {
   const user = await getSessionUser({ req, res });
 
-  if (!user)
-    return res.status(401).json({
-      error: 'not_authenticated',
-      description:
-        'The user does not have an active session or is not authenticated',
-    });
-
   const method = req.method;
   if (method === 'GET') {
+    if (!user) return res.json(null);
     try {
       const account = await prisma.account.findUnique({
         where: {
@@ -29,6 +23,13 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
       });
     }
   }
+
+  if (!user)
+    return res.status(401).json({
+      error: 'not_authenticated',
+      description:
+        'The user does not have an active session or is not authenticated',
+    });
 
   /* 新規Accountの作成 */
   if (method === 'POST') {

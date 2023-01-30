@@ -2,7 +2,7 @@ export const Hero = () => {
   return (
     <div className="py-4 text-center sm:py-16">
       <div className="">
-        <div className="bg-[url('../../public/gradient-background.webp')] bg-cover bg-clip-text py-8 text-4xl font-bold text-transparent drop-shadow sm:text-8xl">
+        <div className="bg-[url('../../public/gradient-background.png')] bg-cover bg-clip-text py-8 text-4xl font-bold text-transparent drop-shadow sm:text-8xl">
           <div className="leading-normal">Change your life</div>
           <div>
             by{' '}

@@ -2,18 +2,12 @@ import '@/styles/globals.css';
 import '@/utils/axios/client';
 
 import type { Session } from '@supabase/auth-helpers-nextjs';
-import type { User } from '@supabase/supabase-js';
 import type { AppProps } from 'next/app';
 
-import { Layout } from '@/layout/Layout';
-import { SpotlightProvider } from '@/layout/SpotlightProvider';
-import { NotificationsProvider } from '@mantine/notifications';
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
-import { SessionContextProvider } from '@supabase/auth-helpers-react';
+import { Providers } from '@/components/layouts/providers/Providers';
+import { LayoutWrapper } from '@/layouts/index';
 import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
-import { useState } from 'react';
-import { RecoilRoot } from 'recoil';
 const meta = {
   title: 'progLearning',
   description: 'ゆるく始めるプログラミング学習コミュニティ。',
@@ -26,13 +20,11 @@ export default function App({
   pageProps,
 }: AppProps<{
   initialSession: Session;
-  user?: User | null;
 }>) {
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
-
   return (
     <>
       {/* <GoogleTagManager gtmId={googleTagManagerId} /> */}
+
       {/* meta seo */}
       <DefaultSeo
         defaultTitle={meta.title}
@@ -67,20 +59,11 @@ export default function App({
         />
       </Head>
 
-      <SessionContextProvider
-        supabaseClient={supabaseClient}
-        initialSession={pageProps.initialSession}
-      >
-        <RecoilRoot>
-          <NotificationsProvider position="top-center">
-            <SpotlightProvider>
-              <Layout {...pageProps}>
-                <Component {...pageProps} />
-              </Layout>
-            </SpotlightProvider>
-          </NotificationsProvider>
-        </RecoilRoot>
-      </SessionContextProvider>
+      <Providers initialSession={pageProps.initialSession}>
+        <LayoutWrapper>
+          <Component {...pageProps} />
+        </LayoutWrapper>
+      </Providers>
     </>
   );
 }

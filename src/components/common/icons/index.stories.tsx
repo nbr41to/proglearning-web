@@ -47,7 +47,7 @@ import {
 } from '.';
 
 export default {
-  title: 'Components/Icons',
+  title: 'Icons/icon',
   argTypes: {
     size: {
       control: {

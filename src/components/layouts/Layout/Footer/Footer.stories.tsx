@@ -1,13 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { EntryForm as Component } from './EntryForm';
+import { Footer as Component } from './Footer';
 
 export default {
+  title: 'Layouts/Footer',
   component: Component,
+  parameters: {
+    layout: 'fullscreen',
+  },
 } as Meta<typeof Component>;
 
 export const Default: StoryObj<typeof Component> = {
-  args: {
-    email: 'sample@exsample.com',
-  },
+  args: {},
 };

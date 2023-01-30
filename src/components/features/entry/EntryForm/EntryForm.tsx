@@ -12,7 +12,12 @@ type Props = {
 };
 
 export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
-  const { register, handleSubmit, setValue } = useForm<Account>();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<Account>();
 
   useEffect(() => {
     setValue('email', email);
@@ -27,10 +32,15 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
     <SignboardContainer>
       <form
         onSubmit={handleSubmit(onSubmit, onError)}
-        className="mx-auto w-fit space-y-4 py-8"
+        className="mx-auto w-fit space-y-4 p-8"
       >
         <div className="flex flex-wrap gap-4">
-          <Input.Wrapper label="お名前" withAsterisk required>
+          <Input.Wrapper
+            label="お名前"
+            withAsterisk
+            required
+            error={errors.name && '入力してください。'}
+          >
             <Input w={280} {...register('name', { required: true })} />
           </Input.Wrapper>
           <Input.Wrapper label="メールアドレス" withAsterisk required>
@@ -43,6 +53,7 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
           label="お使いのパソコンのOSを教えて下さい。"
           withAsterisk
           required
+          error={errors.os && '選択してください。'}
         >
           <Radio
             value="mac"
@@ -66,6 +77,7 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
           label="どこでこのコミュニティを知りましたか？"
           withAsterisk
           required
+          error={errors.byFind && '選択してください。'}
         >
           <Radio
             value="twitter"

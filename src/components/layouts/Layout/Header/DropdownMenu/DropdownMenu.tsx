@@ -1,3 +1,4 @@
+import type { Role } from '@prisma/client';
 import type { FC } from 'react';
 
 import {
@@ -5,24 +6,30 @@ import {
   CaretDownIcon,
   DashboardIcon,
   LeafIcon,
+  ListIcon,
   LogoutIcon,
   QuillPenIcon,
   SettingIcon,
 } from '@/common/icons';
-import { useAccountStatus } from '@/hooks/useAccountStatus';
-import { signOut } from '@/utils/supabase/auth';
 import { Avatar, clsx, Menu } from '@mantine/core';
 import { useRouter } from 'next/router';
 
 type Props = {
   email: string;
   avatarUrl: string;
-  uid: string;
+  role: Role;
+  onSignOut: () => void;
 };
-export const DropdownMenu: FC<Props> = ({ email, avatarUrl, uid }) => {
+
+export const DropdownMenu: FC<Props> = ({
+  email,
+  avatarUrl,
+  role,
+  onSignOut,
+}) => {
   const router = useRouter();
-  const { data: userStatus } = useAccountStatus(uid);
-  const isCheckedOut = userStatus?.checked_out;
+  const isCheckedOut = role === 'admin';
+  const isAdmin = role === 'admin' || role === 'closer';
 
   return (
     <Menu
@@ -90,8 +97,20 @@ export const DropdownMenu: FC<Props> = ({ email, avatarUrl, uid }) => {
         >
           Setting
         </Menu.Item>
+        {isAdmin && (
+          <>
+            <Menu.Divider />
+            <Menu.Label>Admin</Menu.Label>
+            <Menu.Item
+              icon={<ListIcon size={16} />}
+              onClick={() => router.push(`/admin/accounts`)}
+            >
+              Accounts
+            </Menu.Item>
+          </>
+        )}
         <Menu.Divider />
-        <Menu.Item icon={<LogoutIcon size={16} />} onClick={signOut}>
+        <Menu.Item icon={<LogoutIcon size={16} />} onClick={onSignOut}>
           Logout
         </Menu.Item>
       </Menu.Dropdown>
