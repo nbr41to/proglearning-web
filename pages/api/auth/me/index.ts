@@ -15,8 +15,11 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
           uid: user.id,
         },
       });
-      res.json(account);
+
+      return res.json(account);
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
       res.status(500).json({
         error: 'internal_server_error',
         description: 'An internal server error occurred',
@@ -55,7 +58,7 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
         },
       });
 
-      res.json(account);
+      return res.json(account);
     } catch (error) {
       res.status(500).json({
         error: 'internal_server_error',
@@ -86,7 +89,8 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
           introduction: req.body.introduction,
         },
       });
-      res.json(true);
+
+      return res.json(true);
     } catch (error) {
       res.status(500).json({
         error: 'internal_server_error',

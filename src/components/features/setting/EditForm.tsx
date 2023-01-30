@@ -1,4 +1,4 @@
-import type { Account, Profile, Status } from '@prisma/client';
+import type { Account, Profile } from '@prisma/client';
 import type { FC } from 'react';
 
 import { Button, NativeSelect, Textarea, TextInput } from '@mantine/core';
@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form';
 type Props = {
   account: Account & {
     profile: Profile;
-    status: Status;
   };
   onSubmit: (data: any) => Promise<void>;
   onCancel: () => void;

@@ -37,7 +37,7 @@ export const Auth: FC<Props> = ({ children }) => {
   }, [router, data, isLoading, loading, isIgnorePath]);
 
   if (isIgnorePath) return <>{children}</>;
-  if (data) <>{children}</>;
+  if (data) return <>{children}</>;
 
   return null;
 };

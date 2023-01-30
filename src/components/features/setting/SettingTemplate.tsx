@@ -1,14 +1,13 @@
-import type { Account, Profile, Status } from '@prisma/client';
+import type { Account, Profile } from '@prisma/client';
 import type { FC } from 'react';
 
 import { EditForm } from '@/features/setting/EditForm';
-import { Button } from '@mantine/core';
+import { Button, Stepper } from '@mantine/core';
 import { useState } from 'react';
 
 type Props = {
   account: Account & {
     profile: Profile;
-    status: Status;
   };
   onSubmit: (data: any) => Promise<void>;
 };
@@ -49,6 +48,29 @@ export const SettingTemplate: FC<Props> = ({ account, onSubmit }) => {
           </div>
         </>
       )}
+
+      <Stepper size="sm" active={1} orientation="vertical">
+        <Stepper.Step
+          label="1. アカウントの作成"
+          description="Create an account"
+        />
+        <Stepper.Step
+          label="2. クレジットカードの登録"
+          description="Verify email"
+        />
+        <Stepper.Step
+          label="3. Getting Startedを読む"
+          description="Get full access"
+        />
+        <Stepper.Step
+          label="4. 目標と自己紹介を書く"
+          description="Get full access"
+        />
+        <Stepper.Step
+          label="5. Lessonsから学習を開始する"
+          description="Get full access"
+        />
+      </Stepper>
     </div>
   );
 };
