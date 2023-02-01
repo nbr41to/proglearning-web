@@ -3,15 +3,17 @@ import type { FC } from 'react';
 
 import { SignboardContainer } from '@/common/SignboardContainer';
 import { Button, Input, Radio } from '@mantine/core';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 type Props = {
   email: string;
-  onSubmit: (data: Account) => void;
+  onSubmit: (data: Account) => Promise<void>;
 };
 
 export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -27,11 +29,16 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
     // eslint-disable-next-line no-console
     console.log(errors);
   };
+  const handleOnSubmit = async (data: Account) => {
+    setLoading(true);
+    await onSubmit(data);
+    setLoading(false);
+  };
 
   return (
     <SignboardContainer>
       <form
-        onSubmit={handleSubmit(onSubmit, onError)}
+        onSubmit={handleSubmit(handleOnSubmit, onError)}
         className="mx-auto w-fit space-y-4 p-8"
       >
         <div className="flex flex-wrap gap-4">
@@ -116,7 +123,9 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
           />
         </Radio.Group>
 
-        <Button type="submit">送信</Button>
+        <Button type="submit" loading={loading} disabled={loading}>
+          送信
+        </Button>
       </form>
     </SignboardContainer>
   );

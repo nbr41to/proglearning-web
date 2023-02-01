@@ -3,7 +3,7 @@ import type { Status } from '@prisma/client';
 import { supabase } from '@/utils/supabase/client';
 import useSWR from 'swr';
 
-export const useGetAccountStatus = (uid: string | undefined) => {
+export const useGetAccountStatus = (uid?: string) => {
   const { data, isLoading, mutate } = useSWR(
     uid && 'account-status',
     async () => {

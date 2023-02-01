@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from 'react';
 
 import { useGetMe } from '@/hooks/apiHook/useGetMe';
-import useLoading from '@/hooks/useLoading';
+import { useLoading } from '@/hooks/stateHook/useLoading';
 import { paths } from '@/utils/url';
 import { useRouter } from 'next/router';
 import { useMemo, useEffect } from 'react';
@@ -36,7 +36,7 @@ export const Auth: FC<Props> = ({ children }) => {
     }
   }, [router, data, isLoading, loading, isIgnorePath]);
 
-  if (isIgnorePath) return <>{children}</>;
+  if (isIgnorePath || data) return <>{children}</>;
   if (data) return <>{children}</>;
 
   return null;

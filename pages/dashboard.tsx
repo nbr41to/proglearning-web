@@ -4,6 +4,7 @@ import type { FC } from 'react';
 
 import { prisma } from '@/server/prisma/client';
 import { getServerSupabaseClient } from '@/server/supabase/client';
+import { Button } from '@mantine/core';
 
 type Props = {
   account: Account & {
@@ -17,6 +18,12 @@ const DashboardPage: FC<Props> = ({ account }) => {
     <div>
       <h2>Dashboard Page</h2>
       <div>ようこそ！{account.profile.name}さん</div>
+      <div>今月の目標[編集]</div>
+      <div>チュートリアルの達成状況</div>
+      <Button>アウトプット</Button>
+      <Button>アカウント設定</Button>
+      <Button>Lessons</Button>
+      <Button>ロードマップを見る</Button>
       <div>最近見たLessons</div>
     </div>
   );

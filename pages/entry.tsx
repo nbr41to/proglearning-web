@@ -2,8 +2,9 @@ import type { Account } from '@prisma/client';
 import type { NextPage } from 'next';
 
 import { EntryTemplate } from '@/features/entry/EntryTemplate';
+import { useGetMe } from '@/hooks/apiHook/useGetMe';
+import { useLoading } from '@/hooks/stateHook/useLoading';
 import { useGetAccountStatus } from '@/hooks/supabaseHook/useGetAccountStatus';
-import useLoading from '@/hooks/useLoading';
 import { getStripe } from '@/server/stripe/client';
 import { createAccount } from '@/utils/axios/account';
 import { createStripeCheckout } from '@/utils/axios/stripe';
@@ -17,50 +18,40 @@ const EntryPage: NextPage = () => {
   const router = useRouter();
   const [step, stepHandlers] = useCounter(0, { min: 0, max: 3 });
   const user = useUser();
+  const { mutate: mutateMe } = useGetMe();
   const {
     data: status,
     isLoading: isLoadingStatus,
-    mutate,
+    mutate: mutateStatus,
   } = useGetAccountStatus(user?.id);
-  const loading = useLoading(isLoadingStatus);
+  useLoading(isLoadingStatus);
 
   useEffect(() => {
-    if (typeof user === 'undefined') return;
-
-    if (status) {
-      stepHandlers.set(status.checked_out ? 3 : 2);
-
-      return;
-    } else if (user) {
-      stepHandlers.set(1);
-
-      return;
-    }
+    if (user && status) return stepHandlers.set(status.checked_out ? 3 : 2);
+    if (user) return stepHandlers.set(1);
+    stepHandlers.set(0);
   }, [user, status, router, stepHandlers]);
 
   /* アカウント情報の送信 */
   const onSubmitAccount = async (data: Account) => {
     if (!user) return;
-    loading.on();
     const response = await createAccount({
       ...data,
       uid: user.id,
     });
-    loading.off();
 
-    if (response.status === 200) {
-      await mutate();
+    if (response) {
+      await mutateStatus();
+      await mutateMe();
     }
   };
 
   /* 支払い画面へ */
   const onCheckout = async () => {
     if (!user) return;
-    loading.on();
     const response = await createStripeCheckout(user?.id);
     const { sessionId } = response.data;
     const stripe = await getStripe();
-    loading.off();
     stripe?.redirectToCheckout({ sessionId });
   };
 

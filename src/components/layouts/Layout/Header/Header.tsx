@@ -5,6 +5,7 @@ import type { FC } from 'react';
 import { DropdownMenu } from './DropdownMenu';
 import { SearchButton } from './SearchButton';
 import { BookIcon, DetailIcon, MailIcon } from '@/common/icons';
+import { NotificationButton } from '@/layouts/Layout/Header/NotificationButton';
 import { Button, clsx, UnstyledButton } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -79,6 +80,8 @@ export const Header: FC<Props> = ({
       {user && account ? (
         <div className="flex items-center gap-4">
           <SearchButton onClick={onClickSearchButton} />
+          {/* eslint-disable-next-line @typescript-eslint/no-empty-function */}
+          <NotificationButton onClick={() => {}} isNotification />
           <DropdownMenu
             email={user.email || ''}
             avatarUrl={user.user_metadata.avatar_url}

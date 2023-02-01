@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
   ArrowCircleUpIcon,
   AtIcon,
+  BellIcon,
   BookIcon,
   BookOpenIcon,
   CaretDownIcon,
@@ -11,6 +12,7 @@ import {
   CheckedBoxIcon,
   ColorGoogleIcon,
   CowIcon,
+  CreditCardIcon,
   DangerIcon,
   DashboardIcon,
   DetailIcon,
@@ -65,6 +67,7 @@ export const Default: StoryObj<{ size: number }> = {
     <div className="flex w-80 flex-wrap gap-2">
       <ArrowCircleUpIcon size={args.size} />
       <AtIcon size={args.size} />
+      <BellIcon size={args.size} />
       <BookIcon size={args.size} />
       <BookOpenIcon size={args.size} />
       <CaretDownIcon size={args.size} />
@@ -73,6 +76,7 @@ export const Default: StoryObj<{ size: number }> = {
       <CheckedBoxIcon size={args.size} />
       <ColorGoogleIcon size={args.size} />
       <CowIcon size={args.size} />
+      <CreditCardIcon size={args.size} />
       <DangerIcon size={args.size} />
       <DashboardIcon size={args.size} />
       <DetailIcon size={args.size} />

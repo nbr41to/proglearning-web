@@ -1,15 +1,15 @@
 import type { Status } from '@prisma/client';
-import type { User } from '@supabase/supabase-js';
+import type { User } from '@supabase/auth-helpers-react';
 import type { FC, ReactNode } from 'react';
 
 import { Layout } from '@/components/layouts/Layout';
 import { LoadingOverlay } from '@/components/layouts/LoadingOverlay';
 import { useGetMe } from '@/hooks/apiHook/useGetMe';
-import useLoading from '@/hooks/useLoading';
+import { useLoading } from '@/hooks/stateHook/useLoading';
+import { useGetAccountStatus } from '@/hooks/supabaseHook/useGetAccountStatus';
 import { Auth } from '@/layouts/Auth';
-import { signOut } from '@/utils/supabase/auth';
 import { useSpotlight } from '@mantine/spotlight';
-import { useUser } from '@supabase/auth-helpers-react';
+import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -20,9 +20,11 @@ type Props = {
 };
 
 export const LayoutWrapper: FC<Props> = ({ children }) => {
+  const supabase = useSupabaseClient();
   const router = useRouter();
   const user = useUser();
-  const { data: me, mutate } = useGetMe();
+  const { data: me, mutate: mutateMe } = useGetMe();
+  const { mutate: mutateStatus } = useGetAccountStatus();
   const spotlight = useSpotlight();
   const loading = useLoading();
 
@@ -43,8 +45,9 @@ export const LayoutWrapper: FC<Props> = ({ children }) => {
   }, []);
 
   const handleSignOut = async () => {
-    await signOut();
-    await mutate();
+    await supabase.auth.signOut();
+    await mutateMe();
+    await mutateStatus();
   };
 
   return (
@@ -55,6 +58,7 @@ export const LayoutWrapper: FC<Props> = ({ children }) => {
         onClickSearchButton={() => spotlight.openSpotlight()}
         onSignOut={handleSignOut}
       >
+        {/* {children} */}
         <Auth>{children}</Auth>
       </Layout>
       <LoadingOverlay visible={loading.is} />

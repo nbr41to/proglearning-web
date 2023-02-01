@@ -5,7 +5,6 @@ import type { Stripe } from 'stripe';
 import { prisma } from '@/server/prisma/client';
 import { sendMessage } from '@/server/slack/chat';
 import { stripe } from '@/server/stripe/client';
-// import { buffer } from 'micro';
 
 /* request.bodyを自前でparseする */
 async function buffer(readable: Readable) {

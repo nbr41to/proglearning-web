@@ -10,6 +10,7 @@ export const signInWithGoogle = async (redirectTo?: string) => {
   });
 };
 
+/* TODO: これ使うとログアウトできてない auth-helperのを使う */
 export const signOut = async () => {
   await supabase.auth.signOut();
 };

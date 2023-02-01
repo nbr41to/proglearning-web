@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 
 import { useGetAccounts } from '@/hooks/apiHook/useGetAccounts';
-import useLoading from '@/hooks/useLoading';
+import { useLoading } from '@/hooks/stateHook/useLoading';
 import { Table } from '@mantine/core';
 
 const AdminUsersPage: NextPage = () => {

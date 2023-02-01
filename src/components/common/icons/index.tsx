@@ -4,7 +4,7 @@ import {
   AiFillHome as HomeIcon,
   AiOutlineSetting as SettingIcon,
 } from 'react-icons/ai';
-import { BiDetail as DetailIcon } from 'react-icons/bi';
+import { BiDetail as DetailIcon, BiBell as BellIcon } from 'react-icons/bi';
 import {
   BsFillPersonLinesFill as ProfileIcon,
   BsFilterCircleFill as FilterIcon,
@@ -16,6 +16,7 @@ import {
   BsYoutube as YouTubeIcon,
   BsChatText as ChatTextIcon,
   BsFillCaretDownFill as CaretDownIcon,
+  BsFillCreditCard2BackFill as CreditCardIcon,
 } from 'react-icons/bs';
 import { CgDanger as DangerIcon } from 'react-icons/cg';
 import {
@@ -63,6 +64,7 @@ import { VscJson as JsonIcon } from 'react-icons/vsc';
 export {
   ArrowCircleUpIcon,
   AtIcon,
+  BellIcon,
   BookIcon,
   BookOpenIcon,
   CaretDownIcon,
@@ -71,6 +73,7 @@ export {
   CheckedBoxIcon,
   ColorGoogleIcon,
   CowIcon,
+  CreditCardIcon,
   DangerIcon,
   DashboardIcon,
   DetailIcon,

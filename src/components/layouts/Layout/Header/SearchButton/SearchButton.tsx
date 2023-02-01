@@ -12,12 +12,12 @@ export const SearchButton: FC<Props> = ({ onClick }) => {
 
   return (
     <div
-      className="flex h-9 cursor-pointer items-center gap-2 rounded-full border border-solid border-gray-400 bg-white px-4 text-xs font-bold hover:brightness-95"
+      className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-gray-100 px-4 text-sm font-bold hover:brightness-95"
       onClick={onClick}
     >
-      <SearchIcon size={16} />
+      <SearchIcon size={18} />
       Search
-      <Kbd className="border-slate-400 py-px text-[10px]">
+      <Kbd className="whitespace-nowrap border-slate-400 py-px text-[10px]">
         {os === 'windows' ? 'Ctrl' : '⌘'} + K
       </Kbd>
     </div>
