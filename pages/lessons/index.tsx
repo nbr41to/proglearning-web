@@ -2,6 +2,7 @@ import type { NotionPageObjectResponse } from '@/types/notion';
 import type { NextPage } from 'next';
 
 import { PageTitle } from '@/common/PageTitle';
+import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
 import { getDatabaseContentsAll } from '@/server/notion/databases';
 import { Button, Modal } from '@mantine/core';
 import { useRouter } from 'next/router';
@@ -23,6 +24,8 @@ const Lessons: NextPage<Props> = ({ lessons }) => {
     [selectedLessonId, lessons]
   );
 
+  const { data, trigger } = useMeStatus();
+
   return (
     <div className="w-main mx-auto">
       <PageTitle title="Lessons" />
@@ -38,6 +41,12 @@ const Lessons: NextPage<Props> = ({ lessons }) => {
             </h3>
           </div>
         ))}
+      </div>
+      <div>
+        <div>lesson_histories: {data?.lesson_histories.join(',')}</div>
+        <Button onClick={() => trigger({ lesson_histories: ['new-id-123'] })}>
+          add-id
+        </Button>
       </div>
 
       <Modal

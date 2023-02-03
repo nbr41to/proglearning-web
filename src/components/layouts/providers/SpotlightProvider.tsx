@@ -8,16 +8,14 @@ import {
   SearchIcon,
   SettingIcon,
 } from '@/components/common/icons';
-import { useGetAccountStatus } from '@/hooks/supabaseHook/useGetAccountStatus';
+import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
 import { SpotlightProvider as MantineSpotlightProvider } from '@mantine/spotlight';
-import { useUser } from '@supabase/auth-helpers-react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 
 export const SpotlightProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
-  const user = useUser();
-  const { data: userStatus } = useGetAccountStatus(user?.id);
+  const { data: userStatus } = useMeStatus();
   const disabled = !userStatus?.checked_out;
 
   const actions = useMemo(

@@ -13,10 +13,12 @@
     "roma:fix": "rome check --apply-suggested  ./pages/** ./pages/** ./src/**",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "db:push": "dotenv -e .env.local -- prisma db push",
-    "supabase:start": "dotenv -e .env.local -- supabase start",
-    "supabase:stop": "dotenv -e .env.local -- supabase stop supabase stop --backup",
-    "supabase:remove": "dotenv -e .env.local -- supabase stop supabase stop"
+    "supabase-start": "dotenv -e .env -- supabase start",
+    "supabase-stop": "dotenv -e .env -- supabase stop supabase stop --backup",
+    "supabase-remove": "dotenv -e .env -- supabase stop supabase stop"
+  },
+  "prisma": {
+    "seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",

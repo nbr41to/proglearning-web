@@ -5,9 +5,11 @@ import type { Session } from '@supabase/auth-helpers-nextjs';
 import type { AppProps } from 'next/app';
 
 import { Providers } from '@/components/layouts/providers/Providers';
+import { Auth } from '@/layouts/Auth';
 import { LayoutWrapper } from '@/layouts/index';
 import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
+
 const meta = {
   title: 'progLearning',
   description: 'ゆるく始めるプログラミング学習コミュニティ。',
@@ -61,7 +63,9 @@ export default function App({
 
       <Providers initialSession={pageProps.initialSession}>
         <LayoutWrapper>
-          <Component {...pageProps} />
+          <Auth>
+            <Component {...pageProps} />
+          </Auth>
         </LayoutWrapper>
       </Providers>
     </>

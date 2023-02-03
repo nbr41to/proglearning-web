@@ -20,24 +20,24 @@ export default {
 export const Step1: StoryObj<typeof Component> = {
   args: {
     step: 0,
-    userEmail: 'sample@exsample.com',
+    userEmail: 'sample@example.com',
   },
 };
 export const Step2: StoryObj<typeof Component> = {
   args: {
     step: 1,
-    userEmail: 'sample@exsample.com',
+    userEmail: 'sample@example.com',
   },
 };
 export const Step3: StoryObj<typeof Component> = {
   args: {
     step: 2,
-    userEmail: 'sample@exsample.com',
+    userEmail: 'sample@example.com',
   },
 };
 export const Finished: StoryObj<typeof Component> = {
   args: {
     step: 3,
-    userEmail: 'sample@exsample.com',
+    userEmail: 'sample@example.com',
   },
 };

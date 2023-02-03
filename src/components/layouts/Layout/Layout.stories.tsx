@@ -1,4 +1,4 @@
-import type { Account } from '@prisma/client';
+import type { Status } from '@prisma/client';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Layout as Component } from './Layout';
@@ -49,8 +49,8 @@ export const LoggedIn: StoryObj<typeof Component> = {
       },
       created_at: '2021-01-22T13:14:16.469',
     },
-    account: {
+    status: {
       role: 'closer',
-    } as Account,
+    } as Status,
   },
 };

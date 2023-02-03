@@ -2,9 +2,8 @@ import type { Account } from '@prisma/client';
 import type { NextPage } from 'next';
 
 import { EntryTemplate } from '@/features/entry/EntryTemplate';
-import { useGetMe } from '@/hooks/apiHook/useGetMe';
 import { useLoading } from '@/hooks/stateHook/useLoading';
-import { useGetAccountStatus } from '@/hooks/supabaseHook/useGetAccountStatus';
+import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
 import { getStripe } from '@/server/stripe/client';
 import { createAccount } from '@/utils/axios/account';
 import { createStripeCheckout } from '@/utils/axios/stripe';
@@ -18,12 +17,11 @@ const EntryPage: NextPage = () => {
   const router = useRouter();
   const [step, stepHandlers] = useCounter(0, { min: 0, max: 3 });
   const user = useUser();
-  const { mutate: mutateMe } = useGetMe();
   const {
     data: status,
     isLoading: isLoadingStatus,
     mutate: mutateStatus,
-  } = useGetAccountStatus(user?.id);
+  } = useMeStatus();
   useLoading(isLoadingStatus);
 
   useEffect(() => {
@@ -42,7 +40,6 @@ const EntryPage: NextPage = () => {
 
     if (response) {
       await mutateStatus();
-      await mutateMe();
     }
   };
 

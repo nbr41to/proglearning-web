@@ -1,19 +1,21 @@
+import type { ProfileSchemaUpdateParams } from '@/validations/scheme/profile';
 import type { NextPage } from 'next';
 
 import { SettingTemplate } from '@/features/setting/SettingTemplate';
 import { useGetMe } from '@/hooks/apiHook/useGetMe';
-import { useGetAccountProfile } from '@/hooks/supabaseHook/useGetAccountProfile';
+import { useMeProfile } from '@/hooks/supabaseHook/useMeProfile';
 import { updateAccount } from '@/utils/axios/account';
 
 const SettingPage: NextPage = () => {
-  const { data: me } = useGetMe();
-  const { data: profile } = useGetAccountProfile(me?.uid);
+  const { data: me, mutate: mutateMe } = useGetMe();
+  const { data: profile, mutate: mutateMeProfile } = useMeProfile();
 
-  const saveAccount = async (data: any) => {
-    const response = await updateAccount(data);
+  const saveAccount = async (params: ProfileSchemaUpdateParams) => {
+    const response = await updateAccount(params);
 
     if (!response) return;
-    window.location.reload();
+    await mutateMe();
+    await mutateMeProfile();
   };
 
   return (

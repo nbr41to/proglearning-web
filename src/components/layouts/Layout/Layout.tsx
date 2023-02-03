@@ -1,4 +1,4 @@
-import type { Account } from '@prisma/client';
+import type { Status } from '@prisma/client';
 import type { User } from '@supabase/supabase-js';
 import type { FC, ReactNode } from 'react';
 
@@ -8,7 +8,7 @@ import { Header } from './Header';
 type Props = {
   children: ReactNode;
   user: User | null;
-  account?: Account | null;
+  status?: Status | null;
   onClickSearchButton: () => void;
   onSignOut: () => void;
 };
@@ -16,7 +16,7 @@ type Props = {
 export const Layout: FC<Props> = ({
   children,
   user,
-  account,
+  status,
   onClickSearchButton,
   onSignOut,
 }) => {
@@ -24,7 +24,7 @@ export const Layout: FC<Props> = ({
     <>
       <Header
         user={user}
-        account={account}
+        status={status}
         onClickSearchButton={onClickSearchButton}
         onSignOut={onSignOut}
       />

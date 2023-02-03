@@ -1,4 +1,4 @@
-import type { Account } from '@prisma/client';
+import type { Status } from '@prisma/client';
 import type { User } from '@supabase/auth-helpers-react';
 import type { FC } from 'react';
 
@@ -13,14 +13,14 @@ import { useRouter } from 'next/router';
 
 type Props = {
   user: User | null;
-  account?: Account | null;
+  status?: Status | null;
   onClickSearchButton: () => void;
   onSignOut: () => void;
 };
 
 export const Header: FC<Props> = ({
   user,
-  account,
+  status,
   onClickSearchButton,
   onSignOut,
 }) => {
@@ -77,7 +77,7 @@ export const Header: FC<Props> = ({
         </nav>
       </div>
 
-      {user && account ? (
+      {user && status ? (
         <div className="flex items-center gap-4">
           <SearchButton onClick={onClickSearchButton} />
           {/* eslint-disable-next-line @typescript-eslint/no-empty-function */}
@@ -85,7 +85,7 @@ export const Header: FC<Props> = ({
           <DropdownMenu
             email={user.email || ''}
             avatarUrl={user.user_metadata.avatar_url}
-            role={account.role}
+            role={status.role}
             onSignOut={onSignOut}
           />
         </div>

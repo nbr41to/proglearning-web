@@ -1,7 +1,11 @@
+import type { ProfileSchemaUpdateParams } from '@/validations/scheme/profile';
 import type { Account, Profile } from '@prisma/client';
 import type { FC } from 'react';
 
+import { profileSchema } from '@/validations/scheme/profile';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, NativeSelect, Textarea, TextInput } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -9,7 +13,7 @@ type Props = {
   account: Account & {
     profile: Profile;
   };
-  onSubmit: (data: any) => Promise<void>;
+  onSubmit: (data: ProfileSchemaUpdateParams) => Promise<void>;
   onCancel: () => void;
 };
 
@@ -28,17 +32,28 @@ export const EditForm: FC<Props> = ({ account, onSubmit, onCancel }) => {
       zenn_id: account.zenn_id,
       introduction: account.profile.introduction,
     },
+    resolver: zodResolver(profileSchema),
   });
 
-  const handleOnSubmit = async (data: any) => {
+  const handleOnSubmit = async (data: ProfileSchemaUpdateParams) => {
     setIsLoading(true);
     await onSubmit(data);
     setIsLoading(false);
     onCancel();
   };
 
+  const onError = (errors: any) => {
+    showNotification({
+      title: 'Invalid input',
+      message: Object.values(errors)
+        .map((error: any) => error.message)
+        .join(' '),
+      color: 'red',
+    });
+  };
+
   return (
-    <form className="w-96" onSubmit={handleSubmit(handleOnSubmit)}>
+    <form className="w-96" onSubmit={handleSubmit(handleOnSubmit, onError)}>
       <TextInput
         placeholder="name"
         label="名前"

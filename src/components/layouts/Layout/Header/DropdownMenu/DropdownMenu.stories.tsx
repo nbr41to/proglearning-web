@@ -9,7 +9,7 @@ export default {
 
 export const Default: StoryObj<typeof Component> = {
   args: {
-    email: 'sample@exsample.com',
+    email: 'sample@example.com',
     avatarUrl: 'https://avatars.githubusercontent.com/u/59198478?v=4',
     role: 'closer',
   },
@@ -17,7 +17,7 @@ export const Default: StoryObj<typeof Component> = {
 
 export const NoAvatarURL: StoryObj<typeof Component> = {
   args: {
-    email: 'sample@exsample.com',
+    email: 'sample@example.com',
     avatarUrl: '',
     role: 'closer',
   },
@@ -25,7 +25,7 @@ export const NoAvatarURL: StoryObj<typeof Component> = {
 
 export const AdminUser: StoryObj<typeof Component> = {
   args: {
-    email: 'sample@exsample.com',
+    email: 'sample@example.com',
     avatarUrl: 'https://avatars.githubusercontent.com/u/59198478?v=4',
     role: 'admin',
   },

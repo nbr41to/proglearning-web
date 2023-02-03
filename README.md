@@ -15,6 +15,18 @@
 - **User**...Supabase の Auth で管理されるユーザー
 - **Account**...Supabase の DB で管理されるアカウント情報
 
+### Scripts
+
+| no  | do                   | script                  | note              |
+| --- | -------------------- | ----------------------- | ----------------- |
+| 1   | 依存関係の install   | yarn install            |                   |
+| 2   | DB を起動            | yarn supabase-start     | Docker が起動する |
+| 3   | DB を終了            | yarn supabase-stop      |                   |
+| 4   | DB を終了して初期化  | yarn supabase-remove    |                   |
+| 5   | DB の table を作成   | yarn prisma db push     |                   |
+| 6   | DB の seeds を作成   | yarn prisma db seed     |                   |
+| 7   | DB の migrate を作成 | yarn prisma migrate dev |                   |
+
 ### Rules
 
 - `pages/**`以外で`export default`は使わない
@@ -40,29 +52,14 @@
 
 ### 環境構築
 
-```sh
-yarn install
-```
-
-DB の起動
-
-※ Docker Desktop のインストールが必要
-
-```sh
-supabase start
-```
-
-勝手に Docker が立ち上がる
-
-DB の停止
-
-```sh
-supabase stop
-```
+1. `.env`ファイルを用意する
+2. **Scripts** を 1 -> 2 -> 5 -> 6 の順に実行する
 
 Supabase Studio URL: http://localhost:54323
 
 ### local での Stripe イベントの受け取り
+
+Google ログインで新規作成したアカウントなどで検証する
 
 ```sh
 stripe login

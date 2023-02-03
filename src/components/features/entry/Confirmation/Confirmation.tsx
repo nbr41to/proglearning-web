@@ -2,12 +2,13 @@ import type { FC } from 'react';
 
 import { ColorGoogleIcon } from '@/common/icons';
 import { SignboardContainer } from '@/common/SignboardContainer';
-import { signInWithGoogle } from '@/utils/supabase/auth';
+import { useAuth } from '@/hooks/supabaseHook/useAuth';
 import { baseUrl } from '@/utils/url';
 import { Button, Checkbox } from '@mantine/core';
 import { useMemo, useState } from 'react';
 
 export const Confirmation: FC = () => {
+  const { signInWithGoogle } = useAuth();
   const [checkedList, setCheckedList] = useState<string[]>([]);
   const disabled = useMemo(() => checkedList.length !== 3, [checkedList]);
 

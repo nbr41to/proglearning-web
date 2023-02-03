@@ -1,3 +1,4 @@
+import type { ProfileSchemaUpdateParams } from '@/validations/scheme/profile';
 import type { Account } from '@prisma/client';
 
 import axios from 'axios';
@@ -8,5 +9,5 @@ export const createAccount = async (
 ) => axios.post('/api/auth/me', params);
 
 /* アカウント情報の更新 */
-export const updateAccount = async (params: any) =>
+export const updateAccount = async (params: ProfileSchemaUpdateParams) =>
   axios.patch(`/api/auth/me`, params);

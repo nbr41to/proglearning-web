@@ -11,7 +11,6 @@ model Account {
   uid           String   @id @unique
   name          String
   email         String   @unique
-  role          Role     @default(free)
   os            String
   byFind        String
   github_id     String?  @unique
@@ -35,10 +34,12 @@ model Payment {
   id                         String   @id @unique
   stripe_customer_id         String?  @unique
   stripe_checkout_status     String?
+  // https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-status
   stripe_subscription_status String?
+  // https://stripe.com/docs/api/subscriptions/object#subscription_object-status
   createdAt                  DateTime @default(now())
   updatedAt                  DateTime @updatedAt
-  account                    Account  @relation(fields: [id], references: [uid], onDelete: NoAction, onUpdate: NoAction)
+  account                    Account  @relation(fields: [id], references: [uid], onDelete: NoAction)
 }
 
 model Profile {
@@ -47,17 +48,18 @@ model Profile {
   introduction String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  account      Account  @relation(fields: [id], references: [uid], onDelete: NoAction, onUpdate: NoAction)
+  account      Account  @relation(fields: [id], references: [uid], onDelete: NoAction)
 }
 
 model Status {
   id               String   @id @unique
+  role             Role     @default(free)
   checked_out      Boolean  @default(false)
   lessons          String[] @default([])
   lesson_histories String[] @default([])
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
-  account          Account  @relation(fields: [id], references: [uid], onDelete: NoAction, onUpdate: NoAction)
+  account          Account  @relation(fields: [id], references: [uid], onDelete: NoAction)
 }
 
 model DiscordLearningSession {

@@ -70,9 +70,8 @@ export const DropdownMenu: FC<Props> = ({
         </Menu.Item>
         <Menu.Item
           icon={<DashboardIcon size={16} />}
-          disabled={true}
-          // disabled={!isCheckedOut} TODO: 未実装
-          // onClick={() => router.push(`/dashboard`)}
+          disabled={!isCheckedOut}
+          onClick={() => router.push(`/dashboard`)}
         >
           Dashboard (Coming Soon)
         </Menu.Item>
@@ -92,7 +91,6 @@ export const DropdownMenu: FC<Props> = ({
         </Menu.Item>
         <Menu.Item
           icon={<SettingIcon size={16} />}
-          disabled={!isCheckedOut}
           onClick={() => router.push(`/setting`)}
         >
           Setting

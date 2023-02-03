@@ -1,13 +1,15 @@
 import type { NextPage } from 'next';
 
 import { ColorGoogleIcon } from '@/common/icons';
-import { signInWithGoogle } from '@/utils/supabase/auth';
+import { useAuth } from '@/hooks/supabaseHook/useAuth';
 import { Button } from '@mantine/core';
 
 const LoginPage: NextPage = () => {
+  const { signInWithGoogle, developLogin } = useAuth();
+
   return (
     <div className="flex h-[800px] items-center justify-center">
-      <div className="flex h-80 w-80 items-center justify-center rounded border border-solid p-8">
+      <div className="flex h-80 w-80 flex-col items-center justify-center gap-8 rounded border border-solid p-8">
         <Button
           className="border-blue-700 bg-white text-blue-700 shadow"
           variant="outline"
@@ -17,6 +19,11 @@ const LoginPage: NextPage = () => {
         >
           Googleアカウントでログイン
         </Button>
+        {process.env.NODE_ENV === 'development' && (
+          <Button fullWidth onClick={() => developLogin()}>
+            Development login
+          </Button>
+        )}
       </div>
     </div>
   );

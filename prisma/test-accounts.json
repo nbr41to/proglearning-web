@@ -1,0 +1,95 @@
+[
+  {
+    "uid": "test-user-uid-1",
+    "name": "test-user-google-account-name-1",
+    "email": "test1@example.com",
+    "os": "mac",
+    "byFind": "twitter",
+    "github_id": "test-github-id-1",
+    "zenn_id": "test-zenn-id-1",
+    "slack_user_id": "test-slack-user-id-1",
+    "profile": {
+      "create": {
+        "name": "profile-name-1",
+        "introduction": "Hello World"
+      }
+    },
+    "payment": {
+      "create": {
+        "stripe_customer_id": "stripe-customer-id-1",
+        "stripe_checkout_status": "complete",
+        "stripe_subscription_status": "active"
+      }
+    },
+    "status": {
+      "create": {
+        "role": "closer",
+        "checked_out": true,
+        "lessons": [],
+        "lesson_histories": []
+      }
+    }
+  },
+  {
+    "uid": "test-user-uid-2",
+    "name": "test-user-google-account-name-2",
+    "email": "test2@example.com",
+    "os": "mac",
+    "byFind": "twitter",
+    "github_id": "test-github-id-2",
+    "zenn_id": "test-zenn-id-2",
+    "slack_user_id": "test-slack-user-id-2",
+    "profile": {
+      "create": {
+        "name": "profile-name-2",
+        "introduction": "Hello World"
+      }
+    },
+    "payment": {
+      "create": {
+        "stripe_customer_id": "stripe-customer-id-2",
+        "stripe_checkout_status": "complete",
+        "stripe_subscription_status": "not_paid"
+      }
+    },
+    "status": {
+      "create": {
+        "role": "closer",
+        "checked_out": true,
+        "lessons": [],
+        "lesson_histories": []
+      }
+    }
+  },
+  {
+    "uid": "test-user-uid-3",
+    "name": "test-user-google-account-name-3",
+    "email": "test3@example.com",
+    "os": "mac",
+    "byFind": "twitter",
+    "github_id": "test-github-id-3",
+    "zenn_id": "test-zenn-id-3",
+    "slack_user_id": "test-slack-user-id-3",
+    "profile": {
+      "create": {
+        "name": "profile-name-3",
+        "introduction": "Hello World"
+      }
+    },
+    "payment": {
+      "create": {
+        "stripe_customer_id": "stripe-customer-id-3",
+        "stripe_checkout_status": null,
+        "stripe_subscription_status": null
+      }
+    },
+    "status": {
+      "create": {
+        "role": "free",
+        "checked_out": false,
+        "lessons": [],
+        "lesson_histories": []
+      }
+    }
+  }
+]

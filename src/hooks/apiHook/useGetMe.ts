@@ -1,11 +1,13 @@
 import type { Account } from '@prisma/client';
 
 import { axiosGetFetcher } from '@/utils/axios/fetchers';
+import { useUser } from '@supabase/auth-helpers-react';
 import useSWR from 'swr';
 
 export const useGetMe = () => {
+  const user = useUser();
   const { data, isLoading, mutate } = useSWR<Account | null>(
-    '/api/auth/me',
+    user && '/api/auth/me',
     axiosGetFetcher
   );
 
