@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { LeafIcon } from '@/common/icons';
-import { SignboardContainer } from '@/common/SignboardContainer';
+import { SignboardContainer } from '@/common/SignboardContainer/SignboardContainer';
 import { Button } from '@mantine/core';
 import { useRouter } from 'next/router';
 

@@ -17,6 +17,7 @@ import {
   BsChatText as ChatTextIcon,
   BsFillCaretDownFill as CaretDownIcon,
   BsFillCreditCard2BackFill as CreditCardIcon,
+  BsCreditCard as CreditCardOutlineIcon,
 } from 'react-icons/bs';
 import { CgDanger as DangerIcon } from 'react-icons/cg';
 import {
@@ -74,6 +75,7 @@ export {
   ColorGoogleIcon,
   CowIcon,
   CreditCardIcon,
+  CreditCardOutlineIcon,
   DangerIcon,
   DashboardIcon,
   DetailIcon,

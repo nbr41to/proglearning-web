@@ -17,7 +17,7 @@ type Props = {
   onCancel: () => void;
 };
 
-export const EditForm: FC<Props> = ({ account, onSubmit, onCancel }) => {
+export const EditAccountForm: FC<Props> = ({ account, onSubmit, onCancel }) => {
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,

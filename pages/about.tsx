@@ -1,7 +1,7 @@
 'use client';
 
+import { SignboardContainer } from '@/common/SignboardContainer/SignboardContainer';
 import { PageTitle } from '@/components/common/PageTitle';
-import { SignboardContainer } from '@/components/common/SignboardContainer';
 
 const About = () => {
   return (

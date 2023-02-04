@@ -6,7 +6,7 @@ type Props = {
 
 export const SignboardContainer: FC<Props> = ({ children }) => {
   return (
-    <div className="relative rounded-none border-0 bg-slate-100 shadow sm:rounded-lg sm:border">
+    <div className="relative rounded-none border-0 bg-slate-100 py-6 px-8 shadow sm:rounded-lg sm:border">
       {children}
       <div className="absolute top-3 left-3 h-2 w-2 rounded-full bg-gray-600"></div>
       <div className="absolute top-3 right-3 h-2 w-2 rounded-full bg-gray-600"></div>

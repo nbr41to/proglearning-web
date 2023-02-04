@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { prisma } from '@/server/prisma/client';
 import { createCustomer } from '@/server/stripe/customer';
-import { createSession } from '@/server/stripe/session';
+import { createSession, createSessionUpdate } from '@/server/stripe/session';
 import { getSessionUser } from '@/server/supabase/auth';
 
 export default async function handler(
@@ -32,9 +32,17 @@ export default async function handler(
       }
 
       let consumerId = payment?.stripe_customer_id;
+      const subscriptionId = payment?.stripe_subscription_id;
 
+      /* 支払い方法の変更 */
+      if (consumerId && subscriptionId) {
+        const session = await createSessionUpdate(consumerId, subscriptionId);
+
+        return res.status(200).json({ sessionId: session.id });
+      }
+
+      /* Stripeのcustomerを作成 */
       if (!consumerId) {
-        /* customerの新規作成 */
         const customer = await createCustomer({
           name: user.user_metadata.name || '',
           email: user.email || '',
@@ -55,6 +63,7 @@ export default async function handler(
         });
       }
 
+      /* 支払い方法の登録 */
       const session = await createSession(consumerId);
 
       return res.status(200).json({ sessionId: session.id });

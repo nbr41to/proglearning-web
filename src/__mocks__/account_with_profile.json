@@ -1,0 +1,15 @@
+{
+  "uid": "5899f99d-a449-4bfa-8769-19c097aaf1f5",
+  "name": "test-user-google-account-name",
+  "email": "test@example.com",
+  "os": "mac",
+  "byFind": "twitter",
+  "github_id": "test-github-id",
+  "zenn_id": "test-zenn-id",
+  "slack_user_id": "test-slack-user-id",
+  "profile": {
+    "id": "5899f99d-a449-4bfa-8769-19c097aaf1f5",
+    "name": "Administrator-name",
+    "introduction": "Hello World"
+  }
+}

@@ -7,14 +7,5 @@ import { useStaticSWR } from '@/hooks/useStaticSWR';
 export const useInViewIds = () => {
   const { data, mutate } = useStaticSWR<string[]>('inViewHeadingAtom', []);
 
-  const addId = async (id: string) => {
-    const prev = data || [];
-    await mutate([...prev, id]);
-  };
-  const removeId = async (id: string) => {
-    const prev = data || [];
-    await mutate(prev.filter((prevId) => prevId !== id));
-  };
-
-  return { data: data || [], addId, removeId };
+  return { data: data || [], mutate };
 };

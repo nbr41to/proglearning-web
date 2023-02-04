@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { PageTitle } from '@/common/PageTitle';
-import { SignboardContainer } from '@/common/SignboardContainer';
+import { SignboardContainer } from '@/common/SignboardContainer/SignboardContainer';
 import { ContactBySns } from '@/features/contact/ContactBySns';
 import { ContactForm } from '@/features/contact/ContactForm';
 

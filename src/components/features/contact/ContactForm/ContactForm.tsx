@@ -28,7 +28,9 @@ export const ContactForm: FC<Props> = ({ onSubmit }) => {
       StarterKit,
       Underline,
       Link,
-      Placeholder.configure({ placeholder: 'コメントを入力してください。' }),
+      Placeholder.configure({
+        placeholder: 'お問い合わせ内容を入力してください。',
+      }),
     ],
     content: '',
   });

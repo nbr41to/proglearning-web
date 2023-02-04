@@ -12,19 +12,20 @@ type Props = {
 };
 
 export const Heading2: FC<Props> = ({ block }) => {
-  const { addId, removeId } = useInViewIds();
+  const { mutate } = useInViewIds();
   const { ref, entry } = useIntersection({
     threshold: 1,
     rootMargin: '0px',
   });
 
   useEffect(() => {
+    if (!entry) return;
     if (entry.isIntersecting) {
-      addId(block.id);
+      mutate((prev) => [...(prev ?? []), block.id]);
     } else {
-      removeId(block.id);
+      mutate((prev) => prev?.filter((id) => id !== block.id));
     }
-  }, [entry, block.id, addId, removeId]);
+  }, [entry, block.id, mutate]);
 
   return (
     <h2

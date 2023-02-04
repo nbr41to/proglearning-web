@@ -1,5 +1,4 @@
 import '../src/styles/globals.css';
-import { RecoilRoot } from 'recoil';
 
 export const parameters = {
   backgrounds: {
@@ -21,10 +20,6 @@ export const parameters = {
 
 export const decorators = [
   (Story) => {
-    return (
-      <RecoilRoot>
-        <Story />
-      </RecoilRoot>
-    );
+    return <Story />;
   },
 ];

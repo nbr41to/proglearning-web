@@ -1,7 +1,7 @@
 import type { Account } from '@prisma/client';
 import type { FC } from 'react';
 
-import { SignboardContainer } from '@/common/SignboardContainer';
+import { SignboardContainer } from '@/common/SignboardContainer/SignboardContainer';
 import { Button, Input, Radio } from '@mantine/core';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { ColorGoogleIcon } from '@/common/icons';
-import { SignboardContainer } from '@/common/SignboardContainer';
+import { SignboardContainer } from '@/common/SignboardContainer/SignboardContainer';
 import { useAuth } from '@/hooks/supabaseHook/useAuth';
 import { baseUrl } from '@/utils/url';
 import { Button, Checkbox } from '@mantine/core';

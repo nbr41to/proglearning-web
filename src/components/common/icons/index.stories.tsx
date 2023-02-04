@@ -13,6 +13,7 @@ import {
   ColorGoogleIcon,
   CowIcon,
   CreditCardIcon,
+  CreditCardOutlineIcon,
   DangerIcon,
   DashboardIcon,
   DetailIcon,
@@ -77,6 +78,7 @@ export const Default: StoryObj<{ size: number }> = {
       <ColorGoogleIcon size={args.size} />
       <CowIcon size={args.size} />
       <CreditCardIcon size={args.size} />
+      <CreditCardOutlineIcon size={args.size} />
       <DangerIcon size={args.size} />
       <DashboardIcon size={args.size} />
       <DetailIcon size={args.size} />
