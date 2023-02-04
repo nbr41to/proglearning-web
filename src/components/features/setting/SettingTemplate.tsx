@@ -1,7 +1,13 @@
 import type { Account, Profile } from '@prisma/client';
 import type { FC } from 'react';
 
+import { CreditCardIcon } from '@/common/icons';
 import { EditForm } from '@/features/setting/EditForm';
+import { getStripe } from '@/server/stripe/client';
+import {
+  createStripeCheckout,
+  createStripeCheckoutUpdate,
+} from '@/utils/axios/stripe';
 import { Button, Stepper } from '@mantine/core';
 import { useState } from 'react';
 
@@ -14,6 +20,20 @@ type Props = {
 
 export const SettingTemplate: FC<Props> = ({ account, onSubmit }) => {
   const [isEditing, setIsEditing] = useState(false);
+
+  /* 支払い画面へ */
+  const onCheckout = async () => {
+    const response = await createStripeCheckout(account.uid);
+    const { sessionId } = response.data;
+    const stripe = await getStripe();
+    stripe?.redirectToCheckout({ sessionId });
+  };
+  const onCheckoutUpdate = async () => {
+    const response = await createStripeCheckoutUpdate(account.uid);
+    const { sessionId } = response.data;
+    const stripe = await getStripe();
+    stripe?.redirectToCheckout({ sessionId });
+  };
 
   return (
     <div className="w-main mx-auto space-y-4">
@@ -48,6 +68,17 @@ export const SettingTemplate: FC<Props> = ({ account, onSubmit }) => {
           </div>
         </>
       )}
+      <div>
+        <Button leftIcon={<CreditCardIcon size={20} />} onClick={onCheckout}>
+          支払い情報の登録
+        </Button>
+        <Button
+          leftIcon={<CreditCardIcon size={20} />}
+          onClick={onCheckoutUpdate}
+        >
+          支払い情報の変更
+        </Button>
+      </div>
 
       <Stepper size="sm" active={1} orientation="vertical">
         <Stepper.Step

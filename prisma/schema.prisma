@@ -7,6 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// アカウント情報
 model Account {
   uid           String   @id @unique
   name          String
@@ -30,6 +31,7 @@ enum Role {
   admin
 }
 
+// 決済情報
 model Payment {
   id                         String   @id @unique
   stripe_customer_id         String?  @unique
@@ -37,11 +39,13 @@ model Payment {
   // https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-status
   stripe_subscription_status String?
   // https://stripe.com/docs/api/subscriptions/object#subscription_object-status
+  stripe_subscription_id     String?
   createdAt                  DateTime @default(now())
   updatedAt                  DateTime @updatedAt
   account                    Account  @relation(fields: [id], references: [uid], onDelete: NoAction)
 }
 
+// プロフィール
 model Profile {
   id           String   @id @unique
   name         String

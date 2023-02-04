@@ -28,8 +28,8 @@ export const DropdownMenu: FC<Props> = ({
   onSignOut,
 }) => {
   const router = useRouter();
-  const isCheckedOut = role === 'admin';
-  const isAdmin = role === 'admin' || role === 'closer';
+  const isAdmin = role === 'admin';
+  const isCheckedOut = role === 'admin' || role === 'closer';
 
   return (
     <Menu

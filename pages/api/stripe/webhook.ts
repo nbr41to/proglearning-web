@@ -55,12 +55,14 @@ export default async function handler(
           },
           data: {
             stripe_subscription_status: subscription.status,
+            stripe_subscription_id: subscription.id,
           },
         });
       }
 
       if (event.type === 'checkout.session.completed') {
         const session = event.data.object as Stripe.Checkout.Session;
+        session.subscription;
 
         if (session.mode === 'subscription') {
           const customerId = session.customer;
@@ -76,19 +78,12 @@ export default async function handler(
               account: true,
             },
           });
-          await prisma.account.update({
-            where: {
-              uid: payment.id,
-            },
-            data: {
-              role: 'closer',
-            },
-          });
           await prisma.status.update({
             where: {
               id: payment.id,
             },
             data: {
+              role: 'closer',
               checked_out: true,
             },
           });
@@ -100,6 +95,7 @@ export default async function handler(
           });
         }
       }
+      res.end();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error);
@@ -112,5 +108,4 @@ export default async function handler(
     res.setHeader('Allow', 'POST');
     res.status(405).end('Method Not Allowed');
   }
-  res.end();
 }
