@@ -1,6 +1,6 @@
-import { Case } from '@/components/features/Landing/Case';
-import { Hero } from '@/components/features/Landing/Hero';
-import { Introduction } from '@/components/features/Landing/Introduction';
+import { Case } from '@/features/landing/Case';
+import { Hero } from '@/features/landing/Hero';
+import { Introduction } from '@/features/landing/Introduction';
 
 const Home = () => {
   return (
