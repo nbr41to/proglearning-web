@@ -26,6 +26,7 @@ export const useAuth = () => {
       email: process.env.NEXT_PUBLIC_TEST_USER_EMAIL || '',
       password: process.env.NEXT_PUBLIC_TEST_USER_PASSWORD || '',
     });
+    await router.push('/dashboard');
   };
 
   return { signInWithGoogle, signOut, developLogin };

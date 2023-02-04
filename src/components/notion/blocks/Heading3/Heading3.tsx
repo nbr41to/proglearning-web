@@ -2,31 +2,28 @@ import type { Heading3BlockObjectResponse } from '@notionhq/client/build/src/api
 import type { FC } from 'react';
 
 import { RichText } from '@/components/notion/RichText';
-import { inViewHeadingIdsAtom } from '@/recoil/atoms';
+import { useInViewIds } from '@/hooks/stateHook/useInViewIds';
 import { useIntersection } from '@mantine/hooks';
 import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
 
 type Props = {
   block: Heading3BlockObjectResponse;
 };
 
 export const Heading3: FC<Props> = ({ block }) => {
-  const setInViewHeading = useSetRecoilState(inViewHeadingIdsAtom);
+  const { addId, removeId } = useInViewIds();
   const { ref, entry } = useIntersection({
     threshold: 1,
     rootMargin: '0px',
   });
 
   useEffect(() => {
-    if (!entry) return;
-
-    if (entry?.isIntersecting) {
-      setInViewHeading((prev) => [...prev, block.id]);
+    if (entry.isIntersecting) {
+      addId(block.id);
     } else {
-      setInViewHeading((prev) => prev.filter((id) => id !== block.id));
+      removeId(block.id);
     }
-  }, [entry, block.id, setInViewHeading]);
+  }, [entry, block.id, addId, removeId]);
 
   return (
     <h3

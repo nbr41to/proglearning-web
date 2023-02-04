@@ -15,7 +15,7 @@ const LoginPage: NextPage = () => {
           variant="outline"
           fullWidth
           leftIcon={<ColorGoogleIcon size={20} />}
-          onClick={() => signInWithGoogle()}
+          onClick={() => signInWithGoogle('/dashboard')}
         >
           Googleアカウントでログイン
         </Button>
