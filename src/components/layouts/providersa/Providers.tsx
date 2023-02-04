@@ -5,7 +5,6 @@ import { SessionContextProvider } from './SessionContextProvider';
 import { SpotlightProvider } from './SpotlightProvider';
 import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
-import { RecoilRoot } from 'recoil';
 
 type Props = {
   children: ReactNode;
@@ -15,13 +14,11 @@ type Props = {
 export const Providers: FC<Props> = ({ children, initialSession }) => {
   return (
     <SessionContextProvider initialSession={initialSession}>
-      <RecoilRoot>
-        <NotificationsProvider position="top-center">
-          <SpotlightProvider>
-            <ModalsProvider>{children}</ModalsProvider>
-          </SpotlightProvider>
-        </NotificationsProvider>
-      </RecoilRoot>
+      <NotificationsProvider position="top-center">
+        <SpotlightProvider>
+          <ModalsProvider>{children}</ModalsProvider>
+        </SpotlightProvider>
+      </NotificationsProvider>
     </SessionContextProvider>
   );
 };
