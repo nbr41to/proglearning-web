@@ -7,7 +7,7 @@ type Props = {
   };
 };
 
-export const ViewAccount: FC<Props> = ({ account }) => {
+export const MeViewer: FC<Props> = ({ account }) => {
   return (
     <div className="space-y-2">
       <div className="flex items-end gap-3">
@@ -34,7 +34,7 @@ export const ViewAccount: FC<Props> = ({ account }) => {
       </div>
       <div className="flex gap-3">
         <div className="w-28 text-right text-sm text-gray-400">自己紹介</div>
-        <div className="max-w-80 w-60 whitespace-pre-wrap text-sm leading-6">
+        <div className="whitespace-pre-wrap text-sm leading-6">
           {account.profile.introduction}
         </div>
       </div>

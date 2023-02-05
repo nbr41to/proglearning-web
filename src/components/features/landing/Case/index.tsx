@@ -1,5 +1,5 @@
 import { CaseItem } from './CaseItem';
-import { SignboardContainer } from '@/common/SignboardContainer/SignboardContainer';
+import { SignboardContainer } from '@/components/common/SignboardContainer/SignboardContainer';
 
 export const Case = () => {
   return (

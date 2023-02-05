@@ -1,0 +1,8 @@
+{
+  "id": "5899f99d-a449-4bfa-8769-19c097aaf1f5",
+  "role": "admin",
+  "checked_out": true,
+  "lessons": ["lesson-id"],
+  "lesson_histories": ["new-id-123"],
+  "tutorial_step": 1
+}

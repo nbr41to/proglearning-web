@@ -17,7 +17,7 @@ type Props = {
   onCancel: () => void;
 };
 
-export const EditAccountForm: FC<Props> = ({ account, onSubmit, onCancel }) => {
+export const MeEditingForm: FC<Props> = ({ account, onSubmit, onCancel }) => {
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -53,7 +53,10 @@ export const EditAccountForm: FC<Props> = ({ account, onSubmit, onCancel }) => {
   };
 
   return (
-    <form className="w-96" onSubmit={handleSubmit(handleOnSubmit, onError)}>
+    <form
+      className="w-96 space-y-4"
+      onSubmit={handleSubmit(handleOnSubmit, onError)}
+    >
       <TextInput
         placeholder="name"
         label="名前"
@@ -90,11 +93,22 @@ export const EditAccountForm: FC<Props> = ({ account, onSubmit, onCancel }) => {
         maxRows={12}
         {...register('introduction')}
       />
-      <div className="mt-4 flex justify-center gap-4">
-        <Button variant="outline" disabled={isLoading} onClick={onCancel}>
+
+      <div className="flex justify-center gap-4">
+        <Button
+          className="w-1/2"
+          variant="outline"
+          disabled={isLoading}
+          onClick={onCancel}
+        >
           キャンセル
         </Button>
-        <Button type="submit" loading={isLoading} disabled={isLoading}>
+        <Button
+          className="w-1/2"
+          type="submit"
+          loading={isLoading}
+          disabled={isLoading}
+        >
           保存
         </Button>
       </div>

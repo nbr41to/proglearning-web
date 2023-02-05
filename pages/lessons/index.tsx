@@ -1,7 +1,7 @@
 import type { NotionPageObjectResponse } from '@/types/notion';
 import type { NextPage } from 'next';
 
-import { PageTitle } from '@/common/PageTitle';
+import { PageTitle } from '@/components/common/PageTitle';
 import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
 import { getDatabaseContentsAll } from '@/server/notion/databases';
 import { Button, Modal } from '@mantine/core';

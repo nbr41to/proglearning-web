@@ -8,7 +8,6 @@ import { BiDetail as DetailIcon, BiBell as BellIcon } from 'react-icons/bi';
 import {
   BsFillPersonLinesFill as ProfileIcon,
   BsFilterCircleFill as FilterIcon,
-  BsGithub as GitHubIcon,
   BsGrid as GridIcon,
   BsHeartFill as HeartIcon,
   BsListUl as ListIcon,
@@ -18,12 +17,18 @@ import {
   BsFillCaretDownFill as CaretDownIcon,
   BsFillCreditCard2BackFill as CreditCardIcon,
   BsCreditCard as CreditCardOutlineIcon,
+  BsFillPeopleFill as PeopleIcon,
 } from 'react-icons/bs';
 import { CgDanger as DangerIcon } from 'react-icons/cg';
 import {
   FaBook as BookIcon,
   FaTheaterMasks as DummyIcon,
   FaLeaf as LeafIcon,
+  FaMagic as MagicWandBoldIcon,
+  FaHatWizard as WizardHatIcon,
+  FaChevronLeft as ChevronLeftIcon,
+  FaChevronRight as ChevronRightIcon,
+  FaPen as PenIcon,
 } from 'react-icons/fa';
 import { FcGoogle as ColorGoogleIcon } from 'react-icons/fc';
 import { FiSearch as SearchIcon } from 'react-icons/fi';
@@ -37,6 +42,7 @@ import {
 import {
   ImCheckboxChecked as CheckedBoxIcon,
   ImCheckboxUnchecked as UnCheckedBoxIcon,
+  ImMagicWand as MagicWandIcon,
 } from 'react-icons/im';
 import {
   IoInformationCircleSharp as InformationIcon,
@@ -54,15 +60,20 @@ import {
   SiLine as LineIcon,
   SiMaildotru as AtIcon,
   SiZenn as ZennIcon,
+  SiHandshake as ShakeIcon,
+  SiNotion as NotionIcon,
 } from 'react-icons/si';
 import {
-  TbExternalLink as TbExternalLinkIcon,
+  TbExternalLink as ExternalLinkIcon,
   TbLogout as LogoutIcon,
 } from 'react-icons/tb';
-import { TfiGithub as GitHubOctocatIcon } from 'react-icons/tfi';
 import { VscJson as JsonIcon } from 'react-icons/vsc';
 
 export {
+  PeopleIcon,
+  NotionIcon,
+  ShakeIcon,
+  PenIcon,
   ArrowCircleUpIcon,
   AtIcon,
   BellIcon,
@@ -71,6 +82,8 @@ export {
   CaretDownIcon,
   ChatBubblesIcon,
   ChatTextIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   CheckedBoxIcon,
   ColorGoogleIcon,
   CowIcon,
@@ -81,9 +94,8 @@ export {
   DetailIcon,
   DummyIcon,
   ExperimentIcon,
+  ExternalLinkIcon,
   FilterIcon,
-  GitHubIcon,
-  GitHubOctocatIcon,
   GridIcon,
   HeartIcon,
   HomeIcon,
@@ -93,6 +105,8 @@ export {
   LineIcon,
   ListIcon,
   LogoutIcon,
+  MagicWandIcon,
+  MagicWandBoldIcon,
   MailIcon,
   OutlineBlockIcon,
   ProfileIcon,
@@ -102,11 +116,11 @@ export {
   SendIcon,
   SettingIcon,
   StopIcon,
-  TbExternalLinkIcon,
   TouchIcon,
   TwitterIcon,
   UnCheckedBoxIcon,
   UpdateIcon,
+  WizardHatIcon,
   YouTubeIcon,
   ZennIcon,
 };

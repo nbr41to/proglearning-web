@@ -6,9 +6,9 @@ import {
   CreditCardOutlineIcon,
   ProfileIcon,
   SettingIcon,
-} from '@/common/icons';
-import { MyAccountInfo } from '@/features/setting/MyAccountInfo/MyAccountInfo';
-import { MySubscription } from '@/features/setting/MySubscription/MySubscription';
+} from '@/components/common/icons';
+import { MyProfile } from '@/components/features/setting/MyProfile/MyProfile';
+import { MySubscription } from '@/components/features/setting/MySubscription/MySubscription';
 import { getStripe } from '@/server/stripe/client';
 import { createStripeCheckout } from '@/utils/axios/stripe';
 import { Tabs } from '@mantine/core';
@@ -17,10 +17,15 @@ type Props = {
   account: Account & {
     profile: Profile;
   };
-  onSubmit: (data: ProfileSchemaUpdateParams) => Promise<void>;
+  onSubmitGoal: (param: string) => Promise<void>;
+  onSubmitProfile: (params: ProfileSchemaUpdateParams) => Promise<void>;
 };
 
-export const SettingTemplate: FC<Props> = ({ account, onSubmit }) => {
+export const SettingTemplate: FC<Props> = ({
+  account,
+  onSubmitGoal,
+  onSubmitProfile,
+}) => {
   /* 支払い画面へ */
   const onCheckout = async () => {
     const response = await createStripeCheckout(account.uid);
@@ -53,7 +58,11 @@ export const SettingTemplate: FC<Props> = ({ account, onSubmit }) => {
         </Tabs.List>
 
         <Tabs.Panel value="profile">
-          <MyAccountInfo account={account} onSubmit={onSubmit} />
+          <MyProfile
+            account={account}
+            onSubmitGoal={onSubmitGoal}
+            onSubmitProfile={onSubmitProfile}
+          />
         </Tabs.Panel>
 
         <Tabs.Panel value="subscription" pt="xs">

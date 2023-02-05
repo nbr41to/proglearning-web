@@ -1,4 +1,4 @@
-import { ContactTemplate } from '@/features/contact/ContactTemplate';
+import { ContactTemplate } from '@/components/features/contact/ContactTemplate';
 import { sendSlackChannel } from '@/utils/axios/slack';
 
 const ContactPage = () => {

@@ -1,7 +1,7 @@
 import type { NotionBlockObjectResponse } from '@/types/notion';
 import type { NextPage, InferGetStaticPropsType } from 'next';
 
-import { PageTitle } from '@/common/PageTitle';
+import { PageTitle } from '@/components/common/PageTitle';
 import { blockToJsx } from '@/components/notion/blockToJsx';
 import { getChildrenAllInBlock } from '@/server/notion/blocks';
 

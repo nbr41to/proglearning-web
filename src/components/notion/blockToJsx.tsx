@@ -14,7 +14,7 @@ import { NumberedListItem } from './blocks/NumberedListItem';
 import { Paragraph } from './blocks/Paragraph';
 import { Quote } from './blocks/Quote';
 import { ToDo } from './blocks/ToDo';
-import { StopIcon } from '@/common/icons';
+import { StopIcon } from '@/components/common/icons';
 
 export const blockToJsx = (block: NotionBlockObjectResponse) => {
   const blockType = block.type;

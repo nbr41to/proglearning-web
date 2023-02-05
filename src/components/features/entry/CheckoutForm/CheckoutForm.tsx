@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
-import { CreditCardIcon } from '@/common/icons';
-import { SignboardContainer } from '@/common/SignboardContainer/SignboardContainer';
+import { CreditCardIcon } from '@/components/common/icons';
+import { SignboardContainer } from '@/components/common/SignboardContainer/SignboardContainer';
 import { Button } from '@mantine/core';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 
 export const CheckoutForm: FC<Props> = ({ onClick }) => {
   return (
-    <SignboardContainer>
+    <SignboardContainer fill>
       <div className="mx-auto w-fit p-8">
         <Button leftIcon={<CreditCardIcon size={20} />} onClick={onClick}>
           クレジットカードを登録

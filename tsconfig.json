@@ -16,16 +16,15 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/pages/*": ["./pages/*"],
-      "@/features/*": ["./src/components/features/*"],
-      "@/common/*": ["./src/components/common/*"],
-      "@/layouts/*": ["src/components/layouts/*"],
-      "@/templates/*": ["./src/components/templates/*"],
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
       "@/hooks/*": ["./src/hooks/*"],
-      "@/utils/*": ["./src/utils/*"],
-      "@/server/*": ["src/server/*"],
+      "@/mdx/*": ["./src/mdx/*"],
       "@/mocks/*": ["./src/__mocks__/*"],
-      "@/*": ["./src/*"]
+      "@/pages/*": ["./pages/*"],
+      "@/server/*": ["src/server/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/utils/*": ["./src/utils/*"]
     },
     "plugins": [
       {

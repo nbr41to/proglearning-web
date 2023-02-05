@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
-import { AtIcon, SendIcon, TouchIcon } from '@/common/icons';
-import { RichTextEditor } from '@/common/RichTextEditor';
+import { AtIcon, SendIcon, TouchIcon } from '@/components/common/icons';
+import { RichTextEditor } from '@/components/common/RichTextEditor';
 import { contactSchema } from '@/validations/scheme/contact';
 import { validate } from '@/validations/varidate';
 import { Button, clsx, Input } from '@mantine/core';

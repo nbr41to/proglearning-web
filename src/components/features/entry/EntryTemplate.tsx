@@ -1,10 +1,10 @@
 import type { Account } from '@prisma/client';
 import type { FC } from 'react';
 
-import { CheckoutForm } from '@/features/entry/CheckoutForm';
-import { Completed } from '@/features/entry/Completed';
-import { Confirmation } from '@/features/entry/Confirmation';
-import { EntryForm } from '@/features/entry/EntryForm';
+import { CheckoutForm } from '@/components/features/entry/CheckoutForm';
+import { Completed } from '@/components/features/entry/Completed';
+import { Confirmation } from '@/components/features/entry/Confirmation';
+import { EntryForm } from '@/components/features/entry/EntryForm';
 import { Stepper } from '@mantine/core';
 
 type Props = {
@@ -20,11 +20,12 @@ export const EntryTemplate: FC<Props> = ({
   onCheckout,
 }) => {
   return (
-    <div className="w-main mx-auto space-y-8">
+    <div className="w-main mx-auto space-y-8 px-8">
       <div>
         <h2>お申し込み</h2>
-        <p className="text-sm">3ステップで今すぐ登録</p>
+        <p className="text-sm text-gray-600">3ステップで今すぐ登録</p>
       </div>
+
       <Stepper className="w-[800px]" active={step} breakpoint="sm">
         <Stepper.Step label="確認事項" description="Confirmation">
           <Confirmation />

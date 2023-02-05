@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 
-import { ColorGoogleIcon } from '@/common/icons';
+import { ColorGoogleIcon } from '@/components/common/icons';
 import { useAuth } from '@/hooks/supabaseHook/useAuth';
 import { Button } from '@mantine/core';
 

@@ -35,6 +35,7 @@
 - フロントエンドでの DB 操作は RLS 付きの supabase
 - バックエンドでの DB 操作は prisma
 - 認証関連は Supabase の Helper を使用する
+- Icon は[react-icons](https://react-icons.github.io/react-icons)から使用する
 
 ## Todo
 

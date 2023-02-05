@@ -10,7 +10,7 @@ import {
   LogoutIcon,
   QuillPenIcon,
   SettingIcon,
-} from '@/common/icons';
+} from '@/components/common/icons';
 import { Avatar, clsx, Menu } from '@mantine/core';
 import { useRouter } from 'next/router';
 
@@ -62,18 +62,18 @@ export const DropdownMenu: FC<Props> = ({
       <Menu.Dropdown>
         <Menu.Label>{email}</Menu.Label>
         <Menu.Item
+          icon={<DashboardIcon size={16} />}
+          disabled={!isCheckedOut}
+          onClick={() => router.push(`/dashboard`)}
+        >
+          Dashboard
+        </Menu.Item>
+        <Menu.Item
           icon={<LeafIcon size={16} />}
           disabled={!isCheckedOut}
           onClick={() => router.push('/getting-started')}
         >
           Getting Started
-        </Menu.Item>
-        <Menu.Item
-          icon={<DashboardIcon size={16} />}
-          disabled={!isCheckedOut}
-          onClick={() => router.push(`/dashboard`)}
-        >
-          Dashboard (Coming Soon)
         </Menu.Item>
         <Menu.Item
           icon={<BookOpenIcon size={16} />}

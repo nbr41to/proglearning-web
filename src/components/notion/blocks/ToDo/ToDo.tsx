@@ -1,7 +1,7 @@
 import type { ToDoBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import type { FC } from 'react';
 
-import { CheckedBoxIcon, UnCheckedBoxIcon } from '@/common/icons';
+import { CheckedBoxIcon, UnCheckedBoxIcon } from '@/components/common/icons';
 import { RichText } from '@/components/notion/RichText';
 
 type Props = {

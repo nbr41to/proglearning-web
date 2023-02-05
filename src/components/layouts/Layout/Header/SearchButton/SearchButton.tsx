@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { SearchIcon } from '@/common/icons';
+import { SearchIcon } from '@/components/common/icons';
 import { Kbd } from '@mantine/core';
 import { useOs } from '@mantine/hooks';
 

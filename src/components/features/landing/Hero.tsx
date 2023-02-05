@@ -1,26 +1,25 @@
 export const Hero = () => {
   return (
-    <div className="py-4 text-center sm:py-16">
+    <div className="select-none py-12 text-center">
       <div className="">
-        <div className="bg-[url('../../public/gradient-background.png')] bg-cover bg-clip-text py-8 text-4xl font-bold text-transparent drop-shadow sm:text-8xl">
-          <div className="leading-normal">Change your life</div>
-          <div>
-            by{' '}
-            <span className="cursor-pointer transition-colors duration-300 hover:text-orange-300 active:text-white">
-              Learning
-            </span>
+        <div className="whitespace-pre bg-[url('../../public/gradient-background.png')] bg-cover bg-clip-text py-8 text-4xl font-bold text-transparent drop-shadow sm:text-8xl">
+          <div className="font-sans leading-tight">
+            Let&#39;s start
+            <br />
+            Learning the magic.
           </div>
         </div>
 
         <div className="mt-8 px-6 text-xs tracking-wider sm:text-base">
-          <span className="px-2 text-base font-bold text-teal-300">
+          <span className="">オンラインコミュニティ</span>
+          <span className="px-2 text-base font-bold text-primary">
             `progLearning`
           </span>
-          <span className="">はプログラミング学習による</span>
-          <span className="px-2 text-base font-bold text-amber-400">
-            `あなたの変化`
+          <span className="">で</span>
+          <span className="px-2 text-base font-bold text-amber-500">
+            `プログラミング（魔法）`
           </span>
-          <span className="">をサポートします。</span>
+          <span className="">を学ぼう！</span>
         </div>
       </div>
     </div>

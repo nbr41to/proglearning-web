@@ -1,7 +1,7 @@
 import type { Heading2BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import type { FC } from 'react';
 
-import { OutlineBlockIcon } from '@/common/icons';
+import { OutlineBlockIcon } from '@/components/common/icons';
 import { RichText } from '@/components/notion/RichText';
 import { useInViewIds } from '@/hooks/stateHook/useInViewIds';
 import { useIntersection } from '@mantine/hooks';

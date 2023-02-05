@@ -1,18 +1,15 @@
 'use client';
 
-import { SignboardContainer } from '@/common/SignboardContainer/SignboardContainer';
-import { PageTitle } from '@/components/common/PageTitle';
+import type { NextPage } from 'next';
 
-const About = () => {
+import { AboutTemplate } from '@/components/features/landing/AboutTemplate';
+
+const AboutPage: NextPage = () => {
   return (
-    <div className="w-main mx-auto">
-      <SignboardContainer>
-        <div className="space-y-8 p-8">
-          <PageTitle title="About" />
-        </div>
-      </SignboardContainer>
-    </div>
+    <>
+      <AboutTemplate />
+    </>
   );
 };
 
-export default About;
+export default AboutPage;

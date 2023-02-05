@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { BellIcon } from '@/common/icons';
+import { BellIcon } from '@/components/common/icons';
 
 type Props = {
   isNotification: boolean;

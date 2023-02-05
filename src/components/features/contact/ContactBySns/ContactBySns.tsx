@@ -5,7 +5,7 @@ import {
   LineIcon,
   TwitterIcon,
   ChatBubblesIcon,
-} from '@/common/icons';
+} from '@/components/common/icons';
 import { clsx } from '@mantine/core';
 
 export const ContactBySns: FC = () => {

@@ -4,9 +4,9 @@ import '@/utils/axios/client';
 import type { Session } from '@supabase/auth-helpers-nextjs';
 import type { AppProps } from 'next/app';
 
-import { Auth } from '@/layouts/Auth';
-import { LayoutWrapper } from '@/layouts/index';
-import { Providers } from '@/layouts/Providers/Providers';
+import { Auth } from '@/components/layouts/Auth';
+import { LayoutWrapper } from '@/components/layouts/index';
+import { Providers } from '@/components/layouts/Providers/Providers';
 import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
 

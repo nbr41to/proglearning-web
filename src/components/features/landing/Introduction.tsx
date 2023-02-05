@@ -3,46 +3,44 @@ import {
   ProfileIcon,
   TwitterIcon,
   YouTubeIcon,
-} from '@/common/icons';
+} from '@/components/common/icons';
 import Image from 'next/image';
 
 export const Introduction = () => {
   return (
     <div className="py-10 px-6">
-      <h2 className="mb-6 text-center text-xl font-bold sm:text-2xl">
-        未経験からエンジニアになるためのメソッドを提供
+      <h2 className="mb-6 whitespace-pre text-center text-xl font-bold sm:text-2xl">
+        教員からフリーランスのWebエンジニアへなった私が、
+        <wbr />
+        そのメソッドを隠すことなく提供します
       </h2>
       <p className="m-auto mb-8 max-w-xl text-sm leading-relaxed text-slate-500 sm:text-base sm:leading-relaxed">
-        教員を退職してから半年でフリーランスWebエンジニアになった個人が趣味でプログラミング学習を支援しております。難しいと思われがちなプログラミング学習を、わかりやすく解説したり、挫折しないような環境作りをサポートすることで、一歩踏み出した人を応援しています。
+        はじめまして管理人です。教員を退職してから半年でフリーランスのWebエンジニアになった個人が趣味でプログラミング学習を支援しております。難しいと思われがちなプログラミング学習を、わかりやすく解説したり、挫折しないような環境作りをサポートすることで、一歩踏み出した人を応援しています。
       </p>
       <div className="flex flex-col-reverse items-center justify-center space-x-4 text-left sm:flex-row">
         <div className="text-center sm:text-right">
-          <div className="mb-2 text-lg font-bold sm:text-xl">
-            Nobuyuki Kobayashi
-          </div>
-          <div className="text-xs text-slate-500 sm:text-sm">
+          <div className="text-lg font-bold sm:text-xl">Nobuyuki Kobayashi</div>
+          <div className="mt-1 text-xs text-slate-500 sm:text-sm">
             学校の先生 → フリーランスWebエンジニア
           </div>
         </div>
-        <div className="mb-4 rounded-full sm:mb-0">
-          <Image
-            className="rounded-full"
-            src="/profile.png"
-            alt="nob photo"
-            width={64}
-            height={64}
-            priority
-          />
-        </div>
+        <Image
+          className="rounded-full"
+          src="/profile.png"
+          alt="nob photo"
+          width={64}
+          height={64}
+          priority
+        />
       </div>
-      <div className="mx-auto flex w-fit items-center gap-2">
+      <div className="mx-auto flex w-fit items-center gap-3">
         <a
           className="text-gray-800 transition-colors hover:text-gray-600"
           href="https://www.nbr41.com/"
           target="_blank"
           rel="noreferrer"
         >
-          <ProfileIcon />
+          <ProfileIcon size={18} />
         </a>
         <a
           className="text-gray-800 transition-colors hover:text-gray-600"
@@ -50,7 +48,7 @@ export const Introduction = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <TwitterIcon />
+          <TwitterIcon size={18} />
         </a>
         <a
           className="text-gray-800 transition-colors hover:text-gray-600"
@@ -58,7 +56,7 @@ export const Introduction = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <GitHubIcon />
+          <GitHubIcon size={18} />
         </a>
         <a
           className="text-gray-800 transition-colors hover:text-gray-600"
@@ -66,7 +64,7 @@ export const Introduction = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <YouTubeIcon />
+          <YouTubeIcon size={18} />
         </a>
       </div>
     </div>

@@ -2,7 +2,7 @@
 import type { ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import type { FC } from 'react';
 
-import { DangerIcon, UpdateIcon } from '@/common/icons';
+import { DangerIcon, UpdateIcon } from '@/components/common/icons';
 import { Button } from '@mantine/core';
 import NextImage from 'next/image';
 import { useState } from 'react';

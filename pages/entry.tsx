@@ -1,7 +1,7 @@
 import type { Account } from '@prisma/client';
 import type { NextPage } from 'next';
 
-import { EntryTemplate } from '@/features/entry/EntryTemplate';
+import { EntryTemplate } from '@/components/features/entry/EntryTemplate';
 import { useLoading } from '@/hooks/stateHook/useLoading';
 import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
 import { getStripe } from '@/server/stripe/client';

@@ -1,4 +1,5 @@
-import '../src/styles/globals.css';
+import '@/styles/globals.css';
+import { MantineProvider } from '@/components/layouts/Providers/MantineProvider';
 
 export const parameters = {
   backgrounds: {
@@ -15,11 +16,15 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  layout: 'centered',
+  // layout: 'centered',
 };
 
 export const decorators = [
   (Story) => {
-    return <Story />;
+    return (
+      <MantineProvider>
+        <Story />
+      </MantineProvider>
+    );
   },
 ];

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { CreditCardIcon } from '@/common/icons';
+import { CreditCardIcon } from '@/components/common/icons';
 import { Button } from '@mantine/core';
 
 type Props = {

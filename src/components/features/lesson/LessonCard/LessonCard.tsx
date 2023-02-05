@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { BookIcon } from '@/common/icons';
+import { BookIcon } from '@/components/common/icons';
 import { Button, Modal } from '@mantine/core';
 import { useRouter } from 'next/router';
 import { useState } from 'react';

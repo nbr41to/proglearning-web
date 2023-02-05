@@ -1,15 +1,13 @@
-import { Case } from '@/features/landing/Case';
-import { Hero } from '@/features/landing/Hero';
-import { Introduction } from '@/features/landing/Introduction';
+import type { NextPage } from 'next';
 
-const Home = () => {
+import { IndexTemplate } from '@/components/features/landing/IndexTemplate';
+
+const IndexPage: NextPage = () => {
   return (
-    <div className="w-main mx-auto">
-      <Hero />
-      <Introduction />
-      <Case />
-    </div>
+    <>
+      <IndexTemplate />
+    </>
   );
 };
 
-export default Home;
+export default IndexPage;

@@ -3,6 +3,7 @@ import type { FC, ReactNode } from 'react';
 
 import { SessionContextProvider } from './SessionContextProvider';
 import { SpotlightProvider } from './SpotlightProvider';
+import { MantineProvider } from '@/components/layouts/Providers/MantineProvider';
 import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
 
@@ -14,11 +15,13 @@ type Props = {
 export const Providers: FC<Props> = ({ children, initialSession }) => {
   return (
     <SessionContextProvider initialSession={initialSession}>
-      <NotificationsProvider position="top-center">
-        <SpotlightProvider>
-          <ModalsProvider>{children}</ModalsProvider>
-        </SpotlightProvider>
-      </NotificationsProvider>
+      <MantineProvider>
+        <NotificationsProvider position="top-center">
+          <SpotlightProvider>
+            <ModalsProvider>{children}</ModalsProvider>
+          </SpotlightProvider>
+        </NotificationsProvider>
+      </MantineProvider>
     </SessionContextProvider>
   );
 };

@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// アカウント情報
+// アカウント基本情報
 model Account {
   uid           String   @id @unique
   name          String
@@ -17,11 +17,11 @@ model Account {
   github_id     String?  @unique
   zenn_id       String?  @unique
   slack_user_id String?  @unique
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
   payment       Payment?
   profile       Profile?
   status        Status?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 enum Role {
@@ -40,9 +40,9 @@ model Payment {
   stripe_subscription_status String?
   // https://stripe.com/docs/api/subscriptions/object#subscription_object-status
   stripe_subscription_id     String?
+  account                    Account  @relation(fields: [id], references: [uid], onDelete: NoAction)
   createdAt                  DateTime @default(now())
   updatedAt                  DateTime @updatedAt
-  account                    Account  @relation(fields: [id], references: [uid], onDelete: NoAction)
 }
 
 // プロフィール
@@ -50,20 +50,24 @@ model Profile {
   id           String   @id @unique
   name         String
   introduction String?
+  current_goal String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   account      Account  @relation(fields: [id], references: [uid], onDelete: NoAction)
 }
 
+// アカウントの状態
 model Status {
-  id               String   @id @unique
-  role             Role     @default(free)
-  checked_out      Boolean  @default(false)
-  lessons          String[] @default([])
-  lesson_histories String[] @default([])
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  account          Account  @relation(fields: [id], references: [uid], onDelete: NoAction)
+  id               String    @id @unique
+  role             Role      @default(free)
+  checked_out      Boolean   @default(false)
+  tutorial_step    Int       @default(1)
+  lessons          String[]  @default([])
+  lesson_histories String[]  @default([])
+  done_daily_at    DateTime?
+  account          Account   @relation(fields: [id], references: [uid], onDelete: NoAction)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
 }
 
 model DiscordLearningSession {

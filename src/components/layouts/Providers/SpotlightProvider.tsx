@@ -21,18 +21,18 @@ export const SpotlightProvider = ({ children }: { children: ReactNode }) => {
   const actions = useMemo(
     () => [
       {
-        title: 'Getting Started',
-        description: 'progLearningの使い方を学ぶ',
-        icon: <LeafIcon size={26} />,
-        onTrigger: () => router.push('/getting-started'),
-        disabled,
-      },
-      {
         title: 'Dashboard',
         description: 'ダッシュボード',
         icon: <DashboardIcon size={26} />,
         disabled,
         onTrigger: () => router.push('/dashboard'),
+      },
+      {
+        title: 'Getting Started',
+        description: 'progLearningの使い方を学ぶ',
+        icon: <LeafIcon size={26} />,
+        onTrigger: () => router.push('/getting-started'),
+        disabled,
       },
       {
         title: 'Lessons',

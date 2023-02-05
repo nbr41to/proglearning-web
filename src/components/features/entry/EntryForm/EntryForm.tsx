@@ -1,7 +1,7 @@
 import type { Account } from '@prisma/client';
 import type { FC } from 'react';
 
-import { SignboardContainer } from '@/common/SignboardContainer/SignboardContainer';
+import { SignboardContainer } from '@/components/common/SignboardContainer/SignboardContainer';
 import { Button, Input, Radio } from '@mantine/core';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -36,7 +36,7 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
   };
 
   return (
-    <SignboardContainer>
+    <SignboardContainer fill>
       <form
         onSubmit={handleSubmit(handleOnSubmit, onError)}
         className="mx-auto w-fit space-y-4 p-8"

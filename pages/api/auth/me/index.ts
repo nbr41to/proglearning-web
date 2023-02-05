@@ -1,9 +1,20 @@
-import type { NextApiHandler } from 'next';
+import type { ErrorResponse } from '@/types/error';
+import type { Account, Profile } from '@prisma/client';
+import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
 import { prisma } from '@/server/prisma/client';
 import { getSessionUser } from '@/server/supabase/auth';
 
-const ProtectedRoute: NextApiHandler = async (req, res) => {
+type Response =
+  | Account
+  | (Account & { profile: Profile })
+  | null
+  | ErrorResponse;
+
+const ProtectedRoute: NextApiHandler = async (
+  req: NextApiRequest,
+  res: NextApiResponse<Response>
+) => {
   const user = await getSessionUser({ req, res });
 
   const method = req.method;
@@ -22,17 +33,16 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
       console.error(error);
 
       return res.status(500).json({
-        error: 'internal_server_error',
-        description: 'An internal server error occurred',
+        status: 500,
+        message: 'internal_server_error',
       });
     }
   }
 
   if (!user)
     return res.status(401).json({
-      error: 'not_authenticated',
-      description:
-        'The user does not have an active session or is not authenticated',
+      status: 500,
+      message: 'internal_server_error',
     });
 
   /* 新規Accountの作成 */
@@ -62,8 +72,8 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
       return res.json(account);
     } catch (error) {
       return res.status(500).json({
-        error: 'internal_server_error',
-        description: 'An internal server error occurred',
+        status: 500,
+        message: 'internal_server_error',
       });
     }
   }
@@ -71,7 +81,19 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
   /* Accountの更新 */
   if (method === 'PATCH') {
     try {
-      await prisma.account.update({
+      await prisma.profile.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          name: req.body.name,
+          introduction: req.body.introduction,
+        },
+        include: {
+          account: true,
+        },
+      });
+      const response = await prisma.account.update({
         where: {
           uid: user.id,
         },
@@ -81,21 +103,19 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
           zenn_id: req.body.zenn_id,
         },
       });
-      await prisma.profile.update({
-        where: {
-          id: user.id,
-        },
-        data: {
-          name: req.body.name,
-          introduction: req.body.introduction,
-        },
-      });
 
-      return res.json(true);
-    } catch (error) {
+      return res.json(response);
+    } catch (error: any) {
+      if (error?.code === 'P2002') {
+        return res.status(400).json({
+          status: 400,
+          message: `The ${error?.meta?.target[0]} is already in use`,
+        });
+      }
+
       return res.status(500).json({
-        error: 'internal_server_error',
-        description: 'An internal server error occurred',
+        status: 500,
+        message: 'internal_server_error',
       });
     }
   }

@@ -1,3 +1,4 @@
+import type { ErrorResponse } from '@/types/error';
 import type { AxiosError } from 'axios';
 
 import { showNotification } from '@mantine/notifications';
@@ -11,7 +12,7 @@ axios.interceptors.request.use((request) => {
 /* Axios の Response 時の Interceptor */
 axios.interceptors.response.use(
   (response) => response,
-  (error: AxiosError) => {
+  (error: AxiosError<ErrorResponse>) => {
     /**
      * 要認証ページ下における認証失敗
      * - 401 Unauthorized
@@ -22,6 +23,20 @@ axios.interceptors.response.use(
 
         return;
       }
+    }
+
+    /* Axios error */
+    if (error.isAxiosError) {
+      showNotification({
+        title: 'エラーが発生しました',
+        message:
+          typeof error?.response?.data?.message === 'string'
+            ? error.response.data.message
+            : '予期せぬエラーが発生しました',
+        color: 'red',
+      });
+
+      return;
     }
 
     /* 例外 */

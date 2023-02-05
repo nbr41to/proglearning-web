@@ -18,8 +18,8 @@ async function main() {
       email: 'test@example.com',
       os: 'mac',
       byFind: 'twitter',
-      github_id: 'test-github-id',
-      zenn_id: 'test-zenn-id',
+      github_id: 'adamwathan',
+      zenn_id: 'takepepe',
       slack_user_id: 'test-slack-user-id',
       profile: {
         create: {

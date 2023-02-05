@@ -1,8 +1,9 @@
 import type { Account, Profile } from '@prisma/client';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ViewAccount as Component } from './ViewAccount';
-import dummy_account from '@/mocks/account_with_profile.json';
+import { MyProfile as Component } from './MyProfile';
+import dummy_account from '@/mocks/account.json';
+import dummy_profile from '@/mocks/profile.json';
 
 export default {
   component: Component,
@@ -10,6 +11,9 @@ export default {
 
 export const Default: StoryObj<typeof Component> = {
   args: {
-    account: dummy_account as Account & { profile: Profile },
+    account: {
+      ...(dummy_account as Account),
+      profile: dummy_profile as Profile,
+    },
   },
 };

@@ -1,7 +1,7 @@
 import type { LinkPreviewBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import type { FC } from 'react';
 
-import { TbExternalLinkIcon } from '@/common/icons';
+import { ExternalLinkIcon } from '@/components/common/icons';
 
 type Props = {
   block: LinkPreviewBlockObjectResponse;
@@ -16,7 +16,7 @@ export const LinkPreview: FC<Props> = ({ block }) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <TbExternalLinkIcon size={20} className="pt-0.5" />
+        <ExternalLinkIcon size={20} className="pt-0.5" />
         {block.link_preview.url}
       </a>
     </div>

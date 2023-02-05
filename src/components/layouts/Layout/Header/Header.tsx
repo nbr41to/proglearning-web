@@ -4,8 +4,8 @@ import type { FC } from 'react';
 
 import { DropdownMenu } from './DropdownMenu';
 import { SearchButton } from './SearchButton';
-import { BookIcon, DetailIcon, MailIcon } from '@/common/icons';
-import { NotificationButton } from '@/layouts/Layout/Header/NotificationButton';
+import { BookIcon, DetailIcon, MailIcon } from '@/components/common/icons';
+import { NotificationButton } from '@/components/layouts/Layout/Header/NotificationButton';
 import { Button, clsx, UnstyledButton } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -97,7 +97,9 @@ export const Header: FC<Props> = ({
           >
             ログイン
           </UnstyledButton>
-          <Button onClick={() => router.push('/entry')}>登録する</Button>
+          <Button variant="gradient" onClick={() => router.push('/entry')}>
+            登録する
+          </Button>
         </div>
       )}
     </header>
