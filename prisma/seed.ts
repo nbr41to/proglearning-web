@@ -6,7 +6,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const uid = '5899f99d-a449-4bfa-8769-19c097aaf1f5';
+  const uid = process.env.NEXT_PUBLIC_ADMIN_UID || '';
 
   /* Create seed my account */
   const account = await prisma.account.upsert({
