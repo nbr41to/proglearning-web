@@ -1,17 +1,16 @@
+import type { Lesson } from '@/types/lesson';
 import type { FC } from 'react';
 
 import { BookIcon } from '@/components/common/icons';
-import { Button, Modal } from '@mantine/core';
-import { useRouter } from 'next/router';
+import { Modal } from '@mantine/core';
+import Link from 'next/link';
 import { useState } from 'react';
 
 type Props = {
-  title: string;
-  onSubmit: (text: string) => Promise<void>;
+  lesson: Lesson;
 };
 
-export const LessonCard: FC<Props> = () => {
-  const router = useRouter();
+export const LessonCard: FC<Props> = ({ lesson }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,7 +22,7 @@ export const LessonCard: FC<Props> = () => {
         <div className="border-3 h-full rounded-lg border-solid border-white  bg-teal-300 p-4 text-white">
           <div className="flex items-center gap-2">
             <BookIcon size={24} />
-            <div className="text-xl font-bold">Preparation</div>
+            <div className="text-xl font-bold">{lesson.title}</div>
           </div>
           <div className="mt-2">説明</div>
         </div>
@@ -38,14 +37,14 @@ export const LessonCard: FC<Props> = () => {
         <div>説明</div>
         <div>
           内容
-          <li>インストール</li>
-          <li>インストール</li>
-          <li>インストール</li>
-          <li>インストール</li>
+          <div className="flex flex-col">
+            {lesson.contents.map((content) => (
+              <Link key={content.id} href={`/lessons/${content.id}`}>
+                {content.title}
+              </Link>
+            ))}
+          </div>
         </div>
-        <Button onClick={() => router.push(`/lessons/{selectedLesson.id}`)}>
-          学ぶ
-        </Button>
       </Modal>
     </>
   );

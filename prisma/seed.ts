@@ -32,14 +32,13 @@ async function main() {
           stripe_customer_id: null,
           stripe_checkout_status: null,
           stripe_subscription_status: null,
+          stripe_subscription_id: null,
         },
       },
       status: {
         create: {
           role: 'admin',
           checked_out: true,
-          lessons: [],
-          lesson_histories: [],
         },
       },
     },

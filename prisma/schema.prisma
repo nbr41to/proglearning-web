@@ -20,6 +20,7 @@ model Account {
   payment       Payment?
   profile       Profile?
   status        Status?
+  lessons       Lesson[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
@@ -58,16 +59,24 @@ model Profile {
 
 // アカウントの状態
 model Status {
-  id               String    @id @unique
-  role             Role      @default(free)
-  checked_out      Boolean   @default(false)
-  tutorial_step    Int       @default(1)
-  lessons          String[]  @default([])
-  lesson_histories String[]  @default([])
-  done_daily_at    DateTime?
-  account          Account   @relation(fields: [id], references: [uid], onDelete: NoAction)
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  id            String    @id @unique
+  role          Role      @default(free)
+  checked_out   Boolean   @default(false)
+  tutorial_step Int       @default(1)
+  done_daily_at DateTime?
+  account       Account   @relation(fields: [id], references: [uid], onDelete: NoAction)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// Lessonsの進行状況
+model Lesson {
+  id             String    @id @unique
+  uid            String
+  completed      Boolean   @default(false)
+  completed_at   DateTime?
+  last_viewed_at DateTime  @default(now())
+  account        Account   @relation(fields: [uid], references: [uid], onDelete: NoAction)
 }
 
 model DiscordLearningSession {

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "df9f5d75-9a94-43e6-bc1e-b208ddb8f364",
+    "title": "Preparation",
+    "contents": [
+      {
+        "id": "9d965722-29a6-4c05-94a2-f846cbb9ab45",
+        "title": "必要なアプリのインストール"
+      },
+      {
+        "id": "a46f1693-dcd3-4cbd-857c-ad2a0bca2786",
+        "title": "プログラミングに関するフォルダやファイルを作成する"
+      },
+      {
+        "id": "1c23a6df-4715-4a5c-8a34-6b44193d9a56",
+        "title": "ついにプログラマーになる"
+      },
+      {
+        "id": "feed75cd-3b5f-48bf-9e61-4094101c91ec",
+        "title": "CHECK TEST"
+      }
+    ]
+  },
+  {
+    "id": "00acd848-d183-4e9e-af7f-637f4c0731ca",
+    "title": "HTML",
+    "contents": [
+      {
+        "id": "66dc53ed-9c01-4b31-9f74-4464a040d773",
+        "title": "HTMLを知る"
+      },
+      {
+        "id": "f52f99dd-1ada-47e1-826e-4c31d6260922",
+        "title": "タグ（要素）を使ってcontentを装飾する"
+      },
+      {
+        "id": "8586da76-852b-4b4b-959c-cdd5e21c8b70",
+        "title": "ブロック要素とインライン要素"
+      }
+    ]
+  },
+  {
+    "id": "3ad5dd00-dd3a-4d8c-8e06-255cfa645133",
+    "title": "CSS",
+    "contents": [
+      {
+        "id": "b5cccab8-6ad8-4ffc-9020-69c8453129e2",
+        "title": "中級"
+      },
+      {
+        "id": "8b631c12-3ff1-480d-bcdf-7d957f3fe7a2",
+        "title": "入門"
+      }
+    ]
+  }
+]

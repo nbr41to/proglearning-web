@@ -11,7 +11,10 @@ const nextConfig = {
   //   appDir: true,
   // },
   images: {
-    domains: ['github-contributions-api.deno.dev'],
+    domains: [
+      'github-contributions-api.deno.dev',
+      's3.us-west-2.amazonaws.com',
+    ],
   },
 };
 

@@ -25,9 +25,7 @@
     "status": {
       "create": {
         "role": "closer",
-        "checked_out": true,
-        "lessons": [],
-        "lesson_histories": []
+        "checked_out": true
       }
     }
   },
@@ -57,9 +55,7 @@
     "status": {
       "create": {
         "role": "closer",
-        "checked_out": true,
-        "lessons": [],
-        "lesson_histories": []
+        "checked_out": true
       }
     }
   },
@@ -89,9 +85,7 @@
     "status": {
       "create": {
         "role": "free",
-        "checked_out": false,
-        "lessons": [],
-        "lesson_histories": []
+        "checked_out": false
       }
     }
   }

@@ -62,6 +62,7 @@ import {
   SiZenn as ZennIcon,
   SiHandshake as ShakeIcon,
   SiNotion as NotionIcon,
+  SiCheckmarx as CheckIcon,
 } from 'react-icons/si';
 import {
   TbExternalLink as ExternalLinkIcon,
@@ -70,6 +71,7 @@ import {
 import { VscJson as JsonIcon } from 'react-icons/vsc';
 
 export {
+  CheckIcon,
   PeopleIcon,
   NotionIcon,
   ShakeIcon,

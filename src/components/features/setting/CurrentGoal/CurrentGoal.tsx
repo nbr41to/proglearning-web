@@ -33,6 +33,7 @@ export const CurrentGoal: FC<Props> = ({ goal, onSubmit }) => {
       {isEditing ? (
         <div className="flex w-full gap-2" ref={focusTrapRef}>
           <Input
+            placeholder="ここに目標を入力"
             size="sm"
             className="flex-grow"
             value={value}
@@ -57,6 +58,7 @@ export const CurrentGoal: FC<Props> = ({ goal, onSubmit }) => {
               <ActionIcon variant="subtle" radius="xl" onClick={handleOnEdit}>
                 <PenIcon size={12} />
               </ActionIcon>
+              {/* <button onClick={handleOnEdit}>編集</button> */}
             </>
           ) : (
             <Button size="xs" variant="outline" onClick={handleOnEdit}>

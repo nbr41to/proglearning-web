@@ -21,7 +21,7 @@ export const InputCheckbox: FC<Props> = ({
     <label htmlFor={id} className="flex cursor-pointer items-center gap-2">
       <input id={id} type="checkbox" onChange={onChange} {...rest} hidden />
       {checked ? (
-        <CheckedBoxIcon className="text-teal-400" size={20} />
+        <CheckedBoxIcon className="text-red-500" size={20} />
       ) : (
         <UnCheckedBoxIcon className="text-gray-600" size={20} />
       )}

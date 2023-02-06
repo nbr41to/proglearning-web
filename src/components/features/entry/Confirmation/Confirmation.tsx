@@ -32,11 +32,8 @@ export const Confirmation: FC = () => {
   return (
     <>
       <SignboardContainer fill>
-        <div className="mx-auto w-fit space-y-4">
+        <div className="mx-auto w-fit space-y-6">
           <h3 className="text-center text-lg">登録にあたっての確認事項</h3>
-          <div className="mx-auto w-fit">
-            <Button onClick={openTermsOfService}>利用規約を開く</Button>
-          </div>
           <InputCheckbox
             label="登録にGoogleのアカウントが必要です。"
             checked={checkedList.includes(1)}
@@ -47,11 +44,16 @@ export const Confirmation: FC = () => {
             checked={checkedList.includes(2)}
             onChange={() => toggleChecked(2)}
           />
-          <InputCheckbox
-            label="利用規約に同意します。"
-            checked={checkedList.includes(3)}
-            onChange={() => read && toggleChecked(3)}
-          />
+          <div className="flex items-start justify-between">
+            <InputCheckbox
+              label="利用規約に同意します。"
+              checked={checkedList.includes(3)}
+              onChange={() => read && toggleChecked(3)}
+            />
+            <Button size="xs" onClick={openTermsOfService}>
+              利用規約を開く
+            </Button>
+          </div>
           <Button
             className="border-blue-700 bg-white text-blue-700 shadow"
             disabled={disabled}

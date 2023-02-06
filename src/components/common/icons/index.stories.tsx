@@ -71,6 +71,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   NotionIcon,
+  CheckIcon,
 } from '.';
 import { IconWrapper } from '@/components/common/icons/IconViewWrapper';
 
@@ -125,6 +126,9 @@ export const GeneralIcons: StoryObj<{ size: number }> = {
         </IconWrapper>
         <IconWrapper name="ChatTextIcon">
           <ChatTextIcon size={args.size} />
+        </IconWrapper>
+        <IconWrapper name="CheckIcon">
+          <CheckIcon size={args.size} />
         </IconWrapper>
         <IconWrapper name="CheckedBoxIcon">
           <CheckedBoxIcon size={args.size} />

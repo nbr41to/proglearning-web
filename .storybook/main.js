@@ -9,6 +9,9 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
   ],
+  features: {
+    interactionsDebugger: true, // 👈 Enable playback controls
+  },
   framework: {
     name: '@storybook/nextjs',
     options: {},

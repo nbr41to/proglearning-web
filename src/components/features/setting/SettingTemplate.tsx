@@ -10,6 +10,7 @@ import {
 import { MyProfile } from '@/components/features/setting/MyProfile/MyProfile';
 import { MySubscription } from '@/components/features/setting/MySubscription/MySubscription';
 import { getStripe } from '@/server/stripe/client';
+import { deleteAccount } from '@/utils/axios/account';
 import { createStripeCheckout } from '@/utils/axios/stripe';
 import { Tabs } from '@mantine/core';
 
@@ -34,7 +35,11 @@ export const SettingTemplate: FC<Props> = ({
     stripe?.redirectToCheckout({ sessionId });
   };
   const onUnsubscribe = async () => {
-    /*  */
+    return;
+    /* TODO:退会確認Modalと退会完了画面の追加 */
+    const response = await deleteAccount();
+    if (response.status !== 200) return;
+    window.location.href = '/';
   };
 
   return (
