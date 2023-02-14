@@ -5,11 +5,12 @@ import type { FC } from 'react';
 import { DropdownMenu } from './DropdownMenu';
 import { SearchButton } from './SearchButton';
 import { BookIcon, DetailIcon, MailIcon } from '@/components/common/icons';
-import { NotificationButton } from '@/components/layouts/Layout/Header/NotificationButton';
+import { NotificationAnimatedButton } from '@/components/layouts/Layout/Header/NotificationButton';
 import { Button, clsx, UnstyledButton } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 type Props = {
   user: User | null;
@@ -25,6 +26,7 @@ export const Header: FC<Props> = ({
   onSignOut,
 }) => {
   const router = useRouter();
+  const [isNotification, setIsNotification] = useState(true);
 
   return (
     <header className="fixed z-40 flex w-full items-center justify-between gap-4 bg-white/50 py-2 px-4 shadow backdrop-blur">
@@ -80,8 +82,10 @@ export const Header: FC<Props> = ({
       {user && status ? (
         <div className="flex items-center gap-4">
           <SearchButton onClick={onClickSearchButton} />
-          {/* eslint-disable-next-line @typescript-eslint/no-empty-function */}
-          <NotificationButton onClick={() => {}} isNotification />
+          <NotificationAnimatedButton
+            onClick={() => setIsNotification(!isNotification)}
+            isNotification={isNotification}
+          />
           <DropdownMenu
             email={user.email || ''}
             avatarUrl={user.user_metadata.avatar_url}

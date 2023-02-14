@@ -40,7 +40,7 @@ export const TutorialSteps: FC<Props> = ({
     <SignboardContainer>
       <div className="w-fit">
         <h3 className="text-center font-baloo">- Tutorial step -</h3>
-        <div className="relative mt-3 flex rounded bg-white px-4 pt-4">
+        <div className="relative mt-3 flex w-72 rounded bg-white px-4 pt-4">
           {!hiddenIcon && (
             <TouchIcon
               className="absolute left-1 z-10 animate-bounce text-gray-400"

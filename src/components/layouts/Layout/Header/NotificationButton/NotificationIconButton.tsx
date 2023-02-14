@@ -6,7 +6,10 @@ type Props = {
   isNotification: boolean;
   onClick: () => void;
 };
-export const NotificationButton: FC<Props> = ({ isNotification, onClick }) => {
+export const NotificationIconButton: FC<Props> = ({
+  isNotification,
+  onClick,
+}) => {
   return (
     <div
       className="relative grid h-10 w-10 cursor-pointer place-content-center rounded-full p-2 hover:bg-gray-100"
