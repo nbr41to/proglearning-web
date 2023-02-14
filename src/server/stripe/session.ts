@@ -1,7 +1,7 @@
 import { stripe } from './client';
 import { baseUrl } from '@/utils/url';
 
-export const createSession = async (customerId: string) => {
+export const createCheckoutSession = async (customerId: string) => {
   const response = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     mode: 'subscription',
@@ -24,22 +24,10 @@ export const createSession = async (customerId: string) => {
   return response;
 };
 
-export const createSessionUpdate = async (
-  customerId: string,
-  subscriptionId: string
-) => {
-  const response = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    mode: 'setup',
+export const createPortalSession = async (customerId: string) => {
+  const response = await stripe.billingPortal.sessions.create({
     customer: customerId,
-    setup_intent_data: {
-      metadata: {
-        customer_id: customerId,
-        subscription_id: subscriptionId,
-      },
-    },
-    success_url: `${baseUrl}/setting`,
-    cancel_url: `${baseUrl}/setting`,
+    return_url: `${baseUrl}/setting`,
   });
 
   return response;
