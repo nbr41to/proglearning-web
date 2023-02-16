@@ -9,8 +9,6 @@
     "prepare": "husky install",
     "lint": "next lint",
     "format": "eslint --fix './{pages,src}/**/*.{js,jsx,ts,tsx}' && prettier --write --ignore-path .gitignore './{pages,src}/**/*.{js,jsx,ts,tsx}'",
-    "check": "rome check ./pages/** ./src/**",
-    "roma:fix": "rome check --apply-suggested  ./pages/** ./pages/** ./src/**",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "supabase-start": "dotenv -e .env -- supabase start",
