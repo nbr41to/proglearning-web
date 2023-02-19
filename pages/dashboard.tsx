@@ -9,7 +9,11 @@ import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
 const DashboardPage: NextPage = () => {
   const { data: account, isLoading } = useGetMe();
   const { data: status, isLoading: isLoadingStatus, trigger } = useMeStatus();
-  const { data: profile, isLoading: isLoadingProfile } = useMeProfile();
+  const {
+    data: profile,
+    isLoading: isLoadingProfile,
+    updateGoal,
+  } = useMeProfile();
   useLoading(isLoading || isLoadingStatus || isLoadingProfile);
 
   const onStepClick = async (step: number) => {
@@ -25,6 +29,7 @@ const DashboardPage: NextPage = () => {
         status={status}
         profile={profile}
         onStepClick={onStepClick}
+        onSubmitGoal={updateGoal}
       />
     </>
   );

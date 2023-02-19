@@ -5,6 +5,7 @@ import { PageTitle } from '@/components/common/PageTitle';
 import { SignboardContainer } from '@/components/common/SignboardContainer';
 import { GitHubGlass } from '@/components/features/dashboard/GitHubGlass/GitHubGlass';
 import { TutorialSteps } from '@/components/features/dashboard/TutorialSteps';
+import { CurrentGoal } from '@/components/features/setting/CurrentGoal/CurrentGoal';
 import { Button } from '@mantine/core';
 
 type Props = {
@@ -12,6 +13,7 @@ type Props = {
   status: Status;
   profile: Profile;
   onStepClick: (step: number) => Promise<void>;
+  onSubmitGoal: (param: string) => Promise<void>;
 };
 
 export const DashboardTemplate: FC<Props> = ({
@@ -19,6 +21,7 @@ export const DashboardTemplate: FC<Props> = ({
   status,
   profile,
   onStepClick,
+  onSubmitGoal,
 }) => {
   return (
     <div className="w-main mx-auto space-y-4 px-6">
@@ -29,6 +32,7 @@ export const DashboardTemplate: FC<Props> = ({
 
       <div className="grid place-content-center">
         <GitHubGlass githubId={account?.github_id} />
+        <CurrentGoal goal={profile.current_goal} onSubmit={onSubmitGoal} />
       </div>
 
       <div className="flex gap-4">
@@ -44,7 +48,6 @@ export const DashboardTemplate: FC<Props> = ({
 
         <div>
           <SignboardContainer>
-            <div>今月の目標[編集]</div>
             <Button>アウトプット</Button>
             <Button>アカウント設定</Button>
             <Button>Lessons</Button>
