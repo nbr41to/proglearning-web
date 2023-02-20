@@ -32,6 +32,9 @@ export const DashboardTemplate: FC<Props> = ({
 
       <div className="grid place-content-center">
         <GitHubGlass githubId={account?.github_id} />
+      </div>
+
+      <div>
         <CurrentGoal goal={profile.current_goal} onSubmit={onSubmitGoal} />
       </div>
 
