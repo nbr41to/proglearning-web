@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 
 import { ColorGoogleIcon } from '@/components/common/icons';
-import { useAuth } from '@/hooks/supabaseHook/useAuth';
+import { useSupabaseAuth } from '@/hooks/supabaseHook/useSupabaseAuth';
 import { Button } from '@mantine/core';
 
 const LoginPage: NextPage = () => {
-  const { signInWithGoogle, developLogin } = useAuth();
+  const { signInWithGoogle, developLogin } = useSupabaseAuth();
 
   return (
     <div className="flex h-[800px] items-center justify-center">

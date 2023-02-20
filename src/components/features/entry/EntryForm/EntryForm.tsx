@@ -1,14 +1,20 @@
-import type { Account } from '@prisma/client';
+import type { EntryValidatedCreateParams } from '@/models/account/types';
 import type { FC } from 'react';
 
 import { SignboardContainer } from '@/components/common/SignboardContainer/SignboardContainer';
+import {
+  SELECT_ITEMS_BY_FIND,
+  SELECT_ITEMS_OS,
+} from '@/models/account/constants';
+import { entrySchema } from '@/models/account/scheme';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Radio } from '@mantine/core';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 type Props = {
   email: string;
-  onSubmit: (data: Account) => Promise<void>;
+  onSubmit: (data: EntryValidatedCreateParams) => Promise<void>;
 };
 
 export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
@@ -19,20 +25,23 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<Account>();
+  } = useForm<EntryValidatedCreateParams>({
+    resolver: zodResolver(entrySchema),
+  });
 
   useEffect(() => {
     setValue('email', email);
   }, [email, setValue]);
 
-  const onError = (errors: any) => {
-    // eslint-disable-next-line no-console
-    console.log(errors);
-  };
-  const handleOnSubmit = async (data: Account) => {
+  const handleOnSubmit = async (data: EntryValidatedCreateParams) => {
     setLoading(true);
     await onSubmit(data);
     setLoading(false);
+  };
+
+  const onError = (errors: any) => {
+    // eslint-disable-next-line no-console
+    console.log(errors);
   };
 
   return (
@@ -62,21 +71,14 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
           required
           error={errors.os && '選択してください。'}
         >
-          <Radio
-            value="mac"
-            label="Mac"
-            {...register('os', { required: true })}
-          />
-          <Radio
-            value="windows"
-            label="Windows"
-            {...register('os', { required: true })}
-          />
-          <Radio
-            value="other"
-            label="その他"
-            {...register('os', { required: true })}
-          />
+          {SELECT_ITEMS_OS.map((item) => (
+            <Radio
+              key={item.value}
+              value={item.value}
+              label={item.label}
+              {...register('os', { required: true })}
+            />
+          ))}
         </Radio.Group>
 
         <Radio.Group
@@ -86,41 +88,14 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
           required
           error={errors.byFind && '選択してください。'}
         >
-          <Radio
-            value="twitter"
-            label="Twitter"
-            {...register('byFind', { required: true })}
-          />
-          <Radio
-            value="youtube"
-            label="YouTube"
-            {...register('byFind', { required: true })}
-          />
-          <Radio
-            value="note"
-            label="note"
-            {...register('byFind', { required: true })}
-          />
-          <Radio
-            value="zenn"
-            label="Zenn"
-            {...register('byFind', { required: true })}
-          />
-          <Radio
-            value="search"
-            label="検索"
-            {...register('byFind', { required: true })}
-          />
-          <Radio
-            value="invite"
-            label="紹介"
-            {...register('byFind', { required: true })}
-          />
-          <Radio
-            value="other"
-            label="その他"
-            {...register('byFind', { required: true })}
-          />
+          {SELECT_ITEMS_BY_FIND.map((item) => (
+            <Radio
+              key={item.value}
+              value={item.value}
+              label={item.label}
+              {...register('byFind', { required: true })}
+            />
+          ))}
         </Radio.Group>
 
         <Button type="submit" loading={loading} disabled={loading}>
