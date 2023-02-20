@@ -1,17 +1,17 @@
-import type { Account } from '@prisma/client';
+import type { EntryValidatedCreateParams } from '@/models/account/types';
 import type { NextPage } from 'next';
 
 import { EntryTemplate } from '@/components/features/entry/EntryTemplate';
 import { useLoading } from '@/hooks/stateHook/useLoading';
 import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
+import { createAccount } from '@/models/account/api';
 import { getStripe } from '@/server/stripe/client';
-import { createAccount } from '@/utils/axios/account';
 import { createStripeCheckout } from '@/utils/axios/stripe';
 import { useCounter } from '@mantine/hooks';
 import { useUser } from '@supabase/auth-helpers-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 const EntryPage: NextPage = () => {
   const router = useRouter();
@@ -31,26 +31,29 @@ const EntryPage: NextPage = () => {
   }, [user, status, router, stepHandlers]);
 
   /* アカウント情報の送信 */
-  const onSubmitAccount = async (data: Account) => {
-    if (!user) return;
-    const response = await createAccount({
-      ...data,
-      uid: user.id,
-    });
+  const submitAccount = useCallback(
+    async (params: EntryValidatedCreateParams) => {
+      if (!user) return;
+      const response = await createAccount({
+        ...params,
+        uid: user.id,
+      });
 
-    if (response) {
-      await mutateStatus();
-    }
-  };
+      if (response) {
+        await mutateStatus();
+      }
+    },
+    [mutateStatus, user]
+  );
 
-  /* 支払い画面へ */
-  const onCheckout = async () => {
+  /* 支払い情報の登録 */
+  const registerPayment = useCallback(async () => {
     if (!user) return;
     const response = await createStripeCheckout(user?.id);
     const { sessionId } = response.data;
     const stripe = await getStripe();
     stripe?.redirectToCheckout({ sessionId });
-  };
+  }, [user]);
 
   return (
     <>
@@ -60,8 +63,8 @@ const EntryPage: NextPage = () => {
       <EntryTemplate
         userEmail={user?.email}
         step={step}
-        onSubmitAccount={onSubmitAccount}
-        onCheckout={onCheckout}
+        submitAccount={submitAccount}
+        registerPayment={registerPayment}
       />
     </>
   );

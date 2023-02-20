@@ -24,9 +24,13 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
           status: true,
         },
       });
-      res.json(accounts);
+
+      return res.json(accounts);
     } catch (error) {
-      res.status(500).json({
+      // eslint-disable-next-line no-console
+      console.error(error);
+
+      return res.status(500).json({
         error: 'internal_server_error',
         description: 'An internal server error occurred',
       });

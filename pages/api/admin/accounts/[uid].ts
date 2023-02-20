@@ -1,30 +1,35 @@
-import type { ErrorResponse } from '@/types/error';
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiHandler } from 'next';
 
 import { prisma } from '@/server/prisma/client';
 import { deleteUser } from '@/server/supabase/admin';
 import { getSessionUser } from '@/server/supabase/auth';
 
-type Response = boolean | ErrorResponse;
-
-const ProtectedRoute: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse<Response>
-) => {
+const ProtectedRoute: NextApiHandler = async (req, res) => {
   const user = await getSessionUser({ req, res });
+  const isAdmin = user?.id === process.env.NEXT_PUBLIC_ADMIN_UID || false;
+
+  if (!user || !isAdmin)
+    return res.status(401).json({
+      error: 'not_authenticated',
+      description:
+        'The user does not have an active session or is not authenticated',
+    });
 
   const method = req.method;
+
+  /* [ADMIN] UserとAccountの削除 */
   if (method === 'DELETE') {
     if (!user) return res.json(false);
     try {
+      const uid = req.query.uid as string;
       const deleteParamsId = {
         where: {
-          id: user.id,
+          id: uid,
         },
       };
       const deleteParamsUid = {
         where: {
-          uid: user.id,
+          uid,
         },
       };
       await prisma.$transaction(async (tx) => {
@@ -42,13 +47,13 @@ const ProtectedRoute: NextApiHandler = async (
       console.error(error);
 
       return res.status(500).json({
-        status: 500,
-        message: 'internal_server_error',
+        error: 'internal_server_error',
+        description: 'An internal server error occurred',
       });
     }
   }
 
-  res.setHeader('Allow', 'DELETE');
+  res.setHeader('Allow', ['DELETE']);
   res.status(405).end('Method Not Allowed');
 };
 
