@@ -5,3 +5,12 @@ export const axiosGetFetcher = async <T>(url: string): Promise<T> => {
 
   return response.data;
 };
+
+export const axiosPostFetcher = async <T, U>(
+  url: string,
+  { arg }: { arg: U }
+): Promise<T> => {
+  const response = await axios.post<T>(url, arg);
+
+  return response.data;
+};

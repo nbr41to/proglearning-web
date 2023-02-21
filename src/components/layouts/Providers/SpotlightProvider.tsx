@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import {
   BookIcon,
+  CheckIcon,
   DashboardIcon,
   LeafIcon,
   MailIcon,
@@ -48,6 +49,12 @@ export const SpotlightProvider = ({ children }: { children: ReactNode }) => {
       //   // disabled,
       //   onTrigger: () => router.push('/output'),
       // },
+      {
+        title: 'Your Todo-app',
+        description: 'TODOリスト',
+        icon: <CheckIcon size={26} />,
+        onTrigger: () => router.push('/todo-app'),
+      },
       {
         title: 'Contact',
         description: 'お問い合わせはこちら',

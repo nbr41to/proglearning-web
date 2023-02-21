@@ -38,7 +38,7 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
         await tx.status.delete(deleteParamsId);
         await tx.lesson.deleteMany(deleteParamsUid);
         await tx.account.delete(deleteParamsUid);
-        await deleteUser(user.id);
+        await deleteUser(uid);
       });
 
       return res.json(true);

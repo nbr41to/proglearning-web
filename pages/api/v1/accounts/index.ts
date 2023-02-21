@@ -19,7 +19,7 @@ const ProtectedRoute: NextApiHandler = async (
 
   const method = req.method;
 
-  /* 新規Accountの新規作成 */
+  /* 新規Accountの作成 */
   if (method === 'POST') {
     try {
       const body = req.body as AccountPrismaCreateParams;
