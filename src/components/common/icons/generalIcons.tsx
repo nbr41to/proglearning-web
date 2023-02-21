@@ -33,7 +33,7 @@ import {
 } from 'react-icons/fa';
 import { FcGoogle as ColorGoogleIcon } from 'react-icons/fc';
 import { FiSearch as SearchIcon } from 'react-icons/fi';
-import { GiCow as CowIcon } from 'react-icons/gi';
+import { GiCow as CowIcon, GiTomato as PomodoroIcon } from 'react-icons/gi';
 import { GoDashboard as DashboardIcon } from 'react-icons/go';
 import {
   HiArrowCircleUp as ArrowCircleUpIcon,
@@ -127,4 +127,5 @@ export {
   WizardHatIcon,
   YouTubeIcon,
   ZennIcon,
+  PomodoroIcon,
 };

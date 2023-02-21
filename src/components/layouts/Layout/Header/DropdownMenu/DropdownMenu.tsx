@@ -10,6 +10,7 @@ import {
   LogoutIcon,
   QuillPenIcon,
   SettingIcon,
+  PomodoroIcon,
 } from '@/components/common/icons';
 import { Avatar, clsx, Menu } from '@mantine/core';
 import { useRouter } from 'next/router';
@@ -88,6 +89,13 @@ export const DropdownMenu: FC<Props> = ({
           // onClick={() => router.push(`/output`)}
         >
           Output (Coming Soon)
+        </Menu.Item>
+        <Menu.Item
+          icon={<PomodoroIcon size={16} />}
+          disabled={!isCheckedOut}
+          onClick={() => router.push('/pomodoro-timer')}
+        >
+          PomodoroTimer
         </Menu.Item>
         <Menu.Item
           icon={<SettingIcon size={16} />}
