@@ -1,6 +1,8 @@
 import type { Account, Profile, Status } from '@prisma/client';
 import type { FC } from 'react';
 
+import { ActionButton } from '@/components/common/ActionButton';
+import { BookIcon, CheckIcon, ProfileIcon } from '@/components/common/icons';
 import { PageTitle } from '@/components/common/PageTitle';
 import { SignboardContainer } from '@/components/common/SignboardContainer';
 import { GitHubGlass } from '@/components/features/dashboard/GitHubGlass/GitHubGlass';
@@ -24,7 +26,7 @@ export const DashboardTemplate: FC<Props> = ({
   onSubmitGoal,
 }) => {
   return (
-    <div className="w-main mx-auto space-y-4 px-6">
+    <div className="w-main mx-auto px-6">
       <PageTitle title="Dashboard" />
       <div className="text-center">
         ようこそ！<span className="px-1 font-bold">{profile.name}</span>さん
@@ -38,7 +40,7 @@ export const DashboardTemplate: FC<Props> = ({
         <CurrentGoal goal={profile.current_goal} onSubmit={onSubmitGoal} />
       </div>
 
-      <div className="flex gap-4">
+      <div className="mt-6 flex gap-4">
         <div className="w-fit">
           <TutorialSteps
             currentStep={status.tutorial_step}
@@ -56,6 +58,16 @@ export const DashboardTemplate: FC<Props> = ({
             <Button>Lessons</Button>
             <Button>ロードマップを見る</Button>
           </SignboardContainer>
+
+          <div className="mt-4 flex flex-col gap-4">
+            <ActionButton label="TODO アプリを作る" icon={<CheckIcon />} fill />
+            <ActionButton label="Lesson を受ける" icon={<BookIcon />} fill />
+            <ActionButton
+              label="目標と自己紹介を設定する"
+              icon={<ProfileIcon />}
+              fill
+            />
+          </div>
         </div>
       </div>
 

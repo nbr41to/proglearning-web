@@ -28,7 +28,7 @@ export const CurrentGoal: FC<Props> = ({ goal, onSubmit }) => {
   };
 
   return (
-    <div className="flex w-full items-center justify-center">
+    <div className="flex w-full items-center">
       <div className="mr-2 whitespace-pre font-bold">今月の目標:</div>
       {isEditing ? (
         <div className="flex w-full gap-2" ref={focusTrapRef}>
