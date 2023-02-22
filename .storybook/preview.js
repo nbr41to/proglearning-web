@@ -7,6 +7,7 @@ export const parameters = {
     values: [
       { name: 'white', value: '#ffffff' },
       { name: 'black', value: '#000000' },
+      { name: 'navy', value: '#1F2937' },
     ],
   },
   actions: { argTypesRegex: '^on[A-Z].*' },
