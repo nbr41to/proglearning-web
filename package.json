@@ -14,7 +14,8 @@
     "supabase-start": "dotenv -e .env -- supabase start",
     "supabase-stop": "dotenv -e .env -- supabase stop supabase stop --backup",
     "supabase-remove": "dotenv -e .env -- supabase stop supabase stop",
-    "prod-db-push": "dotenv -e .env.production -- yarn prisma db push"
+    "prod-db-push": "dotenv -e .env.production -- yarn prisma db push",
+    "prod-migrate-deploy": "dotenv -e .env.production -- yarn prisma migrate deploy"
   },
   "prisma": {
     "seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
