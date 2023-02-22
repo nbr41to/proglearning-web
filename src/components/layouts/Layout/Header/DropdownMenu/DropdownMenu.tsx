@@ -92,7 +92,6 @@ export const DropdownMenu: FC<Props> = ({
         </Menu.Item>
         <Menu.Item
           icon={<PomodoroIcon size={16} />}
-          disabled={!isCheckedOut}
           onClick={() => router.push('/pomodoro-timer')}
         >
           PomodoroTimer
