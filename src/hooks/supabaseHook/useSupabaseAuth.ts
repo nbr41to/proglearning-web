@@ -10,6 +10,8 @@ export const useSupabaseAuth = () => {
 
   const signInWithGoogle = useCallback(
     async (redirectTo?: string) => {
+      // eslint-disable-next-line no-console
+      window.alert(baseUrl);
       await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
