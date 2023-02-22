@@ -11,11 +11,11 @@
     "format": "eslint --fix './{pages,src}/**/*.{js,jsx,ts,tsx}' && prettier --write --ignore-path .gitignore './{pages,src}/**/*.{js,jsx,ts,tsx}'",
     "storybook": "storybook dev -p 6006 -s public",
     "build-storybook": "storybook build -s public",
-    "serve-storybook": "serve storybook-static",
     "supabase-start": "dotenv -e .env -- supabase start",
     "supabase-stop": "dotenv -e .env -- supabase stop supabase stop --backup",
     "supabase-remove": "dotenv -e .env -- supabase stop supabase stop",
-    "prod-db-push": "dotenv -e .env.production -- yarn prisma db push"
+    "prod-db-push": "dotenv -e .env.production -- yarn prisma db push",
+    "prod-migrate-deploy": "dotenv -e .env.production -- yarn prisma migrate deploy"
   },
   "prisma": {
     "seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"

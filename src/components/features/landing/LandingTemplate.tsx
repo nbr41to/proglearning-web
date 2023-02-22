@@ -37,7 +37,7 @@ const useStyles = createStyles((_theme, _params, getRef) => ({
   },
 }));
 
-export const IndexTemplate: FC = () => {
+export const LandingTemplate: FC = () => {
   const { classes } = useStyles();
   const autoplay = useRef(Autoplay({ delay: 3000 }));
 
