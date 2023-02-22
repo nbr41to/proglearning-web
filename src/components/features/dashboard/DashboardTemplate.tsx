@@ -2,13 +2,16 @@ import type { Account, Profile, Status } from '@prisma/client';
 import type { FC } from 'react';
 
 import { ActionButton } from '@/components/common/ActionButton';
-import { BookIcon, CheckIcon, ProfileIcon } from '@/components/common/icons';
+import {
+  BookIcon,
+  CheckIcon,
+  PomodoroIcon,
+  ProfileIcon,
+} from '@/components/common/icons';
 import { PageTitle } from '@/components/common/PageTitle';
-import { SignboardContainer } from '@/components/common/SignboardContainer';
 import { GitHubGlass } from '@/components/features/dashboard/GitHubGlass/GitHubGlass';
 import { TutorialSteps } from '@/components/features/dashboard/TutorialSteps';
 import { CurrentGoal } from '@/components/features/setting/CurrentGoal/CurrentGoal';
-import { Button } from '@mantine/core';
 import { useRouter } from 'next/router';
 
 type Props = {
@@ -54,24 +57,33 @@ export const DashboardTemplate: FC<Props> = ({
           />
         </div>
 
-        <div>
-          <SignboardContainer>
-            <Button>アウトプット</Button>
-            <Button>アカウント設定</Button>
-            <Button>Lessons</Button>
-            <Button>ロードマップを見る</Button>
-            <Button onClick={() => router.push('/pomodoro')}>Pomodoro</Button>
-          </SignboardContainer>
-
-          <div className="mt-4 flex flex-col gap-4">
-            <ActionButton label="TODO アプリを作る" icon={<CheckIcon />} fill />
-            <ActionButton label="Lesson を受ける" icon={<BookIcon />} fill />
+        <div className="flex flex-grow flex-col gap-4">
+          <ActionButton
+            label="ポモドーロする"
+            icon={<PomodoroIcon />}
+            fill
+            onClick={() => router.push('/pomodoro')}
+          />
+          <ActionButton
+            label="TODO アプリを作る"
+            icon={<CheckIcon />}
+            fill
+            onClick={() => router.push('/todo-app')}
+          />
+          <ActionButton
+            label="Lesson を受ける"
+            icon={<BookIcon />}
+            fill
+            onClick={() => router.push('/lessons')}
+          />
+          {!profile.introduction && (
             <ActionButton
-              label="目標と自己紹介を設定する"
+              label="自己紹介を設定する"
               icon={<ProfileIcon />}
               fill
+              onClick={() => router.push('/setting')}
             />
-          </div>
+          )}
         </div>
       </div>
 

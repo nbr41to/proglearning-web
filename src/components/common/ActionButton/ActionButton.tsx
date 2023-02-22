@@ -9,7 +9,12 @@ type Props = JSX.IntrinsicElements['button'] & {
   fill?: boolean;
 };
 
-export const ActionButton: FC<Props> = ({ label, icon, fill = false }) => {
+export const ActionButton: FC<Props> = ({
+  label,
+  icon,
+  fill = false,
+  ...rest
+}) => {
   return (
     <button
       className={clsx(
@@ -17,6 +22,7 @@ export const ActionButton: FC<Props> = ({ label, icon, fill = false }) => {
         'origin-left transition hover:rotate-1 hover:bg-gray-200 active:bg-gray-300',
         fill ? 'w-full' : 'w-fit'
       )}
+      {...rest}
     >
       <div className="flex w-full items-center gap-2 font-bold">
         {icon}
