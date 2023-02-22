@@ -72,6 +72,7 @@ import {
   ChevronRightIcon,
   NotionIcon,
   CheckIcon,
+  TrashIcon,
 } from '.';
 import { IconWrapper } from '@/components/common/icons/IconViewWrapper';
 
@@ -246,6 +247,9 @@ export const GeneralIcons: StoryObj<{ size: number }> = {
         </IconWrapper>
         <IconWrapper name="TouchIcon">
           <TouchIcon size={args.size} />
+        </IconWrapper>
+        <IconWrapper name="TrashIcon">
+          <TrashIcon size={args.size} />
         </IconWrapper>
         <IconWrapper name="TwitterIcon">
           <TwitterIcon size={args.size} />

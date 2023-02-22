@@ -35,14 +35,6 @@ const ProtectedRoute: NextApiHandler = async (
         await tx.account.delete(deleteParamsUid);
         await deleteUser(user.id);
       });
-      // await prisma.$transaction([
-      //   prisma.payment.delete(deleteParamsId),
-      //   prisma.profile.delete(deleteParamsId),
-      //   prisma.status.delete(deleteParamsId),
-      //   prisma.lesson.deleteMany(deleteParamsUid),
-      //   prisma.account.delete(deleteParamsUid),
-      //   deleteUser(user.id),
-      // ]);
 
       return res.json(true);
     } catch (error) {

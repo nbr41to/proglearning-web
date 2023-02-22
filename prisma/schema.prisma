@@ -21,6 +21,7 @@ model Account {
   profile       Profile?
   status        Status?
   lessons       Lesson[]
+  Todos         Todo[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
@@ -77,6 +78,19 @@ model Lesson {
   completed_at   DateTime?
   last_viewed_at DateTime  @default(now())
   account        Account   @relation(fields: [uid], references: [uid], onDelete: NoAction)
+}
+
+model Todo {
+  id          Int       @id @unique @default(autoincrement())
+  uid         String
+  title       String
+  description String?
+  due         DateTime?
+  completed   Boolean   @default(false)
+  archived    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  account     Account   @relation(fields: [uid], references: [uid])
 }
 
 model DiscordLearningSession {

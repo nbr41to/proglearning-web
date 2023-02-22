@@ -1,17 +1,25 @@
 import type { Account, Profile, Status } from '@prisma/client';
 import type { FC } from 'react';
 
+import { ActionButton } from '@/components/common/ActionButton';
+import {
+  BookIcon,
+  CheckIcon,
+  PomodoroIcon,
+  ProfileIcon,
+} from '@/components/common/icons';
 import { PageTitle } from '@/components/common/PageTitle';
-import { SignboardContainer } from '@/components/common/SignboardContainer';
 import { GitHubGlass } from '@/components/features/dashboard/GitHubGlass/GitHubGlass';
 import { TutorialSteps } from '@/components/features/dashboard/TutorialSteps';
-import { Button } from '@mantine/core';
+import { CurrentGoal } from '@/components/features/setting/CurrentGoal/CurrentGoal';
+import { useRouter } from 'next/router';
 
 type Props = {
   account: Account;
   status: Status;
   profile: Profile;
   onStepClick: (step: number) => Promise<void>;
+  onSubmitGoal: (param: string) => Promise<void>;
 };
 
 export const DashboardTemplate: FC<Props> = ({
@@ -19,9 +27,12 @@ export const DashboardTemplate: FC<Props> = ({
   status,
   profile,
   onStepClick,
+  onSubmitGoal,
 }) => {
+  const router = useRouter();
+
   return (
-    <div className="w-main mx-auto space-y-4 px-6">
+    <div className="w-main mx-auto px-6">
       <PageTitle title="Dashboard" />
       <div className="text-center">
         ようこそ！<span className="px-1 font-bold">{profile.name}</span>さん
@@ -31,7 +42,11 @@ export const DashboardTemplate: FC<Props> = ({
         <GitHubGlass githubId={account?.github_id} />
       </div>
 
-      <div className="flex gap-4">
+      <div>
+        <CurrentGoal goal={profile.current_goal} onSubmit={onSubmitGoal} />
+      </div>
+
+      <div className="mt-6 flex gap-4">
         <div className="w-fit">
           <TutorialSteps
             currentStep={status.tutorial_step}
@@ -42,14 +57,33 @@ export const DashboardTemplate: FC<Props> = ({
           />
         </div>
 
-        <div>
-          <SignboardContainer>
-            <div>今月の目標[編集]</div>
-            <Button>アウトプット</Button>
-            <Button>アカウント設定</Button>
-            <Button>Lessons</Button>
-            <Button>ロードマップを見る</Button>
-          </SignboardContainer>
+        <div className="flex flex-grow flex-col gap-4">
+          <ActionButton
+            label="ポモドーロする"
+            icon={<PomodoroIcon />}
+            fill
+            onClick={() => router.push('/pomodoro')}
+          />
+          <ActionButton
+            label="TODO アプリを作る"
+            icon={<CheckIcon />}
+            fill
+            onClick={() => router.push('/todo-app')}
+          />
+          <ActionButton
+            label="Lesson を受ける"
+            icon={<BookIcon />}
+            fill
+            onClick={() => router.push('/lessons')}
+          />
+          {!profile.introduction && (
+            <ActionButton
+              label="自己紹介を設定する"
+              icon={<ProfileIcon />}
+              fill
+              onClick={() => router.push('/setting')}
+            />
+          )}
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import type { Account } from '@prisma/client';
+import type { EntryValidatedCreateParams } from '@/models/account/types';
 import type { FC } from 'react';
 
 import { CheckoutForm } from '@/components/features/entry/CheckoutForm';
@@ -10,14 +10,15 @@ import { Stepper } from '@mantine/core';
 type Props = {
   userEmail?: string;
   step: number;
-  onSubmitAccount: (data: Account) => Promise<void>;
-  onCheckout: () => Promise<void>;
+  submitAccount: (params: EntryValidatedCreateParams) => Promise<void>;
+  registerPayment: () => Promise<void>;
 };
+
 export const EntryTemplate: FC<Props> = ({
   userEmail,
   step,
-  onSubmitAccount,
-  onCheckout,
+  submitAccount,
+  registerPayment,
 }) => {
   return (
     <div className="w-main mx-auto space-y-8 px-8">
@@ -32,7 +33,7 @@ export const EntryTemplate: FC<Props> = ({
         </Stepper.Step>
         <Stepper.Step label="アカウント作成" description="Create account">
           {userEmail ? (
-            <EntryForm email={userEmail} onSubmit={onSubmitAccount} />
+            <EntryForm email={userEmail} onSubmit={submitAccount} />
           ) : (
             <div className="text-center">
               <p>
@@ -42,7 +43,7 @@ export const EntryTemplate: FC<Props> = ({
           )}
         </Stepper.Step>
         <Stepper.Step label="支払いの登録" description="Payment">
-          <CheckoutForm onClick={onCheckout} />
+          <CheckoutForm onClick={registerPayment} />
         </Stepper.Step>
         <Stepper.Completed>
           <Completed />

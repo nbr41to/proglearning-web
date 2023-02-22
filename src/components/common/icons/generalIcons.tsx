@@ -29,10 +29,11 @@ import {
   FaChevronLeft as ChevronLeftIcon,
   FaChevronRight as ChevronRightIcon,
   FaPen as PenIcon,
+  FaTrashAlt as TrashIcon,
 } from 'react-icons/fa';
 import { FcGoogle as ColorGoogleIcon } from 'react-icons/fc';
 import { FiSearch as SearchIcon } from 'react-icons/fi';
-import { GiCow as CowIcon } from 'react-icons/gi';
+import { GiCow as CowIcon, GiTomato as PomodoroIcon } from 'react-icons/gi';
 import { GoDashboard as DashboardIcon } from 'react-icons/go';
 import {
   HiArrowCircleUp as ArrowCircleUpIcon,
@@ -71,11 +72,6 @@ import {
 import { VscJson as JsonIcon } from 'react-icons/vsc';
 
 export {
-  CheckIcon,
-  PeopleIcon,
-  NotionIcon,
-  ShakeIcon,
-  PenIcon,
   ArrowCircleUpIcon,
   AtIcon,
   BellIcon,
@@ -84,9 +80,10 @@ export {
   CaretDownIcon,
   ChatBubblesIcon,
   ChatTextIcon,
+  CheckedBoxIcon,
+  CheckIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  CheckedBoxIcon,
   ColorGoogleIcon,
   CowIcon,
   CreditCardIcon,
@@ -107,22 +104,28 @@ export {
   LineIcon,
   ListIcon,
   LogoutIcon,
-  MagicWandIcon,
   MagicWandBoldIcon,
+  MagicWandIcon,
   MailIcon,
+  NotionIcon,
   OutlineBlockIcon,
+  PenIcon,
+  PeopleIcon,
   ProfileIcon,
   QrCodeIcon,
   QuillPenIcon,
   SearchIcon,
   SendIcon,
   SettingIcon,
+  ShakeIcon,
   StopIcon,
   TouchIcon,
+  TrashIcon,
   TwitterIcon,
   UnCheckedBoxIcon,
   UpdateIcon,
   WizardHatIcon,
   YouTubeIcon,
   ZennIcon,
+  PomodoroIcon,
 };

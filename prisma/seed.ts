@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 
+import type { Prisma } from '@prisma/client';
+
 import testAccounts from './test-accounts.json';
 import { PrismaClient } from '@prisma/client';
 
@@ -25,7 +27,7 @@ async function main() {
         create: {
           name: 'Administrator-name',
           introduction: 'Hello World',
-        },
+        } as Prisma.ProfileCreateInput,
       },
       payment: {
         create: {
@@ -33,15 +35,15 @@ async function main() {
           stripe_checkout_status: null,
           stripe_subscription_status: null,
           stripe_subscription_id: null,
-        },
+        } as Prisma.PaymentCreateInput,
       },
       status: {
         create: {
           role: 'admin',
           checked_out: true,
-        },
+        } as Prisma.StatusCreateInput,
       },
-    },
+    } as Prisma.AccountCreateInput,
   });
   console.log('Created seed my account:', account);
 
@@ -51,7 +53,7 @@ async function main() {
       const createdAccount = await prisma.account.upsert({
         where: { uid: account.uid },
         update: {},
-        create: account as any,
+        create: account as Prisma.AccountCreateInput,
       });
       console.log('Created seed other account:', createdAccount);
     })
