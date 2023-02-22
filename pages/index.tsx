@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 
-import { IndexTemplate } from '@/components/features/landing/IndexTemplate';
+import { LandingTemplate } from '@/components/features/landing/LandingTemplate';
 
 const IndexPage: NextPage = () => {
   return (
     <>
-      <IndexTemplate />
+      <LandingTemplate />
     </>
   );
 };
