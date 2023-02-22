@@ -8,6 +8,7 @@ import {
   MailIcon,
   SearchIcon,
   SettingIcon,
+  PomodoroIcon,
 } from '@/components/common/icons';
 import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
 import { SpotlightProvider as MantineSpotlightProvider } from '@mantine/spotlight';
@@ -54,6 +55,12 @@ export const SpotlightProvider = ({ children }: { children: ReactNode }) => {
         description: 'TODOリスト',
         icon: <CheckIcon size={26} />,
         onTrigger: () => router.push('/todo-app'),
+      },
+      {
+        title: 'Pomodoro',
+        description: 'ポモドーロ・テクニックで集中力を高める',
+        icon: <PomodoroIcon size={26} />,
+        onTrigger: () => router.push('/pomodoro'),
       },
       {
         title: 'Contact',
