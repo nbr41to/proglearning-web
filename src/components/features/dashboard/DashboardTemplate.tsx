@@ -7,6 +7,7 @@ import { GitHubGlass } from '@/components/features/dashboard/GitHubGlass/GitHubG
 import { TutorialSteps } from '@/components/features/dashboard/TutorialSteps';
 import { CurrentGoal } from '@/components/features/setting/CurrentGoal/CurrentGoal';
 import { Button } from '@mantine/core';
+import { useRouter } from 'next/router';
 
 type Props = {
   account: Account;
@@ -23,6 +24,8 @@ export const DashboardTemplate: FC<Props> = ({
   onStepClick,
   onSubmitGoal,
 }) => {
+  const router = useRouter();
+
   return (
     <div className="w-main mx-auto space-y-4 px-6">
       <PageTitle title="Dashboard" />
@@ -55,6 +58,7 @@ export const DashboardTemplate: FC<Props> = ({
             <Button>アカウント設定</Button>
             <Button>Lessons</Button>
             <Button>ロードマップを見る</Button>
+            <Button onClick={() => router.push('/pomodoro')}>Pomodoro</Button>
           </SignboardContainer>
         </div>
       </div>
