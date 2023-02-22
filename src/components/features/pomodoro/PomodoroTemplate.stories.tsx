@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { PomodoroTimerTemplate as Component } from './PomodoroTimerTemplate';
+import { PomodoroTemplate as Component } from './PomodoroTemplate';
 
 export default {
-  title: 'Template/PomodoroTimerTemplate',
+  title: 'Template/PomodoroTemplate',
   component: Component,
   argTypes: {},
 } as Meta<typeof Component>;

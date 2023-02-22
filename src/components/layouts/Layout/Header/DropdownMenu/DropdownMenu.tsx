@@ -92,9 +92,9 @@ export const DropdownMenu: FC<Props> = ({
         </Menu.Item>
         <Menu.Item
           icon={<PomodoroIcon size={16} />}
-          onClick={() => router.push('/pomodoro-timer')}
+          onClick={() => router.push('/pomodoro')}
         >
-          PomodoroTimer
+          Pomodoro
         </Menu.Item>
         <Menu.Item
           icon={<SettingIcon size={16} />}

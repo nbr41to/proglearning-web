@@ -58,9 +58,7 @@ export const DashboardTemplate: FC<Props> = ({
             <Button>アカウント設定</Button>
             <Button>Lessons</Button>
             <Button>ロードマップを見る</Button>
-            <Button onClick={() => router.push('/pomodoro-timer')}>
-              PomodoroTimer
-            </Button>
+            <Button onClick={() => router.push('/pomodoro')}>Pomodoro</Button>
           </SignboardContainer>
         </div>
       </div>

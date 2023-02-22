@@ -57,10 +57,10 @@ export const SpotlightProvider = ({ children }: { children: ReactNode }) => {
         onTrigger: () => router.push('/todo-app'),
       },
       {
-        title: 'Pomodoro Timer',
+        title: 'Pomodoro',
         description: 'ポモドーロ・テクニックで集中力を高める',
         icon: <PomodoroIcon size={26} />,
-        onTrigger: () => router.push('/pomodoro-timer'),
+        onTrigger: () => router.push('/pomodoro'),
       },
       {
         title: 'Contact',
