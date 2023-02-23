@@ -12,7 +12,7 @@ import { getSessionUser } from '@/server/supabase/auth';
 
 const ProtectedRoute: NextApiHandler = async (
   req: NextApiRequest,
-  res: NextApiResponse<Account | ErrorResponse>
+  res: NextApiResponse<Account | null | ErrorResponse>
 ) => {
   const user = await getSessionUser({ req, res });
   if (!user)
@@ -35,11 +35,6 @@ const ProtectedRoute: NextApiHandler = async (
         where: { uid },
         ...(isEmptyQuery ? undefined : { include: query }),
       });
-      if (!account)
-        return res.status(404).json({
-          status: 404,
-          message: 'not_found_account',
-        });
 
       return res.json(account);
     } catch (error) {

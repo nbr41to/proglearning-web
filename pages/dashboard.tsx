@@ -18,6 +18,9 @@ const DashboardPage: NextPage = () => {
     profile: true,
     status: true,
   });
+  // const { data: account, isLoading, mutate } = useGetMe();
+  // const { data: status } = useGetMeStatus();
+  // const { data: profile } = useGetMeProfile();
 
   useLoading(isLoading);
 

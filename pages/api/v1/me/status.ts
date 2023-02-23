@@ -10,7 +10,7 @@ import { getSessionUser } from '@/server/supabase/auth';
 
 const ProtectedRoute: NextApiHandler = async (
   req: NextApiRequest,
-  res: NextApiResponse<Status | ErrorResponse>
+  res: NextApiResponse<Status | null | ErrorResponse>
 ) => {
   const user = await getSessionUser({ req, res });
   if (!user)
@@ -28,11 +28,6 @@ const ProtectedRoute: NextApiHandler = async (
       const status = await prisma.status.findUnique({
         where: { id: uid },
       });
-      if (!status)
-        return res.status(404).json({
-          status: 404,
-          message: 'not_found_status',
-        });
 
       return res.json(status);
     } catch (error) {

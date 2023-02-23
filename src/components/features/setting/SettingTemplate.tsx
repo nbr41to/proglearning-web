@@ -11,7 +11,6 @@ import {
 import { MyProfile } from '@/components/features/setting/MyProfile/MyProfile';
 import { MySubscription } from '@/components/features/setting/MySubscription/MySubscription';
 import { getStripe } from '@/libs/stripe';
-import { withdraw } from '@/models/account/apis';
 import { createStripeCheckout } from '@/useCases/checkout/apis';
 import { Tabs } from '@mantine/core';
 
@@ -36,13 +35,6 @@ export const SettingTemplate: FC<Props> = ({
     const { sessionId } = response.data;
     const stripe = await getStripe();
     stripe?.redirectToCheckout({ sessionId });
-  };
-  const onUnsubscribe = async () => {
-    return;
-    /* TODO:退会確認Modalと退会完了画面の追加 */
-    const response = await withdraw();
-    if (response.status !== 200) return;
-    window.location.href = '/';
   };
 
   return (
@@ -75,11 +67,7 @@ export const SettingTemplate: FC<Props> = ({
         </Tabs.Panel>
 
         <Tabs.Panel value="subscription" pt="xs">
-          <MySubscription
-            plan="closer"
-            onCheckout={onCheckout}
-            onUnsubscribe={onUnsubscribe}
-          />
+          <MySubscription plan="closer" onCheckout={onCheckout} />
         </Tabs.Panel>
 
         <Tabs.Panel value="settings" pt="xs">

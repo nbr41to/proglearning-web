@@ -32,14 +32,17 @@ const ProtectedRoute: NextApiHandler = async (
           id: uid,
         },
       });
-      const stripeCustomerId = payment?.stripe_customer_id;
-      if (stripeCustomerId) {
-        await stripe.customers.del(stripeCustomerId);
-      } else {
-        return res.status(400).json({
-          status: 400,
-          message: 'stripe_customer_id_not_found',
-        });
+
+      if (payment?.stripe_checkout_status) {
+        const stripeCustomerId = payment.stripe_customer_id;
+        if (stripeCustomerId) {
+          await stripe.customers.del(stripeCustomerId);
+        } else {
+          return res.status(400).json({
+            status: 400,
+            message: 'stripe_customer_id_not_found',
+          });
+        }
       }
 
       /* Delete Account at Supabase DB */

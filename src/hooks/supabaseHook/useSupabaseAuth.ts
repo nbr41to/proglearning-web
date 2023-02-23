@@ -13,17 +13,20 @@ export const useSupabaseAuth = () => {
       await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: redirectTo ? redirectTo : baseUrl + '/dashboard',
+          redirectTo: baseUrl + (redirectTo ? redirectTo : '/dashboard'),
         },
       });
     },
     [supabase.auth]
   );
 
-  const signOut = useCallback(async () => {
-    await supabase.auth.signOut();
-    await router.push('/login');
-  }, [router, supabase.auth]);
+  const signOut = useCallback(
+    async (redirectTo?: string) => {
+      await supabase.auth.signOut();
+      await router.push(redirectTo ? redirectTo : '/login');
+    },
+    [router, supabase.auth]
+  );
 
   /* Development only */
   const developLogin = useCallback(async () => {

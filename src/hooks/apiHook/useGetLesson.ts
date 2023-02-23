@@ -8,7 +8,7 @@ export const useGetLesson = (lessonId: string) => {
   const user = useUser();
 
   return useSWR<MyLesson>(
-    user && `/api/v1/lessons/${lessonId}`,
+    user && lessonId && `/api/v1/lessons/${lessonId}`,
     axiosGetFetcher<MyLesson>
   );
 };

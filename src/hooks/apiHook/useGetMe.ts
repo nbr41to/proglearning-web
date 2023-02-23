@@ -13,8 +13,10 @@ export const useGetMe = <T extends AccountInclude>(
 ) => {
   const user = useUser();
 
-  return useSWR<AccountGetPayload<T>, AccountQueryParams>(
-    ['/api/v1/me', query],
-    user && axiosGetQueryFetcher<AccountGetPayload<T>, AccountQueryParams>
+  return useSWR<AccountGetPayload<T> | null, AccountQueryParams>(
+    [user && '/api/v1/me', query],
+    user
+      ? axiosGetQueryFetcher<AccountGetPayload<T>, AccountQueryParams>
+      : () => null
   );
 };

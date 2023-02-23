@@ -2,9 +2,9 @@ import type { FC, ReactNode } from 'react';
 
 import { useGetMe } from '@/hooks/apiHook/useGetMe';
 import { useLoading } from '@/hooks/stateHook/useLoading';
-import { paths } from '@/utils/url';
+import { unprotectedRoutes } from '@/utils/url';
 import { useRouter } from 'next/router';
-import { useMemo, useEffect } from 'react';
+import { useEffect } from 'react';
 
 type Props = {
   children: ReactNode;
@@ -14,30 +14,22 @@ export const Auth: FC<Props> = ({ children }) => {
   const router = useRouter();
   const { data, isLoading } = useGetMe();
   const loading = useLoading();
-  const isIgnorePath = useMemo(
-    () => !paths.loggedIn.some((path) => router.pathname.startsWith(path)),
-    [router.pathname]
-  );
+  const isIgnorePath = unprotectedRoutes.includes(router.asPath);
+  const isLoginPath = router.asPath === '/login';
 
   useEffect(() => {
     if (isIgnorePath) return loading.off();
     if (typeof data === 'undefined' && isLoading) {
       loading.on();
     }
-    if (data === null) {
-      loading.off();
+    if (data === null && !isLoginPath) {
       router.push('/login');
     }
-    if (data) {
-      loading.off();
-      if (router.pathname === '/login') {
-        router.push('/dashboard');
-      }
+    if (data && isLoginPath) {
+      router.push('/dashboard');
     }
-  }, [router, data, isLoading, loading, isIgnorePath]);
+    loading.off();
+  }, [router, data, isLoading, loading, isIgnorePath, isLoginPath]);
 
-  if (isIgnorePath || data) return <>{children}</>;
-  if (data) return <>{children}</>;
-
-  return null;
+  return isIgnorePath || data || isLoginPath ? <>{children}</> : null;
 };
