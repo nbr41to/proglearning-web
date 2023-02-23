@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 
 import { CreditCardIcon } from '@/components/common/icons';
-import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
-import { getBillingPortalUrl } from '@/utils/axios/stripe';
+import { useGetMeStatus } from '@/hooks/apiHook/useGetMeStatus';
+import { getBillingPortalUrl } from '@/useCases/updateSubscription/apis';
 import { Button } from '@mantine/core';
 
 type Props = {
@@ -16,7 +16,7 @@ export const MySubscription: FC<Props> = ({
   onCheckout,
   onUnsubscribe,
 }) => {
-  const { data: status } = useMeStatus();
+  const { data: status } = useGetMeStatus();
   const isCheckout = !!status?.checked_out;
 
   const openCustomerPortal = async () => {

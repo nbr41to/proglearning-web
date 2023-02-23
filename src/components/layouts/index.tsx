@@ -2,8 +2,8 @@ import type { FC, ReactNode } from 'react';
 
 import { Layout } from '@/components/layouts/Layout';
 import { LoadingOverlay } from '@/components/layouts/LoadingOverlay';
+import { useGetMeStatus } from '@/hooks/apiHook/useGetMeStatus';
 import { useLoading } from '@/hooks/stateHook/useLoading';
-import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
 import { useSupabaseAuth } from '@/hooks/supabaseHook/useSupabaseAuth';
 import { useSpotlight } from '@mantine/spotlight';
 import { useUser } from '@supabase/auth-helpers-react';
@@ -17,7 +17,7 @@ type Props = {
 export const LayoutWrapper: FC<Props> = ({ children }) => {
   const router = useRouter();
   const user = useUser();
-  const { data: status, isLoading: isLoadingStatus } = useMeStatus();
+  const { data: status, isLoading: isLoadingStatus } = useGetMeStatus();
   const { signOut } = useSupabaseAuth();
   const spotlight = useSpotlight();
   const loading = useLoading(isLoadingStatus);

@@ -1,6 +1,10 @@
-import type { AccountPrismaCreateParams } from '@/models/account/types';
+import type {
+  AccountValidatedUpdateParams,
+  AccountValidatedCreateParams,
+  AccountQueryParams,
+  Account,
+} from '@/models/account/types';
 import type { ErrorResponse } from '@/types/error';
-import type { Account } from '@prisma/client';
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
 import { prisma } from '@/server/prisma/client';
@@ -17,19 +21,63 @@ const ProtectedRoute: NextApiHandler = async (
       message: 'unauthorized',
     });
 
+  const uid = user.id;
   const method = req.method;
+
+  /* Accountの取得 */
+  if (method === 'GET') {
+    try {
+      const query = req.query as AccountQueryParams;
+      const isEmptyQuery =
+        Object.keys(query).length === 0 && query.constructor === Object;
+
+      const account = await prisma.account.findUnique({
+        where: { uid },
+        ...(isEmptyQuery ? undefined : { include: query }),
+      });
+      if (!account)
+        return res.status(404).json({
+          status: 404,
+          message: 'not_found_account',
+        });
+
+      return res.json(account);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+
+      return res.status(500).json({
+        status: 500,
+        message: 'internal_server_error',
+      });
+    }
+  }
+
+  /* Accountの更新 */
+  if (method === 'PATCH') {
+    try {
+      const body = req.body as AccountValidatedUpdateParams;
+      const account = await prisma.account.update({
+        where: { uid },
+        data: body,
+      });
+
+      return res.json(account);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+
+      return res.status(500).json({
+        status: 500,
+        message: 'internal_server_error',
+      });
+    }
+  }
 
   /* 新規Accountの作成 */
   if (method === 'POST') {
     try {
-      const body = req.body as AccountPrismaCreateParams;
-      if (user.id !== body.uid)
-        return res.status(401).json({
-          status: 401,
-          message: 'unauthorized',
-        });
-
-      const uid = user.id;
+      const body = req.body as AccountValidatedCreateParams;
 
       /* Check Exist Account */
       const existAccount = await prisma.account.findUnique({
@@ -50,6 +98,7 @@ const ProtectedRoute: NextApiHandler = async (
         update: {},
         create: {
           ...body,
+          uid,
           profile: {
             create: {
               name: body.name,
@@ -76,7 +125,7 @@ const ProtectedRoute: NextApiHandler = async (
     }
   }
 
-  res.setHeader('Allow', ['POST']);
+  res.setHeader('Allow', ['GET', 'POST', 'PATCH']);
   res.status(405).end('Method Not Allowed');
 };
 

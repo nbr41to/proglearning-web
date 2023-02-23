@@ -3,31 +3,44 @@ import type { NextPage } from 'next';
 import { DashboardTemplate } from '@/components/features/dashboard/DashboardTemplate';
 import { useGetMe } from '@/hooks/apiHook/useGetMe';
 import { useLoading } from '@/hooks/stateHook/useLoading';
-import { useMeProfile } from '@/hooks/supabaseHook/useMeProfile';
-import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
+import { updateProfile } from '@/models/profile/apis';
+import { updateStatus } from '@/models/status/apis';
 
 const DashboardPage: NextPage = () => {
-  const { data: account, isLoading } = useGetMe();
-  const { data: status, isLoading: isLoadingStatus, trigger } = useMeStatus();
   const {
-    data: profile,
-    isLoading: isLoadingProfile,
-    updateGoal,
-  } = useMeProfile();
-  useLoading(isLoading || isLoadingStatus || isLoadingProfile);
+    data: account,
+    isLoading,
+    mutate,
+  } = useGetMe<{
+    profile: true;
+    status: true;
+  }>({
+    profile: true,
+    status: true,
+  });
+
+  useLoading(isLoading);
 
   const onStepClick = async (step: number) => {
-    await trigger({ tutorial_step: step });
+    await updateStatus({ tutorial_step: step });
+    await mutate();
   };
 
-  if (!account || !status || !profile) return null;
+  const updateGoal = async (goal: string) => {
+    await updateProfile({ current_goal: goal });
+    await mutate();
+  };
+
+  if (!account) return null;
+  if (!account.status) return null;
+  if (!account.profile) return null;
 
   return (
     <>
       <DashboardTemplate
         account={account}
-        status={status}
-        profile={profile}
+        status={account.status}
+        profile={account.profile}
         onStepClick={onStepClick}
         onSubmitGoal={updateGoal}
       />

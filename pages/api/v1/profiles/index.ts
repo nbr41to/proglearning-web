@@ -1,7 +1,4 @@
-import type {
-  Status,
-  StatusValidatedUpdateParams,
-} from '@/models/status/types';
+import type { Profile } from '@/models/profile/types';
 import type { ErrorResponse } from '@/types/error';
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
@@ -10,7 +7,7 @@ import { getSessionUser } from '@/server/supabase/auth';
 
 const ProtectedRoute: NextApiHandler = async (
   req: NextApiRequest,
-  res: NextApiResponse<Status | ErrorResponse>
+  res: NextApiResponse<Profile[] | ErrorResponse>
 ) => {
   const user = await getSessionUser({ req, res });
   if (!user)
@@ -21,26 +18,16 @@ const ProtectedRoute: NextApiHandler = async (
 
   const method = req.method;
 
-  /* Statusの更新 */
-  if (method === 'PATCH') {
+  /* Profileリストの取得 */
+  if (method === 'GET') {
     try {
-      const uid = req.query.uid as string;
-      const body = req.body as StatusValidatedUpdateParams;
-      if (user.id !== uid)
-        return res.status(401).json({
-          status: 401,
-          message: 'unauthorized',
-        });
+      const profile = await prisma.profile.findMany();
 
-      const status = await prisma.status.update({
-        where: { id: uid },
-        data: {
-          ...body,
-        },
-      });
-
-      return res.json(status);
+      return res.json(profile);
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+
       return res.status(500).json({
         status: 500,
         message: 'internal_server_error',
@@ -48,7 +35,7 @@ const ProtectedRoute: NextApiHandler = async (
     }
   }
 
-  res.setHeader('Allow', ['PATCH']);
+  res.setHeader('Allow', 'GET');
   res.status(405).end('Method Not Allowed');
 };
 

@@ -37,7 +37,7 @@ const ProtectedRoute: NextApiHandler = async (req, res) => {
     }
   }
 
-  res.setHeader('Allow', ['GET', 'POST', 'PATCH']);
+  res.setHeader('Allow', ['GET']);
   res.status(405).end('Method Not Allowed');
 };
 

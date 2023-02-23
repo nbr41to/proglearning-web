@@ -1,4 +1,5 @@
-import type { ProfileSchemaUpdateParams } from '@/validations/scheme/profile';
+import type { AccountValidatedUpdateParams } from '@/models/account/types';
+import type { ProfileValidatedUpdateParams } from '@/models/profile/types';
 import type { Account, Profile } from '@prisma/client';
 import type { FC } from 'react';
 
@@ -10,8 +11,8 @@ import {
 import { MyProfile } from '@/components/features/setting/MyProfile/MyProfile';
 import { MySubscription } from '@/components/features/setting/MySubscription/MySubscription';
 import { getStripe } from '@/libs/stripe';
-import { deleteAccount } from '@/utils/axios/account';
-import { createStripeCheckout } from '@/utils/axios/stripe';
+import { withdraw } from '@/models/account/apis';
+import { createStripeCheckout } from '@/useCases/checkout/apis';
 import { Tabs } from '@mantine/core';
 
 type Props = {
@@ -19,13 +20,15 @@ type Props = {
     profile: Profile;
   };
   onSubmitGoal: (param: string) => Promise<void>;
-  onSubmitProfile: (params: ProfileSchemaUpdateParams) => Promise<void>;
+  onUpdateAccount: (params: AccountValidatedUpdateParams) => Promise<void>;
+  onUpdateProfile: (params: ProfileValidatedUpdateParams) => Promise<void>;
 };
 
 export const SettingTemplate: FC<Props> = ({
   account,
   onSubmitGoal,
-  onSubmitProfile,
+  onUpdateAccount,
+  onUpdateProfile,
 }) => {
   /* 支払い画面へ */
   const onCheckout = async () => {
@@ -37,7 +40,7 @@ export const SettingTemplate: FC<Props> = ({
   const onUnsubscribe = async () => {
     return;
     /* TODO:退会確認Modalと退会完了画面の追加 */
-    const response = await deleteAccount();
+    const response = await withdraw();
     if (response.status !== 200) return;
     window.location.href = '/';
   };
@@ -66,7 +69,8 @@ export const SettingTemplate: FC<Props> = ({
           <MyProfile
             account={account}
             onSubmitGoal={onSubmitGoal}
-            onSubmitProfile={onSubmitProfile}
+            onUpdateAccount={onUpdateAccount}
+            onUpdateProfile={onUpdateProfile}
           />
         </Tabs.Panel>
 

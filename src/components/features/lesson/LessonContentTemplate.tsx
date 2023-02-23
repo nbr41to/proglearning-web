@@ -3,7 +3,8 @@ import type { FC } from 'react';
 
 import { CheckIcon } from '@/components/common/icons';
 import { blockToJsx } from '@/components/notion/blockToJsx';
-import { useMeLesson } from '@/hooks/supabaseHook/useMeLesson';
+import { useGetLesson } from '@/hooks/apiHook/useGetLesson';
+import { updateLesson } from '@/models/myLesson/apis';
 import { Button } from '@mantine/core';
 import { useRouter } from 'next/router';
 
@@ -14,16 +15,17 @@ type Props = {
 export const LessonContentTemplate: FC<Props> = ({ lesson }) => {
   const router = useRouter();
   const lessonId = router.query.lessonId as string;
-  const { data: meLesson, trigger: updateLessons } = useMeLesson(lessonId);
+  const { data: myLesson, mutate } = useGetLesson(lessonId);
   const title =
     lesson.page.properties.Title.type === 'title'
       ? lesson.page.properties.Title.title[0].plain_text
       : 'not_title';
-  const isDone = meLesson?.completed;
+  const isDone = myLesson?.completed;
 
   const lessonDone = async () => {
     if (isDone) return;
-    await updateLessons({ id: lessonId, completed: true });
+    await updateLesson({ id: lessonId, completed: true });
+    await mutate();
   };
 
   return (

@@ -1,15 +1,20 @@
-import type { Account } from '@prisma/client';
+import type {
+  AccountGetPayload,
+  AccountInclude,
+  AccountQueryParams,
+} from '@/models/account/types';
 
-import { axiosGetFetcher } from '@/utils/axios/fetchers';
+import { axiosGetQueryFetcher } from '@/libs/axios/fetchers';
 import { useUser } from '@supabase/auth-helpers-react';
 import useSWR from 'swr';
 
-export const useGetMe = () => {
+export const useGetMe = <T extends AccountInclude>(
+  query?: AccountQueryParams
+) => {
   const user = useUser();
-  const { data, isLoading, mutate } = useSWR<Account | null>(
-    user && '/api/auth/me',
-    axiosGetFetcher
-  );
 
-  return { data, isLoading, mutate };
+  return useSWR<AccountGetPayload<T>, AccountQueryParams>(
+    ['/api/v1/me', query],
+    user && axiosGetQueryFetcher<AccountGetPayload<T>, AccountQueryParams>
+  );
 };

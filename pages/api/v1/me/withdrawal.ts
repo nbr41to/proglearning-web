@@ -13,15 +13,23 @@ const ProtectedRoute: NextApiHandler = async (
   res: NextApiResponse<Response>
 ) => {
   const user = await getSessionUser({ req, res });
+  if (!user)
+    return res.status(401).json({
+      status: 401,
+      message: 'unauthorized',
+    });
 
+  const uid = user.id;
   const method = req.method;
+
   if (method === 'DELETE') {
     if (!user) return res.json(false);
+    /* 退会処理 */
     try {
       /* Delete Stripe Customer */
       const payment = await prisma.payment.findUnique({
         where: {
-          id: user.id,
+          id: uid,
         },
       });
       const stripeCustomerId = payment?.stripe_customer_id;
@@ -37,12 +45,12 @@ const ProtectedRoute: NextApiHandler = async (
       /* Delete Account at Supabase DB */
       const deleteParamsId = {
         where: {
-          id: user.id,
+          id: uid,
         },
       };
       const deleteParamsUid = {
         where: {
-          uid: user.id,
+          uid: uid,
         },
       };
       await prisma.$transaction(async (tx) => {
@@ -51,7 +59,7 @@ const ProtectedRoute: NextApiHandler = async (
         await tx.status.delete(deleteParamsId);
         await tx.lesson.deleteMany(deleteParamsUid);
         await tx.account.delete(deleteParamsUid);
-        await deleteUser(user.id);
+        await deleteUser(uid);
       });
 
       return res.json(true);

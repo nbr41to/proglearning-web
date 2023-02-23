@@ -1,11 +1,11 @@
-import type { Todo } from '@/models/todo/types';
+import type { Status } from '@/models/status/types';
 
 import { axiosGetFetcher } from '@/libs/axios/fetchers';
 import { useUser } from '@supabase/auth-helpers-react';
 import useSWR from 'swr';
 
-export const useGetTodos = () => {
+export const useGetMeStatus = () => {
   const user = useUser();
 
-  return useSWR<Todo[]>(user && '/api/v1/todos', axiosGetFetcher<Todo[]>);
+  return useSWR<Status>(user && '/api/v1/me/status', axiosGetFetcher<Status>);
 };

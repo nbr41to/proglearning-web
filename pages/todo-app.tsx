@@ -4,11 +4,11 @@ import { TodoAppTemplate } from '@/components/features/todo-app/TodoAppTemplate'
 import { useGetTodos } from '@/hooks/apiHook/useGetTodos';
 
 const TodoAppPage: NextPage = () => {
-  const { data } = useGetTodos();
+  const { data: todos } = useGetTodos();
 
   return (
     <>
-      <TodoAppTemplate data={data} />
+      <TodoAppTemplate todos={todos || []} />
     </>
   );
 };
