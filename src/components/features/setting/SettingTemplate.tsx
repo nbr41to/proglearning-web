@@ -9,7 +9,7 @@ import {
 } from '@/components/common/icons';
 import { MyProfile } from '@/components/features/setting/MyProfile/MyProfile';
 import { MySubscription } from '@/components/features/setting/MySubscription/MySubscription';
-import { getStripe } from '@/server/stripe/client';
+import { getStripe } from '@/libs/stripe';
 import { deleteAccount } from '@/utils/axios/account';
 import { createStripeCheckout } from '@/utils/axios/stripe';
 import { Tabs } from '@mantine/core';

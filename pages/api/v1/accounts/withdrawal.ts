@@ -34,6 +34,7 @@ const ProtectedRoute: NextApiHandler = async (
         });
       }
 
+      /* Delete Account at Supabase DB */
       const deleteParamsId = {
         where: {
           id: user.id,
