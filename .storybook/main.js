@@ -16,4 +16,7 @@ module.exports = {
     name: '@storybook/nextjs',
     options: {},
   },
+  docs: {
+    autodocs: true,
+  },
 };

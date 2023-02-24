@@ -17,14 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/hooks/*": ["./src/hooks/*"],
-      "@/mdx/*": ["./src/mdx/*"],
-      "@/mocks/*": ["./src/__mocks__/*"],
-      "@/pages/*": ["./pages/*"],
-      "@/server/*": ["src/server/*"],
-      "@/styles/*": ["./src/styles/*"],
-      "@/utils/*": ["./src/utils/*"]
+      "@/pages/*": ["./pages/*"]
     },
     "plugins": [
       {

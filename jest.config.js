@@ -10,8 +10,7 @@ const jestConfig = {
   moduleNameMapper: {
     // path alias
     '^@/pages/(.*)$': '<rootDir>/pages/$1',
-    '^@/src/(.*)$': '<rootDir>/src/$1',
-    '^@/utils/(.*)$': '<rootDir>/src/utils/$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   // testEnvironment: 'jest-environment-jsdom', // unused
 };
