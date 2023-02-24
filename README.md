@@ -48,25 +48,29 @@
    cp .env.sample .env
    ```
 
-2. `.env`の中身は Notion の Development > 環境変数のページを参照
-3. Docker Desktop をインストール（※Docker が起動している状態であれば良い）
+   `.env` の内容は Notion の Development > 環境変数のページのものを貼り付ける
+
+2. Docker Desktop をインストール（※Docker が起動している状態であれば良い）
 
    Windows でうまく行かない場合は[こちら](https://www.notion.so/nobco/Windows-Docker-Desktop-bbf9906bb7eb4076ba792f1510a97d2c?pvs=4)を参考
 
-4. 上記にある **Scripts** を 1 -> 2 -> 5 -> 6 の順に実行する
-5. 依存関係の install
+3. 上記にある **Scripts** を 1 -> 2 -> 5 -> 6 の順に実行する
+4. 依存関係の install
 
    ```sh
    yarn install
    ```
 
-6. アプリを起動する
+5. アプリを起動する
 
    ```sh
    yarn dev
    ```
 
-Docker を停止したい場合は開発時は Scripts の 3.を再起動は 2.を
+備考
+
+- Docker を停止したい場合は開発時は Scripts の 3.を再起動は 2.を
+- ログインの不要な開発の場合は 2. 3. は不要
 
 ### Supabase Studio
 
