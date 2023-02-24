@@ -1,9 +1,9 @@
 import { ContactTemplate } from '@/components/features/contact/ContactTemplate';
-import { sendSlackChannel } from '@/utils/axios/slack';
+import { sendToSlackChannel } from '@/useCases/contact/apis';
 
 const ContactPage = () => {
   const handleSubmit = async (text: string) => {
-    await sendSlackChannel(text);
+    await sendToSlackChannel(text);
   };
 
   return (

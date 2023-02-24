@@ -1,32 +1,46 @@
-import type { ProfileSchemaUpdateParams } from '@/validations/scheme/profile';
+import type { AccountValidatedUpdateParams } from '@/models/account/types';
+import type { ProfileValidatedUpdateParams } from '@/models/profile/types';
 import type { NextPage } from 'next';
 
 import { SettingTemplate } from '@/components/features/setting/SettingTemplate';
 import { useGetMe } from '@/hooks/apiHook/useGetMe';
-import { useMeProfile } from '@/hooks/supabaseHook/useMeProfile';
-import { updateAccount } from '@/utils/axios/account';
+import { updateAccount } from '@/models/account/apis';
+import { updateProfile } from '@/models/profile/apis';
 
 const SettingPage: NextPage = () => {
-  const { data: me, mutate: mutateMe } = useGetMe();
-  const { data: profile, mutate: mutateMeProfile, updateGoal } = useMeProfile();
+  const { data: account, mutate: mutateMe } = useGetMe<{ profile: true }>({
+    profile: true,
+  });
 
-  const saveAccount = async (params: ProfileSchemaUpdateParams) => {
+  const handleUpdateAccount = async (params: AccountValidatedUpdateParams) => {
     const response = await updateAccount(params);
 
     if (!response) return;
     await mutateMe();
-    await mutateMeProfile();
   };
+  const handleUpdateProfile = async (params: ProfileValidatedUpdateParams) => {
+    const response = await updateProfile(params);
+
+    if (!response) return;
+    await mutateMe();
+  };
+
+  const updateGoal = async (goal: string) => {
+    await updateProfile({ current_goal: goal });
+    await mutateMe();
+  };
+
+  if (!account) return null;
+  if (!account.profile) return null;
 
   return (
     <div>
-      {me && profile && (
-        <SettingTemplate
-          account={{ ...me, profile }}
-          onSubmitGoal={updateGoal}
-          onSubmitProfile={saveAccount}
-        />
-      )}
+      <SettingTemplate
+        account={{ ...account, profile: account.profile }}
+        onSubmitGoal={updateGoal}
+        onUpdateAccount={handleUpdateAccount}
+        onUpdateProfile={handleUpdateProfile}
+      />
     </div>
   );
 };

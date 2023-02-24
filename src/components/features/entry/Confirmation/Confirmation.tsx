@@ -5,7 +5,6 @@ import { InputCheckbox } from '@/components/common/InputCheckbox';
 import { SignboardContainer } from '@/components/common/SignboardContainer/SignboardContainer';
 import { useSupabaseAuth } from '@/hooks/supabaseHook/useSupabaseAuth';
 import Terms from '@/mdx/terms_of_service.mdx';
-import { baseUrl } from '@/utils/url';
 import { Button, Modal } from '@mantine/core';
 import { useReducer, useMemo, useState } from 'react';
 
@@ -61,7 +60,7 @@ export const Confirmation: FC = () => {
             variant="outline"
             fullWidth
             leftIcon={<ColorGoogleIcon size={20} />}
-            onClick={() => signInWithGoogle(baseUrl + '/entry')}
+            onClick={() => signInWithGoogle('/entry')}
           >
             Googleアカウントで登録
           </Button>

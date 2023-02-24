@@ -3,8 +3,9 @@ import type { FC } from 'react';
 
 import { PageTitle } from '@/components/common/PageTitle';
 import { LessonCard } from '@/components/features/lesson/LessonCard';
+import { createLesson, getLesson, updateLesson } from '@/models/myLesson/apis';
 import { Button } from '@mantine/core';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 type Props = {
@@ -12,6 +13,8 @@ type Props = {
 };
 
 export const LessonsTemplate: FC<Props> = ({ lessons }) => {
+  const router = useRouter();
+
   const [viewType, setViewType] = useState<'card' | 'list'>('card');
   const toggleViewType = () => {
     if (viewType === 'card') {
@@ -19,6 +22,20 @@ export const LessonsTemplate: FC<Props> = ({ lessons }) => {
     } else {
       setViewType('card');
     }
+  };
+
+  const viewLesson = async (lessonId: string) => {
+    const response = await getLesson(lessonId);
+    if (!response.data) {
+      await createLesson({
+        id: lessonId,
+        completed: false,
+        last_viewed_at: new Date(),
+      });
+    } else {
+      await updateLesson({ id: lessonId, last_viewed_at: new Date() });
+    }
+    await router.push(`/lessons/${lessonId}`);
   };
 
   return (
@@ -31,7 +48,7 @@ export const LessonsTemplate: FC<Props> = ({ lessons }) => {
       {viewType === 'card' && (
         <div className="flex flex-wrap gap-4">
           {lessons.map((lesson) => (
-            <LessonCard key={lesson.id} lesson={lesson} />
+            <LessonCard key={lesson.id} lesson={lesson} onView={viewLesson} />
           ))}
         </div>
       )}
@@ -43,9 +60,13 @@ export const LessonsTemplate: FC<Props> = ({ lessons }) => {
               <div>{lesson.title}</div>
               <div className="flex flex-col pl-4">
                 {lesson.contents.map((content) => (
-                  <Link key={content.id} href={`/lessons/${content.id}`}>
+                  <div
+                    key={content.id}
+                    className="cursor-pointer hover:underline"
+                    onClick={() => viewLesson(content.id)}
+                  >
                     {content.title}
-                  </Link>
+                  </div>
                 ))}
               </div>
             </div>

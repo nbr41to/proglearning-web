@@ -2,6 +2,7 @@ import type { ErrorResponse } from '@/types/error';
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
 import { prisma } from '@/server/prisma/client';
+import { stripe } from '@/server/stripe/client';
 import { deleteUser } from '@/server/supabase/admin';
 import { getSessionUser } from '@/server/supabase/auth';
 
@@ -12,19 +13,47 @@ const ProtectedRoute: NextApiHandler = async (
   res: NextApiResponse<Response>
 ) => {
   const user = await getSessionUser({ req, res });
+  if (!user)
+    return res.status(401).json({
+      status: 401,
+      message: 'unauthorized',
+    });
 
+  const uid = user.id;
   const method = req.method;
+
   if (method === 'DELETE') {
     if (!user) return res.json(false);
+    /* 退会処理 */
     try {
+      /* Delete Stripe Customer */
+      const payment = await prisma.payment.findUnique({
+        where: {
+          id: uid,
+        },
+      });
+
+      if (payment?.stripe_checkout_status) {
+        const stripeCustomerId = payment.stripe_customer_id;
+        if (stripeCustomerId) {
+          await stripe.customers.del(stripeCustomerId);
+        } else {
+          return res.status(400).json({
+            status: 400,
+            message: 'stripe_customer_id_not_found',
+          });
+        }
+      }
+
+      /* Delete Account at Supabase DB */
       const deleteParamsId = {
         where: {
-          id: user.id,
+          id: uid,
         },
       };
       const deleteParamsUid = {
         where: {
-          uid: user.id,
+          uid: uid,
         },
       };
       await prisma.$transaction(async (tx) => {
@@ -33,7 +62,7 @@ const ProtectedRoute: NextApiHandler = async (
         await tx.status.delete(deleteParamsId);
         await tx.lesson.deleteMany(deleteParamsUid);
         await tx.account.delete(deleteParamsUid);
-        await deleteUser(user.id);
+        await deleteUser(uid);
       });
 
       return res.json(true);

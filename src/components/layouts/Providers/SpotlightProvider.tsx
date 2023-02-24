@@ -10,14 +10,14 @@ import {
   SettingIcon,
   PomodoroIcon,
 } from '@/components/common/icons';
-import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
+import { useGetMeStatus } from '@/hooks/apiHook/useGetMeStatus';
 import { SpotlightProvider as MantineSpotlightProvider } from '@mantine/spotlight';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 
 export const SpotlightProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
-  const { data: userStatus } = useMeStatus();
+  const { data: userStatus } = useGetMeStatus();
   const disabled = !userStatus?.checked_out;
 
   const actions = useMemo(

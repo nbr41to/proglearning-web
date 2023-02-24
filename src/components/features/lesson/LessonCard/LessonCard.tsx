@@ -3,14 +3,14 @@ import type { FC } from 'react';
 
 import { BookIcon } from '@/components/common/icons';
 import { Modal } from '@mantine/core';
-import Link from 'next/link';
 import { useState } from 'react';
 
 type Props = {
   lesson: Lesson;
+  onView: (lessonId: string) => Promise<void>;
 };
 
-export const LessonCard: FC<Props> = ({ lesson }) => {
+export const LessonCard: FC<Props> = ({ lesson, onView }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -37,11 +37,15 @@ export const LessonCard: FC<Props> = ({ lesson }) => {
         <div>説明</div>
         <div>
           内容
-          <div className="flex flex-col">
+          <div className="flex flex-col pl-4">
             {lesson.contents.map((content) => (
-              <Link key={content.id} href={`/lessons/${content.id}`}>
-                {content.title}
-              </Link>
+              <div
+                key={content.id}
+                className="cursor-pointer hover:underline"
+                onClick={() => onView(content.id)}
+              >
+                - {content.title}
+              </div>
             ))}
           </div>
         </div>
