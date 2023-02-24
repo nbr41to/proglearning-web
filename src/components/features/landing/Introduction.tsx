@@ -36,7 +36,7 @@ export const Introduction = () => {
       <div className="mx-auto flex w-fit items-center gap-3">
         <a
           className="text-gray-800 transition-colors hover:text-gray-600"
-          href="https://www.nbr41.com/"
+          href="https://www.nbr41.com/profile"
           target="_blank"
           rel="noreferrer"
         >

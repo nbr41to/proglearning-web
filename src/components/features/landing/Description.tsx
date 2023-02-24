@@ -1,4 +1,4 @@
-import { ShakeIcon } from '@/components/common/icons';
+import { SearchIcon, ShakeIcon } from '@/components/common/icons';
 import { SignboardContainer } from '@/components/common/SignboardContainer';
 import { Button } from '@mantine/core';
 import { useRouter } from 'next/router';
@@ -33,8 +33,14 @@ export const Description = () => {
             <li>顔出しは任意、匿名の参加でOK</li>
           </ul>
         </div>
-        <div className="ml-auto w-fit">
-          <Button onClick={() => router.push('/about')}>もっと詳しく</Button>
+        <div className="ml-auto -mt-8 w-fit">
+          <Button
+            color="orange"
+            rightIcon={<SearchIcon size={20} />}
+            onClick={() => router.push('/about')}
+          >
+            もっと詳しく
+          </Button>
         </div>
       </div>
     </SignboardContainer>
