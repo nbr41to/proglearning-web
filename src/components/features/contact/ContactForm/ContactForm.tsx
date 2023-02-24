@@ -2,8 +2,8 @@ import type { FC } from 'react';
 
 import { AtIcon, SendIcon, TouchIcon } from '@/components/common/icons';
 import { RichTextEditor } from '@/components/common/RichTextEditor';
-import { contactSchema } from '@/validations/scheme/contact';
-import { validate } from '@/validations/varidate';
+import { contactSchema } from '@/useCases/contact/scheme';
+import { validate } from '@/utils/validate';
 import { Button, clsx, Input } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { Link } from '@mantine/tiptap';
@@ -39,7 +39,10 @@ export const ContactForm: FC<Props> = ({ onSubmit }) => {
   const handleSubmit = async () => {
     if (disabled) return;
     const content = editor.getText();
-    const validated = validate(contactSchema, { email, content });
+    const validated = validate<{ email: string; content: string }>(
+      contactSchema,
+      { email, content }
+    );
     if (!validated) return;
 
     setIsLoading(true);
