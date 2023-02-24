@@ -1,4 +1,5 @@
-import type { ProfileSchemaUpdateParams } from '@/validations/scheme/profile';
+import type { AccountValidatedUpdateParams } from '@/models/account/types';
+import type { ProfileValidatedUpdateParams } from '@/models/profile/types';
 import type { Account, Profile } from '@prisma/client';
 import type { FC } from 'react';
 
@@ -13,13 +14,16 @@ type Props = {
     profile: Profile;
   };
   onSubmitGoal: (param: string) => Promise<void>;
-  onSubmitProfile: (data: ProfileSchemaUpdateParams) => Promise<void>;
+  onUpdateAccount: (params: AccountValidatedUpdateParams) => Promise<void>;
+  onUpdateProfile: (params: ProfileValidatedUpdateParams) => Promise<void>;
 };
 
 export const MyProfile: FC<Props> = ({
   account,
   onSubmitGoal,
-  onSubmitProfile,
+  // eslint-disable-next-line unused-imports/no-unused-vars
+  onUpdateAccount,
+  onUpdateProfile,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -33,7 +37,7 @@ export const MyProfile: FC<Props> = ({
         {isEditing ? (
           <MeEditingForm
             account={account}
-            onSubmit={onSubmitProfile}
+            onSubmit={onUpdateProfile}
             onCancel={() => setIsEditing(false)}
           />
         ) : (

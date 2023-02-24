@@ -1,15 +1,15 @@
 import type { Todo } from '@/models/todo/types';
 import type { FC } from 'react';
 
-import { createTodo } from '@/models/todo/api';
+import { createTodo } from '@/models/todo/apis';
 import { Button, Input } from '@mantine/core';
 import { useState } from 'react';
 
 type Props = {
-  data: Todo[];
+  todos: Todo[];
 };
 
-export const TodoAppTemplate: FC<Props> = ({ data }) => {
+export const TodoAppTemplate: FC<Props> = ({ todos }) => {
   const [inputText, setInputText] = useState<string>('');
 
   const handleCreate = async () => {
@@ -23,7 +23,7 @@ export const TodoAppTemplate: FC<Props> = ({ data }) => {
     <div className="w-main mx-auto space-y-4 px-8">
       <h2>Your todo-app</h2>
       <div>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+        <pre>{JSON.stringify(todos, null, 2)}</pre>
       </div>
       <Input
         value={inputText}

@@ -8,7 +8,7 @@
 - Auth & DB: Supabase
 - DB 定義: `prisma/schema.prisma` に記載
 - Others: Stripe / Slack / Notion / Vercel / Docker / Axios / SWR / ~~Recoil~~ / Rive /
-  Storybook / React Hook Form / Zod / ESlint / Prettier / Husky / lint-staged / Jest / React Testing Library /
+  Storybook / React Hook Form / Zod / ESlint / Prettier / Husky / lint-staged / Jest / React Testing Library / Faker /
 
 ### Scripts
 
@@ -23,6 +23,8 @@
 | 7   | DB の migrate を更新 | yarn prisma migrate dev -n {name} | migrate の差分がある場合にそれを反映 |
 | 8   | DB の migrate を確認 | yarn prisma migrate deploy        | migrate の差分がある場合にそれを反映 |
 | 9   | Storybook の起動     | yarn storybook                    |                                      |
+| 10  | test の実行          | yarn test                         |                                      |
+| 11  | test の監視を実行    | yarn test --watch                 |                                      |
 
 ### 用語定義
 
@@ -48,25 +50,29 @@
    cp .env.sample .env
    ```
 
-2. `.env`の中身は Notion の Development > 環境変数のページを参照
-3. Docker Desktop をインストール（※Docker が起動している状態であれば良い）
+   `.env` の内容は Notion の Development > 環境変数のページのものを貼り付ける
+
+2. Docker Desktop をインストール（※Docker が起動している状態であれば良い）
 
    Windows でうまく行かない場合は[こちら](https://www.notion.so/nobco/Windows-Docker-Desktop-bbf9906bb7eb4076ba792f1510a97d2c?pvs=4)を参考
 
-4. 上記にある **Scripts** を 1 -> 2 -> 5 -> 6 の順に実行する
-5. 依存関係の install
+3. 上記にある **Scripts** を 1 -> 2 -> 5 -> 6 の順に実行する
+4. 依存関係の install
 
    ```sh
    yarn install
    ```
 
-6. アプリを起動する
+5. アプリを起動する
 
    ```sh
    yarn dev
    ```
 
-Docker を停止したい場合は開発時は Scripts の 3.を再起動は 2.を
+備考
+
+- Docker を停止したい場合は開発時は Scripts の 3.を再起動は 2.を
+- ログインの不要な開発の場合は 2. 3. は不要
 
 ### Supabase Studio
 

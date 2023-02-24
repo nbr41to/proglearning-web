@@ -1,5 +1,5 @@
 import '@/styles/globals.css';
-import '@/utils/axios/client';
+import '@/libs/axios/client';
 
 import type { Session } from '@supabase/auth-helpers-nextjs';
 import type { AppProps } from 'next/app';

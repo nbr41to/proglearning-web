@@ -29,7 +29,7 @@ export const Header: FC<Props> = ({
   const [isNotification, setIsNotification] = useState(true);
 
   return (
-    <header className="fixed z-40 flex w-full items-center justify-between gap-4 bg-white/50 py-2 px-4 shadow backdrop-blur">
+    <header className="fixed z-40 flex w-full items-center justify-between gap-4 bg-white/50 py-2 px-4 shadow backdrop-blur sp:justify-center">
       <div className="flex items-center gap-8">
         <Link
           className="a-reset flex items-center gap-2 transition-shadow hover:text-gray-700 hover:drop-shadow"
@@ -45,7 +45,7 @@ export const Header: FC<Props> = ({
           <h1 className="font-baloo">progLearning</h1>
         </Link>
 
-        <nav className="flex gap-4">
+        <nav className="flex gap-4 sp:hidden">
           <Link
             href="/about"
             className={clsx(
@@ -94,7 +94,7 @@ export const Header: FC<Props> = ({
           />
         </div>
       ) : (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 sp:hidden">
           <UnstyledButton
             className="text-sm"
             onClick={() => router.push('/login')}

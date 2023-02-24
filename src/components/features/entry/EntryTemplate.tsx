@@ -1,4 +1,4 @@
-import type { EntryValidatedCreateParams } from '@/models/account/types';
+import type { AccountValidatedCreateParams } from '@/models/account/types';
 import type { FC } from 'react';
 
 import { CheckoutForm } from '@/components/features/entry/CheckoutForm';
@@ -10,7 +10,7 @@ import { Stepper } from '@mantine/core';
 type Props = {
   userEmail?: string;
   step: number;
-  submitAccount: (params: EntryValidatedCreateParams) => Promise<void>;
+  submitAccount: (params: AccountValidatedCreateParams) => Promise<void>;
   registerPayment: () => Promise<void>;
 };
 

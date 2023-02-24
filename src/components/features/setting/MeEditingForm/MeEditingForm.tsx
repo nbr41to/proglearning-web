@@ -1,8 +1,8 @@
-import type { ProfileSchemaUpdateParams } from '@/validations/scheme/profile';
+import type { ProfileValidatedUpdateParams } from '@/models/profile/types';
 import type { Account, Profile } from '@prisma/client';
 import type { FC } from 'react';
 
-import { profileSchema } from '@/validations/scheme/profile';
+import { profileSchema } from '@/models/profile/scheme';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, NativeSelect, Textarea, TextInput } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
@@ -13,7 +13,7 @@ type Props = {
   account: Account & {
     profile: Profile;
   };
-  onSubmit: (data: ProfileSchemaUpdateParams) => Promise<void>;
+  onSubmit: (data: ProfileValidatedUpdateParams) => Promise<void>;
   onCancel: () => void;
 };
 
@@ -35,7 +35,7 @@ export const MeEditingForm: FC<Props> = ({ account, onSubmit, onCancel }) => {
     resolver: zodResolver(profileSchema),
   });
 
-  const handleOnSubmit = async (data: ProfileSchemaUpdateParams) => {
+  const handleOnSubmit = async (data: ProfileValidatedUpdateParams) => {
     setIsLoading(true);
     await onSubmit(data);
     setIsLoading(false);

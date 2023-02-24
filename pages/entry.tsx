@@ -1,12 +1,12 @@
-import type { EntryValidatedCreateParams } from '@/models/account/types';
+import type { AccountValidatedCreateParams } from '@/models/account/types';
 import type { NextPage } from 'next';
 
 import { EntryTemplate } from '@/components/features/entry/EntryTemplate';
+import { useGetMeStatus } from '@/hooks/apiHook/useGetMeStatus';
 import { useLoading } from '@/hooks/stateHook/useLoading';
-import { useMeStatus } from '@/hooks/supabaseHook/useMeStatus';
-import { createAccount } from '@/models/account/api';
-import { getStripe } from '@/server/stripe/client';
-import { createStripeCheckout } from '@/utils/axios/stripe';
+import { getStripe } from '@/libs/stripe';
+import { createAccount } from '@/models/account/apis';
+import { createStripeCheckout } from '@/useCases/checkout/apis';
 import { useCounter } from '@mantine/hooks';
 import { useUser } from '@supabase/auth-helpers-react';
 import Head from 'next/head';
@@ -21,7 +21,7 @@ const EntryPage: NextPage = () => {
     data: status,
     isLoading: isLoadingStatus,
     mutate: mutateStatus,
-  } = useMeStatus();
+  } = useGetMeStatus();
   useLoading(isLoadingStatus);
 
   useEffect(() => {
@@ -32,11 +32,10 @@ const EntryPage: NextPage = () => {
 
   /* アカウント情報の送信 */
   const submitAccount = useCallback(
-    async (params: EntryValidatedCreateParams) => {
+    async (params: AccountValidatedCreateParams) => {
       if (!user) return;
       const response = await createAccount({
         ...params,
-        uid: user.id,
       });
 
       if (response) {

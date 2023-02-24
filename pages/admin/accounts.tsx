@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { TrashIcon } from '@/components/common/icons';
 import { useGetAccounts } from '@/hooks/apiHook/useGetAccounts';
 import { useLoading } from '@/hooks/stateHook/useLoading';
-import { deleteUserAndAccount } from '@/models/account/api';
+import { deleteUserAndAccount } from '@/models/account/apis';
 import { ActionIcon, Table } from '@mantine/core';
 
 const AdminUsersPage: NextPage = () => {
@@ -37,19 +37,19 @@ const AdminUsersPage: NextPage = () => {
             </tr>
           </thead>
           <tbody>
-            {accounts.map((account) => (
+            {accounts?.map((account) => (
               <tr key={account.uid} className="hover:bg-gray-100">
-                <td>{account.profile.name}</td>
+                <td>{account.profile?.name}</td>
                 <td>{account.email}</td>
                 <td>{account.uid}</td>
-                <td>{account.payment.stripe_customer_id}</td>
-                <td>{account.payment.stripe_checkout_status}</td>
-                <td>{account.payment.stripe_subscription_status}</td>
-                <td>{account.status.role}</td>
+                <td>{account.payment?.stripe_customer_id}</td>
+                <td>{account.payment?.stripe_checkout_status}</td>
+                <td>{account.payment?.stripe_subscription_status}</td>
+                <td>{account.status?.role}</td>
                 <td>
                   <ActionIcon
                     radius={999}
-                    disabled={account.status.role === 'admin'}
+                    disabled={account.status?.role === 'admin'}
                     onClick={() => handleDelete(account.uid)}
                   >
                     <TrashIcon />

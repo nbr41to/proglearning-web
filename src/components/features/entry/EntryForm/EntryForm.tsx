@@ -1,4 +1,4 @@
-import type { EntryValidatedCreateParams } from '@/models/account/types';
+import type { AccountValidatedCreateParams } from '@/models/account/types';
 import type { FC } from 'react';
 
 import { SignboardContainer } from '@/components/common/SignboardContainer/SignboardContainer';
@@ -6,7 +6,7 @@ import {
   SELECT_ITEMS_BY_FIND,
   SELECT_ITEMS_OS,
 } from '@/models/account/constants';
-import { entrySchema } from '@/models/account/scheme';
+import { accountCreateSchema } from '@/models/account/scheme';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Radio } from '@mantine/core';
 import { useState, useEffect } from 'react';
@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form';
 
 type Props = {
   email: string;
-  onSubmit: (data: EntryValidatedCreateParams) => Promise<void>;
+  onSubmit: (data: AccountValidatedCreateParams) => Promise<void>;
 };
 
 export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
@@ -25,15 +25,15 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<EntryValidatedCreateParams>({
-    resolver: zodResolver(entrySchema),
+  } = useForm<AccountValidatedCreateParams>({
+    resolver: zodResolver(accountCreateSchema),
   });
 
   useEffect(() => {
     setValue('email', email);
   }, [email, setValue]);
 
-  const handleOnSubmit = async (data: EntryValidatedCreateParams) => {
+  const handleOnSubmit = async (data: AccountValidatedCreateParams) => {
     setLoading(true);
     await onSubmit(data);
     setLoading(false);
