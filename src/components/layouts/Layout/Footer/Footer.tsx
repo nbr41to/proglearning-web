@@ -7,10 +7,10 @@ import Link from 'next/link';
 
 export const Footer: FC = () => {
   return (
-    <footer className="fixed bottom-0 left-0 flex h-60 w-full flex-col justify-between bg-gray-800 px-8 pt-6 text-white">
+    <footer className="fixed bottom-0 left-0 flex h-60 w-full flex-col justify-between bg-gray-800 px-8 pt-6 text-white sp:h-40">
       <div className="flex gap-10">
         <div>
-          <div className="flex items-center gap-2">
+          <Link href="/" className="a-reset flex items-center gap-2">
             <Image
               src="/logo.png"
               alt="site logo"
@@ -19,16 +19,14 @@ export const Footer: FC = () => {
               sizes="265px"
               priority
             />
-            <Link href="/" className="a-reset font-baloo text-[26px]">
-              progLearning
-            </Link>
-          </div>
+            <div className="font-baloo text-[26px]">progLearning</div>
+          </Link>
           <div className="mt-2 text-xs">
             ゆるく始めるプログラミング学習コミュニティ。
           </div>
         </div>
 
-        <div className="grid max-w-md flex-grow grid-cols-3">
+        <div className="grid max-w-md flex-grow grid-cols-3 sp:hidden">
           <div className="space-y-2">
             <div className="py-1 text-sm">- General -</div>
             {siteMapPaths.general.map((path) => (
