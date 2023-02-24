@@ -42,7 +42,7 @@ export const LandingTemplate: FC = () => {
   const autoplay = useRef(Autoplay({ delay: 3000 }));
 
   return (
-    <div className="w-main mx-auto space-y-16 pb-60">
+    <div className="w-main mx-auto space-y-16 pb-60 sp:space-y-6 sp:pb-24">
       <Carousel
         classNames={classes}
         withIndicators

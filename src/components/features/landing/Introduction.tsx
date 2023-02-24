@@ -8,9 +8,11 @@ import Image from 'next/image';
 
 export const Introduction = () => {
   return (
-    <div className="py-10 px-6">
-      <h2 className="mb-6 whitespace-pre text-center text-xl font-bold sm:text-2xl">
-        教員からフリーランスのWebエンジニアへなった私が、
+    <div className="py-10 px-6 sp:py-6">
+      <h2 className="mb-6 whitespace-pre text-center text-2xl font-bold sp:mb-4 sp:text-lg">
+        教員からフリーランスの
+        <wbr />
+        Webエンジニアへなった私が、
         <wbr />
         そのメソッドを隠すことなく提供します
       </h2>
@@ -33,7 +35,7 @@ export const Introduction = () => {
           priority
         />
       </div>
-      <div className="mx-auto flex w-fit items-center gap-3">
+      <div className="mx-auto flex w-fit items-center gap-3 sp:mt-2">
         <a
           className="text-gray-800 transition-colors hover:text-gray-600"
           href="https://www.nbr41.com/profile"
