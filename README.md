@@ -8,7 +8,7 @@
 - Auth & DB: Supabase
 - DB 定義: `prisma/schema.prisma` に記載
 - Others: Stripe / Slack / Notion / Vercel / Docker / Axios / SWR / ~~Recoil~~ / Rive /
-  Storybook / React Hook Form / Zod / ESlint / Prettier / Husky / lint-staged / Jest / React Testing Library /
+  Storybook / React Hook Form / Zod / ESlint / Prettier / Husky / lint-staged / Jest / React Testing Library / Faker /
 
 ### Scripts
 
