@@ -6,7 +6,7 @@ import { ContactBySns } from '@/components/features/contact/ContactBySns';
 import { ContactForm } from '@/components/features/contact/ContactForm';
 
 type Props = {
-  onSubmit: (text: string) => Promise<void>;
+  onSubmit: (text: string, onSuccess: () => void) => Promise<void>;
 };
 
 export const ContactTemplate: FC<Props> = ({ onSubmit }) => {

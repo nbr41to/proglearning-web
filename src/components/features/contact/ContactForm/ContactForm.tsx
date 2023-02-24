@@ -14,7 +14,7 @@ import StarterKit from '@tiptap/starter-kit';
 import { useReducer, useState } from 'react';
 
 type Props = {
-  onSubmit: (text: string) => Promise<void>;
+  onSubmit: (text: string, onSuccess: () => void) => Promise<void>;
 };
 
 export const ContactForm: FC<Props> = ({ onSubmit }) => {
@@ -47,14 +47,16 @@ export const ContactForm: FC<Props> = ({ onSubmit }) => {
 
     setIsLoading(true);
     await onSubmit(
-      `お問い合わせがありました！\n${validated.content}\n\nEmail: ${validated.email}`
+      `【お問い合わせ】\n内容:\n\n${validated.content}\n\nEmail: ${validated.email}`,
+      () => {
+        showNotification({
+          title: '送信完了しました！',
+          message: 'メールにてご連絡いたします。',
+        });
+        editor.commands.setContent('');
+        setEmail('');
+      }
     );
-    showNotification({
-      title: '送信完了しました！',
-      message: 'メールにてご連絡いたします。',
-    });
-    editor.commands.setContent('');
-    setEmail('');
     setIsLoading(false);
   };
 
