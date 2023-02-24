@@ -11,7 +11,7 @@ export const SignboardContainer: FC<Props> = ({ fill = false, children }) => {
   return (
     <div
       className={clsx(
-        'relative rounded-none border-0 bg-gray-100 py-6 px-8 shadow sm:rounded-lg sm:border',
+        'relative rounded-lg bg-gray-100 py-6 px-8 shadow sp:rounded-none sp:shadow-none',
         fill ? 'w-full' : 'w-fit'
       )}
     >

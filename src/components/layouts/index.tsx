@@ -26,6 +26,7 @@ export const LayoutWrapper: FC<Props> = ({ children }) => {
   const handleComplete = () => loading.off();
 
   useEffect(() => {
+    if (!user) return;
     router.events.on('routeChangeStart', handleStart);
     router.events.on('routeChangeComplete', handleComplete);
     router.events.on('routeChangeError', handleComplete);
