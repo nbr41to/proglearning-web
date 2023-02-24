@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 
+import { LoginCheckWrapper } from '@/components/common/LoginCheckWrapper';
 import { siteMapPaths } from '@/utils/menu';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -40,17 +41,17 @@ export const Footer: FC = () => {
               </Link>
             ))}
           </div>
-          <div className="relative space-y-2">
+          <div className="space-y-2">
             <div className="py-1 text-sm">- User -</div>
-            <div className="absolute h-full w-full cursor-pointer" />
             {siteMapPaths.user.map((path) => (
-              <Link
-                key={path.path}
-                className="a-reset block w-fit cursor-pointer text-xs font-bold hover:underline"
-                href={path.path}
-              >
-                {path.name}
-              </Link>
+              <LoginCheckWrapper key={path.path}>
+                <Link
+                  className="a-reset block w-fit cursor-pointer text-xs font-bold hover:underline"
+                  href={path.path}
+                >
+                  {path.name}
+                </Link>
+              </LoginCheckWrapper>
             ))}
           </div>
           <div className="space-y-2">
