@@ -23,6 +23,8 @@
 | 7   | DB の migrate を更新 | yarn prisma migrate dev -n {name} | migrate の差分がある場合にそれを反映 |
 | 8   | DB の migrate を確認 | yarn prisma migrate deploy        | migrate の差分がある場合にそれを反映 |
 | 9   | Storybook の起動     | yarn storybook                    |                                      |
+| 10  | test の実行          | yarn test                         |                                      |
+| 11  | test の監視を実行    | yarn test --watch                 |                                      |
 
 ### 用語定義
 
