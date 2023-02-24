@@ -2,8 +2,8 @@ import type { FC } from 'react';
 
 import { AtIcon, SendIcon, TouchIcon } from '@/components/common/icons';
 import { RichTextEditor } from '@/components/common/RichTextEditor';
-import { contactSchema } from '@/validations/scheme/contact';
-import { validate } from '@/validations/varidate';
+import { contactSchema } from '@/useCases/contact/scheme';
+import { validate } from '@/utils/validate';
 import { Button, clsx, Input } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { Link } from '@mantine/tiptap';
@@ -14,7 +14,7 @@ import StarterKit from '@tiptap/starter-kit';
 import { useReducer, useState } from 'react';
 
 type Props = {
-  onSubmit: (text: string) => Promise<void>;
+  onSubmit: (text: string, onSuccess: () => void) => Promise<void>;
 };
 
 export const ContactForm: FC<Props> = ({ onSubmit }) => {
@@ -39,19 +39,24 @@ export const ContactForm: FC<Props> = ({ onSubmit }) => {
   const handleSubmit = async () => {
     if (disabled) return;
     const content = editor.getText();
-    const validated = validate(contactSchema, { email, content });
+    const validated = validate<{ email: string; content: string }>(
+      contactSchema,
+      { email, content }
+    );
     if (!validated) return;
 
     setIsLoading(true);
     await onSubmit(
-      `お問い合わせがありました！\n${validated.content}\n\nEmail: ${validated.email}`
+      `【お問い合わせ】\n内容:\n\n${validated.content}\n\nEmail: ${validated.email}`,
+      () => {
+        showNotification({
+          title: '送信完了しました！',
+          message: 'メールにてご連絡いたします。',
+        });
+        editor.commands.setContent('');
+        setEmail('');
+      }
     );
-    showNotification({
-      title: '送信完了しました！',
-      message: 'メールにてご連絡いたします。',
-    });
-    editor.commands.setContent('');
-    setEmail('');
     setIsLoading(false);
   };
 

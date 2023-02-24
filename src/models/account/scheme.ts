@@ -18,6 +18,7 @@ export const accountCreateSchema = z.object({
 });
 
 export const accountUpdateSchema = z.object({
-  name: z.string().min(1, { message: '名前を入力してください' }),
-  os: z.union([z.literal('mac'), z.literal('windows'), z.literal('others')]),
+  ...accountCreateSchema.omit({ byFind: true }).shape,
+  github_id: z.string(),
+  zenn_id: z.string(),
 });

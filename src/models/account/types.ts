@@ -18,7 +18,7 @@ export type AccountGetPayload<T extends AccountInclude> =
 
 /* API parameters */
 export type AccountQueryParams = Omit<Prisma.AccountInclude, 'payment'>;
-export type AccountPrismaCreateParams = Prisma.AccountCreateInput;
+export type AccountPrismaCreateParams = Omit<Prisma.AccountCreateInput, 'uid'>;
 export type AccountPrismaUpdateParams = Prisma.AccountUpdateInput;
 
 /* Validated parameters */

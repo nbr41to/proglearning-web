@@ -10,7 +10,7 @@ import { clsx } from '@mantine/core';
 
 export const ContactBySns: FC = () => {
   return (
-    <div className="flex justify-center gap-8">
+    <div className="flex flex-wrap justify-center gap-8 sp:gap-4">
       <a
         className="relative"
         href="https://lin.ee/JYDAgcH"
