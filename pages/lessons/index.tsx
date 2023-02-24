@@ -1,8 +1,8 @@
 import type { NotionPageObjectResponse } from '@/types/notion';
 import type { InferGetStaticPropsType, NextPage } from 'next';
 
+import dummy_lessons from '@/__mocks__/lessons.json';
 import { LessonsTemplate } from '@/components/features/lesson/LessonsTemplate';
-import dummy_lessons from '@/mocks/lessons.json';
 import { getDatabaseContentsAll } from '@/server/notion/databases';
 import { toLessons } from '@/utils/lesson';
 

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { LoginCheckWrapper } from '@/components/common/LoginCheckWrapper';
-import { siteMapPaths } from '@/utils/menu';
+import { siteMapPaths } from '@/components/layouts/menu';
 import Image from 'next/image';
 import Link from 'next/link';
 

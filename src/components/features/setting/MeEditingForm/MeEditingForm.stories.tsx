@@ -2,8 +2,8 @@ import type { Account, Profile } from '@prisma/client';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { MeEditingForm as Component } from './MeEditingForm';
-import dummy_account from '@/mocks/account.json';
-import dummy_profile from '@/mocks/profile.json';
+import dummy_account from '@/__mocks__/account.json';
+import dummy_profile from '@/__mocks__/profile.json';
 
 export default {
   component: Component,
