@@ -4,6 +4,10 @@ import type { FC, ReactNode } from 'react';
 
 import { Footer } from './Footer';
 import { Header } from './Header';
+import { Humburger } from './Humburger';
+import { useState } from 'react';
+
+// import { SpMenu } from './SpMenu';
 
 type Props = {
   children: ReactNode;
@@ -20,6 +24,13 @@ export const Layout: FC<Props> = ({
   onClickSearchButton,
   onSignOut,
 }) => {
+  // ハンバーガーメニューの状態監視
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleHumburgerClick = () => {
+    setOpen((prevstate) => !prevstate);
+  };
+
   return (
     <>
       <Header
@@ -32,6 +43,23 @@ export const Layout: FC<Props> = ({
         <div className="mx-auto max-w-[1280px]">{children}</div>
       </main>
       <Footer />
+      {open === false ? (
+        <Humburger
+          onClick={() => handleHumburgerClick()}
+          open={open}
+          label="メニューを開きます"
+          controls="Menu"
+        />
+      ) : (
+        ''
+      )}
+      <Humburger
+        onClick={() => handleHumburgerClick()}
+        open={open}
+        label="メニューを開きます"
+        controls="Menu"
+      />
+      {/* <SpMenu /> */}
     </>
   );
 };
