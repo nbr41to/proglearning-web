@@ -14,7 +14,9 @@ export const Auth: FC<Props> = ({ children }) => {
   const router = useRouter();
   const { data, isLoading } = useGetMe();
   const loading = useLoading();
-  const isIgnorePath = unprotectedRoutes.includes(router.asPath);
+  const isIgnorePath = unprotectedRoutes.includes(
+    router.asPath.replace(/#.*/, '')
+  );
   const isLoginPath = router.asPath === '/login';
 
   useEffect(() => {
