@@ -61,7 +61,7 @@ export const aboutNavLinks = [
         icon: WizardHatIcon,
       },
       {
-        id: 'this-is-magic',
+        id: 'experience-magic',
         label: '魔法を体験する',
         icon: MagicWandBoldIcon,
       },
@@ -87,7 +87,7 @@ export const aboutNavLinks = [
     disabled: false,
     children: [
       {
-        id: 'first-child',
+        id: 'first-child1',
         label: 'First child link',
         icon: BookIcon,
       },
@@ -100,7 +100,7 @@ export const aboutNavLinks = [
     disabled: false,
     children: [
       {
-        id: 'first-child',
+        id: 'first-child2',
         label: 'First child link',
         icon: BookIcon,
       },
@@ -113,7 +113,7 @@ export const aboutNavLinks = [
     disabled: false,
     children: [
       {
-        id: 'first-child',
+        id: 'first-child3',
         label: 'First child link',
         icon: BookIcon,
       },
@@ -126,7 +126,7 @@ export const aboutNavLinks = [
     icon: HeartIcon,
     children: [
       {
-        id: 'first-child',
+        id: 'first-child4',
         label: 'First child link',
         icon: BookIcon,
       },
@@ -139,7 +139,7 @@ export const aboutNavLinks = [
     icon: BookIcon,
     children: [
       {
-        id: 'first-child',
+        id: 'first-child5',
         label: 'First child link',
         icon: BookIcon,
       },

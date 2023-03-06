@@ -73,8 +73,7 @@ body {
   .w-aside {
     @apply w-[254px];
     @apply min-w-[254px];
-    @apply hidden;
-    @apply md:block;
+    @apply sp:hidden;
   }
   .border-box {
     @apply border-solid;

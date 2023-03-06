@@ -19,12 +19,11 @@ export const IntersectionWrapper: FC<Props> = ({
 }) => {
   const { ref, entry } = useIntersection({
     threshold: 1,
-    rootMargin: '-60px',
+    rootMargin: '0px',
   });
 
   useEffect(() => {
     if (!entry) return;
-
     if (entry.isIntersecting) {
       setInViewIds((prev) => [...prev, id]);
     } else {

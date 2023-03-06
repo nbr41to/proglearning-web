@@ -22,7 +22,7 @@ export const Navbar: FC<Props> = ({ inViewIds }) => {
           disabled={link.disabled}
           color="cyan"
           active={inViewIds.includes(link.id)}
-          opened={opendIds.includes(link.id)}
+          opened={inViewIds.includes(link.id) || opendIds.includes(link.id)}
           icon={createElement(link.icon)}
           childrenOffset={28}
           onClick={() => {
@@ -54,6 +54,7 @@ export const Navbar: FC<Props> = ({ inViewIds }) => {
         label="お問い合わせ"
         color="cyan"
         rightSection={<ExternalLinkIcon />}
+        disableRightSectionRotation
         onClick={() => router.push('/contact')}
       />
     </div>
