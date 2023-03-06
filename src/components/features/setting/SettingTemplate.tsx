@@ -8,8 +8,8 @@ import {
   ProfileIcon,
   SettingIcon,
 } from '@/components/common/icons';
-import { MyProfile } from '@/components/features/setting/MyProfile/MyProfile';
 import { MySubscription } from '@/components/features/setting/MySubscription/MySubscription';
+import { MyProfile } from '@/components/features/setting/SettingMyProfile/SettingMyProfile';
 import { getStripe } from '@/libs/stripe';
 import { createStripeCheckout } from '@/useCases/checkout/apis';
 import { Tabs } from '@mantine/core';

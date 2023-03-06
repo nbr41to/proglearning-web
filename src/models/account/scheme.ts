@@ -17,8 +17,10 @@ export const accountCreateSchema = z.object({
   byFind: z.string(),
 });
 
-export const accountUpdateSchema = z.object({
-  ...accountCreateSchema.omit({ byFind: true }).shape,
-  github_id: z.string(),
-  zenn_id: z.string(),
-});
+export const accountUpdateSchema = z
+  .object({
+    ...accountCreateSchema.omit({ byFind: true }).shape,
+    github_id: z.string(),
+    zenn_id: z.string(),
+  })
+  .partial();
