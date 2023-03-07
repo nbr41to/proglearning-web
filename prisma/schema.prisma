@@ -9,21 +9,23 @@ datasource db {
 
 // アカウント基本情報
 model Account {
-  uid           String   @id @unique
+  uid           String        @id @unique
   name          String
-  email         String   @unique
+  email         String        @unique
   os            String
   byFind        String
-  github_id     String?  @unique
-  zenn_id       String?  @unique
-  slack_user_id String?  @unique
+  github_id     String?       @unique
+  zenn_id       String?       @unique
+  slack_user_id String?       @unique
   payment       Payment?
   profile       Profile?
   status        Status?
   lessons       Lesson[]
   Todos         Todo[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  pomodoros     Pomodoro[]
+  pomodoroTags  PomodoroTag[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 enum Role {
@@ -97,4 +99,26 @@ model DiscordLearningSession {
   slack_timestamp   String   @id @unique
   joined_member_ids String[]
   created_at        DateTime @default(now())
+}
+
+model Pomodoro {
+  id         Int         @id @unique @default(autoincrement())
+  uid        String
+  tagId      Int
+  tag        PomodoroTag @relation(fields: [tagId], references: [id])
+  started_at DateTime
+  completed  Boolean     @default(false)
+  account    Account     @relation(fields: [uid], references: [uid])
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model PomodoroTag {
+  id        Int        @id @unique @default(autoincrement())
+  uid       String
+  name      String
+  account   Account    @relation(fields: [uid], references: [uid])
+  pomodoros Pomodoro[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
