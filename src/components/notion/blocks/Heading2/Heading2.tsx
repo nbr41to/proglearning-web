@@ -3,16 +3,17 @@ import type { FC } from 'react';
 
 import { OutlineBlockIcon } from '@/components/common/icons';
 import { RichText } from '@/components/notion/RichText';
-import { useInViewIds } from '@/hooks/stateHook/useInViewIds';
+import { inViewHeadingIdsAtom } from '@/libs/recoil/atoms';
 import { useIntersection } from '@mantine/hooks';
 import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 
 type Props = {
   block: Heading2BlockObjectResponse;
 };
 
 export const Heading2: FC<Props> = ({ block }) => {
-  const { mutate } = useInViewIds();
+  const setState = useSetRecoilState(inViewHeadingIdsAtom);
   const { ref, entry } = useIntersection({
     threshold: 1,
     rootMargin: '0px',
@@ -21,16 +22,16 @@ export const Heading2: FC<Props> = ({ block }) => {
   useEffect(() => {
     if (!entry) return;
     if (entry.isIntersecting) {
-      mutate((prev) => [...(prev ?? []), block.id]);
+      setState((prev) => [...(prev ?? []), block.id]);
     } else {
-      mutate((prev) => prev?.filter((id) => id !== block.id));
+      setState((prev) => prev?.filter((id) => id !== block.id));
     }
-  }, [entry, block.id, mutate]);
+  }, [entry, block.id, setState]);
 
   return (
     <h2
       id={block.id}
-      className="my-6 flex items-center gap-2 px-3 text-xl shadow-[-1px_-1px_6px_#ccc,4px_4px_1px_#1E293B] sp:text-base"
+      className="my-6 flex scroll-m-24 items-center gap-2 px-3 text-xl shadow-[-1px_-1px_6px_#ccc,4px_4px_1px_#1E293B] sp:text-base"
       ref={ref}
     >
       <OutlineBlockIcon size={24} />

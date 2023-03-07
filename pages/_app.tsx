@@ -6,6 +6,7 @@ import type { AppProps } from 'next/app';
 
 import { Auth } from '@/components/layouts/Auth';
 import { LayoutWrapper } from '@/components/layouts/index';
+import { Maintenance } from '@/components/layouts/Maintenance';
 import { Providers } from '@/components/layouts/Providers/Providers';
 import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
@@ -61,13 +62,17 @@ export default function App({
         />
       </Head>
 
-      <Providers initialSession={pageProps.initialSession}>
-        <LayoutWrapper>
-          <Auth>
-            <Component {...pageProps} />
-          </Auth>
-        </LayoutWrapper>
-      </Providers>
+      {process.env.NEXT_PUBLIC_MAINTENANCE_MODE ? (
+        <Maintenance />
+      ) : (
+        <Providers initialSession={pageProps.initialSession}>
+          <LayoutWrapper>
+            <Auth>
+              <Component {...pageProps} />
+            </Auth>
+          </LayoutWrapper>
+        </Providers>
+      )}
     </>
   );
 }
