@@ -28,7 +28,7 @@ export const Layout: FC<Props> = ({
         onClickSearchButton={onClickSearchButton}
         onSignOut={onSignOut}
       />
-      <main className="relative z-10 mb-60 min-h-[calc(100vh-32px)] w-full overflow-scroll bg-white pt-20 sp:mb-40">
+      <main className="relative z-10 mb-60 min-h-[calc(100vh-32px)] w-full bg-white pt-20 sp:mb-40">
         <div className="mx-auto max-w-[1280px]">{children}</div>
       </main>
       <Footer />

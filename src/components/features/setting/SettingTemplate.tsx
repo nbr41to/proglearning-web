@@ -8,8 +8,8 @@ import {
   ProfileIcon,
   SettingIcon,
 } from '@/components/common/icons';
-import { MyProfile } from '@/components/features/setting/MyProfile/MyProfile';
 import { MySubscription } from '@/components/features/setting/MySubscription/MySubscription';
+import { SettingMyProfile } from '@/components/features/setting/SettingMyProfile/SettingMyProfile';
 import { getStripe } from '@/libs/stripe';
 import { createStripeCheckout } from '@/useCases/checkout/apis';
 import { Tabs } from '@mantine/core';
@@ -58,7 +58,7 @@ export const SettingTemplate: FC<Props> = ({
         </Tabs.List>
 
         <Tabs.Panel value="profile">
-          <MyProfile
+          <SettingMyProfile
             account={account}
             onSubmitGoal={onSubmitGoal}
             onUpdateAccount={onUpdateAccount}
