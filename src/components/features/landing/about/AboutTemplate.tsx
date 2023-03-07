@@ -1,37 +1,49 @@
+import type { NotionBlockObjectResponse } from '@/types/notion';
 import type { FC } from 'react';
 
-import { LearningProgramming } from '@/components/features/landing/about/LearningProgramming';
-import { Navbar } from '@/components/features/landing/about/Navbar';
-import { Overview } from '@/components/features/landing/about/Overview';
-import { StartLearning } from '@/components/features/landing/about/StartLearning';
-import { useState } from 'react';
+import { TableOfContents } from '@/components/features/landing/about/TableOfContents';
+import { blockToJsx } from '@/components/notion/blockToJsx';
+import { useMemo } from 'react';
 
-export const AboutTemplate: FC = () => {
-  const [inViewIds, setInViewIds] = useState<string[]>([]);
-  // console.log(inViewIds);
+type Props = {
+  blocks: NotionBlockObjectResponse[];
+};
+export const AboutTemplate: FC<Props> = ({ blocks }) => {
+  const headingList = useMemo(
+    () =>
+      blocks.flatMap((block) => {
+        if (block.type === 'heading_2') {
+          return {
+            id: block.id,
+            type: block.type,
+            title: block.heading_2.rich_text[0].plain_text,
+          };
+        }
+        if (block.type === 'heading_3') {
+          return {
+            id: block.id,
+            type: block.type,
+            title: block.heading_3.rich_text[0].plain_text,
+          };
+        }
+
+        return [];
+      }),
+    [blocks]
+  );
 
   return (
     <div className="mx-auto flex justify-center gap-8 px-8 pt-7">
       <div className="w-aside">
         <div className="sticky top-28 max-w-[240px]">
-          <Navbar inViewIds={inViewIds} />
+          <TableOfContents headingList={headingList} />
         </div>
       </div>
 
       <div className="w-main flex-grow">
-        <Overview setInViewIds={setInViewIds} />
-        <div className="h-[1000px]"></div>
-        <StartLearning setInViewIds={setInViewIds} />
-        <div className="h-[1000px]"></div>
-        <LearningProgramming setInViewIds={setInViewIds} />
-        <h2>見出し</h2>
-        <p>内容</p>
-        <h2>見出し</h2>
-        <p>内容</p>
-        <h2>見出し</h2>
-        <p>内容</p>
-        <h2>見出し</h2>
-        <p>内容</p>
+        {blocks.map((block) => (
+          <div key={block.id}>{blockToJsx(block)}</div>
+        ))}
       </div>
     </div>
   );
