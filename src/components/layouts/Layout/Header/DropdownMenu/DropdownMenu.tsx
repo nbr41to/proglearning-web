@@ -40,7 +40,7 @@ export const DropdownMenu: FC<Props> = ({
       arrowSize={10}
       arrowRadius={2}
       arrowPosition="center"
-      transition="pop-top-right"
+      transitionProps={{ transition: 'pop-top-right', duration: 100 }}
       position="bottom-end"
     >
       <Menu.Target>
