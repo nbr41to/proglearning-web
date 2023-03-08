@@ -62,7 +62,7 @@ export default function App({
         />
       </Head>
 
-      {process.env.NEXT_PUBLIC_MAINTENANCE_MODE ? (
+      {process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true' ? (
         <Maintenance />
       ) : (
         <Providers initialSession={pageProps.initialSession}>
