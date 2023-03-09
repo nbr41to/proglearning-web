@@ -49,7 +49,7 @@ export default async function handler(
         const subscription = event.data.object as Stripe.Subscription;
         const customerId = subscription.customer;
         /* DBの決済Statusを変更 */
-        await prisma.payment.update({
+        const payment = await prisma.payment.update({
           where: {
             stripe_customer_id: customerId as string,
           },
@@ -58,6 +58,17 @@ export default async function handler(
             stripe_subscription_id: subscription.id,
           },
         });
+        /* 決済に失敗 */
+        if (subscription.status !== 'active') {
+          await prisma.status.update({
+            where: {
+              id: payment.id,
+            },
+            data: {
+              checked_out: false,
+            },
+          });
+        }
       }
 
       if (event.type === 'checkout.session.completed') {

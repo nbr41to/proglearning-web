@@ -38,18 +38,13 @@ export const MySubscription: FC<Props> = ({ plan, onCheckout }) => {
         <div className="text-lg">
           現在のプラン：<span className="font-bold">{plan}</span>
         </div>
-        <div className="text-gray-600">
-          <div>free / 教材のみ</div>
-          <div className="text-gray-400">pro / coming soon</div>
-          <div>closer / Slackの招待, 質問し放題</div>
-        </div>
         <div className="flex items-center gap-2">
           {isCheckout ? (
             <Button
               leftIcon={<CreditCardIcon size={20} />}
               onClick={openCustomerPortal}
             >
-              支払い情報の変更
+              支払い情報の確認 / 変更
             </Button>
           ) : (
             <Button

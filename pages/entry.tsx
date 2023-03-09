@@ -46,13 +46,16 @@ const EntryPage: NextPage = () => {
   );
 
   /* 支払い情報の登録 */
-  const registerPayment = useCallback(async () => {
-    if (!user) return;
-    const response = await createStripeCheckout(user?.id);
-    const { sessionId } = response.data;
-    const stripe = await getStripe();
-    stripe?.redirectToCheckout({ sessionId });
-  }, [user]);
+  const registerPayment = useCallback(
+    async (plan: string) => {
+      if (!user) return;
+      const response = await createStripeCheckout(user?.id, plan);
+      const { sessionId } = response.data;
+      const stripe = await getStripe();
+      stripe?.redirectToCheckout({ sessionId });
+    },
+    [user]
+  );
 
   return (
     <>

@@ -19,7 +19,9 @@ export const ActionButton: FC<Props> = ({
     <button
       className={clsx(
         'relative cursor-pointer rounded-sm border-0 bg-gray-100 py-4 pl-6 pr-8 shadow',
-        'origin-left transition hover:rotate-1 hover:bg-gray-200 active:bg-gray-300',
+        rest.disabled
+          ? 'cursor-not-allowed'
+          : 'origin-left transition hover:rotate-1 hover:bg-gray-200 active:bg-gray-300',
         fill ? 'w-full' : 'w-fit'
       )}
       {...rest}

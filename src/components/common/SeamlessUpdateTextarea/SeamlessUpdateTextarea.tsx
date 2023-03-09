@@ -45,12 +45,6 @@ export const SeamlessUpdateTextarea: FC<Props> = ({
     setLoading(false);
   };
 
-  const onKeyPressEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter') {
-      e.currentTarget.blur();
-    }
-  };
-
   return (
     <Textarea
       disabled={loading}
@@ -59,7 +53,6 @@ export const SeamlessUpdateTextarea: FC<Props> = ({
       value={value}
       onChange={(e) => setValue(e.target.value)}
       onBlur={onBlur}
-      onKeyPress={onKeyPressEnter}
       {...rest}
     />
   );
