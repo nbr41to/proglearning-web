@@ -2,7 +2,6 @@ import type { FC } from 'react';
 
 import { ExternalLinkIcon } from '@/components/common/icons';
 import { useHover } from '@mantine/hooks';
-import Image from 'next/image';
 import Link from 'next/link';
 
 type Props = {
@@ -22,12 +21,13 @@ export const GitHubGlass: FC<Props> = ({ githubId }) => {
             target="_blank"
             rel="noreferrer"
           >
-            <Image
-              src={`https://github-contributions-api.deno.dev/${githubId}.svg?no-total=true&no-legend=true&`}
+            {/* next 13.2からQuery params 使うと動かなくなった */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`https://github-contributions-api.deno.dev/${githubId}.svg?no-total=true&no-legend=true`}
               alt="github-contributions"
               width={680}
               height={120}
-              priority
               sizes="(max-width: 680px) 100vw, 680px"
             />
             {hovered && (

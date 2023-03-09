@@ -6,20 +6,20 @@ import { Hero } from '@/components/features/landing/Hero';
 import { Introduction } from '@/components/features/landing/Introduction';
 import { News } from '@/components/features/landing/News';
 import { Carousel } from '@mantine/carousel';
-import { createStyles } from '@mantine/core';
+import { createStyles, getStylesRef } from '@mantine/core';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
 
-const useStyles = createStyles((_theme, _params, getRef) => ({
+const useStyles = createStyles(() => ({
   root: {
     '&:hover': {
-      [`& .${getRef('controls')}`]: {
+      [`& .${getStylesRef('controls')}`]: {
         opacity: 1,
       },
     },
   },
   controls: {
-    ref: getRef('controls'),
+    ref: getStylesRef('controls'),
     transition: 'opacity 150ms ease',
     opacity: 0,
   },
