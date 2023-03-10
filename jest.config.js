@@ -12,7 +12,7 @@ const jestConfig = {
     '^@/pages/(.*)$': '<rootDir>/pages/$1',
     '^@/(.*)$': '<rootDir>/src/$1',
   },
-  // testEnvironment: 'jest-environment-jsdom', // unused
+  testEnvironment: 'jest-environment-jsdom', // unused
 };
 
 // createJestConfigを定義することによって、本ファイルで定義された設定がNext.jsの設定に反映されます

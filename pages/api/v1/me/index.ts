@@ -88,15 +88,16 @@ const ProtectedRoute: NextApiHandler = async (
         });
 
       /* Initialize Account */
+      const { profileName, ...rest } = body;
       const account = await prisma.account.upsert({
         where: { uid },
         update: {},
         create: {
-          ...body,
+          ...rest,
           uid,
           profile: {
             create: {
-              name: body.name,
+              name: profileName,
             },
           },
           payment: {

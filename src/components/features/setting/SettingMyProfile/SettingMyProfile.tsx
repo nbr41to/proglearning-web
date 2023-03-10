@@ -3,6 +3,7 @@ import type { ProfileValidatedUpdateParams } from '@/models/profile/types';
 import type { Account, Profile } from '@prisma/client';
 import type { FC } from 'react';
 
+import { HoverInformation } from '@/components/common/HoverInformation';
 import { SeamlessUpdateTextarea } from '@/components/common/SeamlessUpdateTextarea';
 import { SeamlessUpdateTextInput } from '@/components/common/SeamlessUpdateTextInput';
 import { CurrentGoal } from '@/components/features/setting/CurrentGoal';
@@ -37,35 +38,60 @@ export const SettingMyProfile: FC<Props> = ({
       />
       <div className="mt-6 space-y-4">
         <SeamlessUpdateTextInput
-          label="名前"
+          label={
+            <div className="flex items-center gap-2">
+              名前
+              <HoverInformation text="アプリ内の表示名" />
+            </div>
+          }
           schema={profileNameSchema}
           value={account.profile.name}
           update={(name) => onUpdateProfile({ name })}
           size="md"
         />
         <TextInput
-          label="メールアドレス"
+          label={
+            <div className="flex items-center gap-2">
+              メールアドレス
+              <HoverInformation text="ご登録いただいたメールアドレスです。" />
+            </div>
+          }
           description="※ Googleアカウントと紐付いているため変更不可"
           value={account.email}
           disabled
           size="md"
         />
         <SeamlessUpdateTextInput
-          label="GitHub ID"
+          label={
+            <div className="flex items-center gap-2">
+              GitHub ID
+              <HoverInformation text="登録することで、GitHubに公開された情報をこのアプリでも利用できます。" />
+            </div>
+          }
           schema={githubIdSchema}
           value={account.github_id || ''}
           update={(github_id) => onUpdateAccount({ github_id })}
           size="md"
         />
         <SeamlessUpdateTextInput
-          label="Zenn ID"
+          label={
+            <div className="flex items-center gap-2">
+              Zenn ID
+              <HoverInformation text="登録することで、Zennに公開された情報をこのアプリでも利用できます。" />
+            </div>
+          }
           schema={zennIdSchema}
           value={account.zenn_id || ''}
           update={(zenn_id) => onUpdateAccount({ zenn_id })}
           size="md"
         />
         <SeamlessUpdateTextarea
-          label="自己紹介"
+          label={
+            <div className="flex items-center gap-2">
+              自己紹介
+              <HoverInformation text="コミュニティ内のみんなに向けて公開されるプロフィールです。自分のことを知ってもらえるような内容にしよう！" />
+            </div>
+          }
           description="ここで頑張りたいことや、自分のスキルを書いてみましょう！"
           schema={introductionSchema}
           value={account.profile.introduction || ''}
