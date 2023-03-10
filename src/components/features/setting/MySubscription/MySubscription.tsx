@@ -6,14 +6,15 @@ import { useSupabaseAuth } from '@/hooks/supabaseHook/useSupabaseAuth';
 import { withdraw } from '@/models/account/apis';
 import { getBillingPortalUrl } from '@/useCases/updateSubscription/apis';
 import { Button, Modal } from '@mantine/core';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 type Props = {
   plan: string;
-  onCheckout: () => void;
 };
 
-export const MySubscription: FC<Props> = ({ plan, onCheckout }) => {
+export const MySubscription: FC<Props> = ({ plan }) => {
+  const router = useRouter();
   const [isWithdrawConfirm, setIsWithdrawConfirm] = useState(false);
   const { signOut } = useSupabaseAuth();
 
@@ -49,7 +50,7 @@ export const MySubscription: FC<Props> = ({ plan, onCheckout }) => {
           ) : (
             <Button
               leftIcon={<CreditCardIcon size={20} />}
-              onClick={onCheckout}
+              onClick={() => router.push('/entry')}
             >
               支払い情報の登録
             </Button>
