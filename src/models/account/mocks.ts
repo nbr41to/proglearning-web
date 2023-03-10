@@ -1,14 +1,13 @@
 import type {
-  Account,
-  AccountPrismaCreateParams,
   AccountPrismaUpdateParams,
+  AccountValidatedCreateParams,
   SelectItemByFindValue,
   SelectItemOsValue,
 } from '@/models/account/types';
 
 import { faker } from '@/libs/faker';
 
-export const dummy_account: Account = {
+export const dummy_account = {
   uid: faker.datatype.uuid(),
   name: faker.name.fullName(),
   email: faker.internet.email(),
@@ -30,11 +29,12 @@ export const dummy_account: Account = {
   slack_user_id: 'test-slack-user-id',
   createdAt: new Date('2023-01-01T00:00:00.000Z'),
   updatedAt: new Date('2023-01-01T00:00:00.000Z'),
-};
+} as const;
 
-export const dummy_account_create_params: AccountPrismaCreateParams = {
-  name: dummy_account.name,
+export const dummy_account_create_params: AccountValidatedCreateParams = {
   email: dummy_account.email,
+  name: dummy_account.name,
+  profileName: dummy_account.name,
   os: dummy_account.os,
   byFind: dummy_account.byFind,
 };

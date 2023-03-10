@@ -6,11 +6,10 @@ import { DropdownMenu } from './DropdownMenu';
 import { SearchButton } from './SearchButton';
 import { BookIcon, DetailIcon, MailIcon } from '@/components/common/icons';
 import { NotificationAnimatedButton } from '@/components/layouts/Layout/Header/NotificationButton';
-import { Button, clsx, UnstyledButton } from '@mantine/core';
+import { Button, clsx, Tooltip, UnstyledButton } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 
 type Props = {
   user: User | null;
@@ -26,7 +25,7 @@ export const Header: FC<Props> = ({
   onSignOut,
 }) => {
   const router = useRouter();
-  const [isNotification, setIsNotification] = useState(true);
+  const isNotification = false;
 
   return (
     <header className="fixed z-40 flex w-full items-center justify-between gap-4 bg-white/50 py-2 px-4 shadow backdrop-blur sp:justify-center">
@@ -56,16 +55,22 @@ export const Header: FC<Props> = ({
             <DetailIcon size={22} />
             About
           </Link>
-          <Link
-            href="/lessons"
-            className={clsx(
-              'a-reset mt-2 flex items-center gap-2 font-baloo text-xl',
-              'transition-color transition-transform hover:-translate-y-0.5 hover:text-gray-700 hover:drop-shadow-sm'
-            )}
-          >
-            <BookIcon size={20} />
-            Lessons
-          </Link>
+          <Tooltip label="coming soon">
+            <div className="mt-2 flex cursor-not-allowed items-center gap-2 font-baloo text-xl text-gray-400">
+              <BookIcon size={20} />
+              Lessons
+            </div>
+            {/* <Link
+              href="/lessons"
+              className={clsx(
+                'a-reset mt-2 flex items-center gap-2 font-baloo text-xl',
+                'transition-color transition-transform hover:-translate-y-0.5 hover:text-gray-700 hover:drop-shadow-sm'
+              )}
+            >
+              <BookIcon size={20} />
+              Lessons
+            </Link> */}
+          </Tooltip>
           <Link
             href="/contact"
             className={clsx(
@@ -82,10 +87,7 @@ export const Header: FC<Props> = ({
       {user && status ? (
         <div className="flex items-center gap-4">
           <SearchButton onClick={onClickSearchButton} />
-          <NotificationAnimatedButton
-            onClick={() => setIsNotification(!isNotification)}
-            isNotification={isNotification}
-          />
+          <NotificationAnimatedButton isNotification={isNotification} />
           <DropdownMenu
             email={user.email || ''}
             avatarUrl={user.user_metadata.avatar_url}

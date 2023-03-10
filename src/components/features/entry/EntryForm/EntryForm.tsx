@@ -50,19 +50,25 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
         onSubmit={handleSubmit(handleOnSubmit, onError)}
         className="mx-auto w-fit space-y-4 p-8"
       >
-        <div className="flex flex-wrap gap-4">
-          <Input.Wrapper
-            label="お名前"
-            withAsterisk
-            required
-            error={errors.name && '入力してください。'}
-          >
-            <Input w={280} {...register('name', { required: true })} />
-          </Input.Wrapper>
-          <Input.Wrapper label="メールアドレス" withAsterisk required>
-            <Input type="email" w={280} value={email} disabled />
-          </Input.Wrapper>
-        </div>
+        <Input.Wrapper label="メールアドレス" withAsterisk required>
+          <Input type="email" w={280} value={email} disabled />
+        </Input.Wrapper>
+        <Input.Wrapper
+          label="氏名（本名）"
+          withAsterisk
+          required
+          error={errors.name && '入力してください。'}
+        >
+          <Input w={280} {...register('name', { required: true })} />
+        </Input.Wrapper>
+        <Input.Wrapper
+          label="ユーザー名（呼ばれたい名前）"
+          withAsterisk
+          required
+          error={errors.profileName && '入力してください。'}
+        >
+          <Input w={280} {...register('profileName', { required: true })} />
+        </Input.Wrapper>
 
         <Radio.Group
           name="os"
@@ -71,14 +77,16 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
           required
           error={errors.os && '選択してください。'}
         >
-          {SELECT_ITEMS_OS.map((item) => (
-            <Radio
-              key={item.value}
-              value={item.value}
-              label={item.label}
-              {...register('os', { required: true })}
-            />
-          ))}
+          <div className="mt-2 flex gap-4">
+            {SELECT_ITEMS_OS.map((item) => (
+              <Radio
+                key={item.value}
+                value={item.value}
+                label={item.label}
+                {...register('os', { required: true })}
+              />
+            ))}
+          </div>
         </Radio.Group>
 
         <Radio.Group
@@ -88,14 +96,16 @@ export const EntryForm: FC<Props> = ({ email, onSubmit }) => {
           required
           error={errors.byFind && '選択してください。'}
         >
-          {SELECT_ITEMS_BY_FIND.map((item) => (
-            <Radio
-              key={item.value}
-              value={item.value}
-              label={item.label}
-              {...register('byFind', { required: true })}
-            />
-          ))}
+          <div className="mt-2 flex gap-4">
+            {SELECT_ITEMS_BY_FIND.map((item) => (
+              <Radio
+                key={item.value}
+                value={item.value}
+                label={item.label}
+                {...register('byFind', { required: true })}
+              />
+            ))}
+          </div>
         </Radio.Group>
 
         <Button type="submit" loading={loading} disabled={loading}>
