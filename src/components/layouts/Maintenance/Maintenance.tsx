@@ -33,7 +33,7 @@ export const Maintenance: FC = () => {
       <footer className="fixed bottom-0 left-0 flex h-40 w-full flex-col justify-between bg-gray-800 px-8 pt-6 text-white sp:h-40">
         <div className="flex gap-10">
           <div>
-            <div className="a-reset flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <Image
                 src="/logo.png"
                 alt="site logo"

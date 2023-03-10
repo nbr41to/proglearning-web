@@ -3,6 +3,8 @@ import type { FC } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@/components/common/icons';
 import { Description } from '@/components/features/landing/Description';
 import { Hero } from '@/components/features/landing/Hero';
+import { Hero2 } from '@/components/features/landing/Hero2';
+import { Hero3 } from '@/components/features/landing/Hero3';
 import { Introduction } from '@/components/features/landing/Introduction';
 import { News } from '@/components/features/landing/News';
 import { Carousel } from '@mantine/carousel';
@@ -56,10 +58,10 @@ export const LandingTemplate: FC = () => {
           <Hero />
         </Carousel.Slide>
         <Carousel.Slide>
-          <Hero />
+          <Hero2 />
         </Carousel.Slide>
         <Carousel.Slide>
-          <Hero />
+          <Hero3 />
         </Carousel.Slide>
       </Carousel>
 
