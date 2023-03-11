@@ -14,7 +14,7 @@ export default async function handler(
     ? Buffer.from(apiKey, 'base64').toString()
     : undefined;
 
-  if (!decodedApiKey || decodedApiKey !== process.env.DISCORD_SESSION_API_KEY) {
+  if (!decodedApiKey || decodedApiKey !== process.env.EXTERNAL_API_KEY) {
     res.status(401).end('Unauthorized');
 
     return;

@@ -89,8 +89,6 @@ export const DashboardTemplate: FC<Props> = ({
           />
         </div>
       </div>
-
-      <div>最近見たLessons</div>
     </div>
   );
 };
