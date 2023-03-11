@@ -2,8 +2,8 @@ import type { FC } from 'react';
 
 import { CreditCardIcon } from '@/components/common/icons';
 import { useGetMeStatus } from '@/hooks/apiHook/useGetMeStatus';
+import { useLoading } from '@/hooks/stateHook/useLoading';
 import { useSupabaseAuth } from '@/hooks/supabaseHook/useSupabaseAuth';
-import { useLoading } from '@/hooks/useLoading';
 import { withdraw } from '@/models/account/apis';
 import { getBillingPortalUrl } from '@/useCases/updateSubscription/apis';
 import { Button, Modal } from '@mantine/core';
