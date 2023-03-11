@@ -27,6 +27,10 @@ module.exports = {
       lg: '1024px',
       // => @media (min-width: 1024px) { ... }
     },
+    aria: {
+      expanded: 'expanded="true"',
+      unexpanded: 'expanded="false"',
+    },
   },
   plugins: [require('@tailwindcss/line-clamp')],
   corePlugins: {

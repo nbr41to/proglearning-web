@@ -90,3 +90,18 @@ body {
     @apply no-underline;
   }
 }
+@layer utilities {
+  .humburgerBase {
+    clip-path: circle(150% at 50% 50%);
+    transition: clip-path 4s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+}
+
+@layer utilities {
+  .humburgerinner {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    transition: transform 2s cubic-bezier(0.19, 1, 0.22, 1) 1s,
+      opacity 0.75s linear 1s;
+  }
+}
