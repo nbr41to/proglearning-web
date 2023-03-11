@@ -31,10 +31,10 @@ export default async function handler(
         });
       }
 
-      let consumerId = payment?.stripe_customer_id;
+      let customerId = payment?.stripe_customer_id;
 
       /* Stripeのcustomerを作成 */
-      if (!consumerId) {
+      if (!customerId) {
         const customer = await createCustomer({
           name: user.user_metadata.name || '',
           email: user.email || '',
@@ -43,20 +43,27 @@ export default async function handler(
           },
         });
 
-        consumerId = customer.id;
+        customerId = customer.id;
 
         await prisma.payment.update({
           where: {
             id: payment.id as string,
           },
           data: {
-            stripe_customer_id: consumerId,
+            stripe_customer_id: customerId,
           },
         });
       }
 
       /* 支払い方法の登録 */
-      const session = await createCheckoutSession(consumerId);
+      const priceId =
+        req.body.plan === 'monthly'
+          ? process.env.STRIPE_CLOSER_MONTHLY_PLAN_ID ?? ''
+          : process.env.STRIPE_CLOSER_YEARLY_PLAN_ID ?? '';
+      const session = await createCheckoutSession({
+        customerId,
+        priceId,
+      });
 
       return res.status(200).json({ sessionId: session.id });
     } catch (err: any) {

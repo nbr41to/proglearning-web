@@ -1,7 +1,7 @@
 import type { Account, Profile } from '@prisma/client';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { MeEditingForm as Component } from './MeEditingForm';
+import { SettingMyProfile as Component } from './SettingMyProfile';
 import dummy_account from '@/__mocks__/account.json';
 import dummy_profile from '@/__mocks__/profile.json';
 

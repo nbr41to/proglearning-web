@@ -3,23 +3,25 @@ import type { FC } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@/components/common/icons';
 import { Description } from '@/components/features/landing/Description';
 import { Hero } from '@/components/features/landing/Hero';
+import { Hero2 } from '@/components/features/landing/Hero2';
+import { Hero3 } from '@/components/features/landing/Hero3';
 import { Introduction } from '@/components/features/landing/Introduction';
 import { News } from '@/components/features/landing/News';
 import { Carousel } from '@mantine/carousel';
-import { createStyles } from '@mantine/core';
+import { createStyles, getStylesRef } from '@mantine/core';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
 
-const useStyles = createStyles((_theme, _params, getRef) => ({
+const useStyles = createStyles(() => ({
   root: {
     '&:hover': {
-      [`& .${getRef('controls')}`]: {
+      [`& .${getStylesRef('controls')}`]: {
         opacity: 1,
       },
     },
   },
   controls: {
-    ref: getRef('controls'),
+    ref: getStylesRef('controls'),
     transition: 'opacity 150ms ease',
     opacity: 0,
   },
@@ -56,10 +58,10 @@ export const LandingTemplate: FC = () => {
           <Hero />
         </Carousel.Slide>
         <Carousel.Slide>
-          <Hero />
+          <Hero2 />
         </Carousel.Slide>
         <Carousel.Slide>
-          <Hero />
+          <Hero3 />
         </Carousel.Slide>
       </Carousel>
 

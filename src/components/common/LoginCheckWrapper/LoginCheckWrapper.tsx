@@ -39,7 +39,14 @@ export const LoginCheckWrapper: FC<Props> = ({
       >
         <div>この機能を使用するには登録する必要があります🥺</div>
         <div className="mt-4 flex justify-center gap-4">
-          <Button onClick={() => router.push('/entry')}>登録する</Button>
+          <Button
+            onClick={() => {
+              router.push('/entry');
+              setOpened(false);
+            }}
+          >
+            登録する
+          </Button>
           <Button variant="outline" onClick={() => setOpened(false)}>
             閉じる
           </Button>

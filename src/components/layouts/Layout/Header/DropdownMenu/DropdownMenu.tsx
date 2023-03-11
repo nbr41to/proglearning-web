@@ -40,7 +40,7 @@ export const DropdownMenu: FC<Props> = ({
       arrowSize={10}
       arrowRadius={2}
       arrowPosition="center"
-      transition="pop-top-right"
+      transitionProps={{ transition: 'pop-top-right', duration: 100 }}
       position="bottom-end"
     >
       <Menu.Target>
@@ -78,23 +78,24 @@ export const DropdownMenu: FC<Props> = ({
         </Menu.Item>
         <Menu.Item
           icon={<BookOpenIcon size={16} />}
-          onClick={() => router.push('/lessons')}
+          disabled={true}
+          // onClick={() => router.push('/lessons')}
         >
-          Lessons
+          Lessons (Coming Soon)
         </Menu.Item>
         <Menu.Item
           icon={<QuillPenIcon size={16} />}
           disabled={true}
-          // disabled={!isCheckedOut} TODO: 未実装
           // onClick={() => router.push(`/output`)}
         >
           Output (Coming Soon)
         </Menu.Item>
         <Menu.Item
           icon={<PomodoroIcon size={16} />}
-          onClick={() => router.push('/pomodoro')}
+          disabled={true}
+          // onClick={() => router.push('/pomodoro')}
         >
-          Pomodoro
+          Pomodoro (Coming Soon)
         </Menu.Item>
         <Menu.Item
           icon={<SettingIcon size={16} />}

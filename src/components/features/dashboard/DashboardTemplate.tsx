@@ -58,24 +58,6 @@ export const DashboardTemplate: FC<Props> = ({
         </div>
 
         <div className="flex flex-grow flex-col gap-4">
-          <ActionButton
-            label="ポモドーロする"
-            icon={<PomodoroIcon />}
-            fill
-            onClick={() => router.push('/pomodoro')}
-          />
-          <ActionButton
-            label="TODO アプリを作る"
-            icon={<CheckIcon />}
-            fill
-            onClick={() => router.push('/todo-app')}
-          />
-          <ActionButton
-            label="Lesson を受ける"
-            icon={<BookIcon />}
-            fill
-            onClick={() => router.push('/lessons')}
-          />
           {!profile.introduction && (
             <ActionButton
               label="自己紹介を設定する"
@@ -84,6 +66,27 @@ export const DashboardTemplate: FC<Props> = ({
               onClick={() => router.push('/setting')}
             />
           )}
+          <ActionButton
+            label="Lesson を受ける"
+            icon={<BookIcon />}
+            disabled
+            fill
+            onClick={() => router.push('/lessons')}
+          />
+          <ActionButton
+            label="ポモドーロする"
+            disabled
+            icon={<PomodoroIcon />}
+            fill
+            onClick={() => router.push('/pomodoro')}
+          />
+          <ActionButton
+            label="TODO アプリを作る"
+            disabled
+            icon={<CheckIcon />}
+            fill
+            onClick={() => router.push('/todo-app')}
+          />
         </div>
       </div>
 

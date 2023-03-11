@@ -11,7 +11,7 @@ type Props = {
   userEmail?: string;
   step: number;
   submitAccount: (params: AccountValidatedCreateParams) => Promise<void>;
-  registerPayment: () => Promise<void>;
+  registerPayment: (plan: string) => Promise<void>;
 };
 
 export const EntryTemplate: FC<Props> = ({

@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { getPublicChannelList } from '@/server/slack/conversations';
 
+/* チャンネルリストの取得 */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

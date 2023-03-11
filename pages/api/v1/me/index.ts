@@ -15,11 +15,7 @@ const ProtectedRoute: NextApiHandler = async (
   res: NextApiResponse<Account | null | ErrorResponse>
 ) => {
   const user = await getSessionUser({ req, res });
-  if (!user)
-    return res.status(401).json({
-      status: 401,
-      message: 'unauthorized',
-    });
+  if (!user) return res.status(200).json(null);
 
   const uid = user.id;
   const method = req.method;
@@ -88,15 +84,16 @@ const ProtectedRoute: NextApiHandler = async (
         });
 
       /* Initialize Account */
+      const { profileName, ...rest } = body;
       const account = await prisma.account.upsert({
         where: { uid },
         update: {},
         create: {
-          ...body,
+          ...rest,
           uid,
           profile: {
             create: {
-              name: body.name,
+              name: profileName,
             },
           },
           payment: {

@@ -1,14 +1,11 @@
 import type { ReactNode } from 'react';
 
 import {
-  BookIcon,
-  CheckIcon,
   DashboardIcon,
   LeafIcon,
   MailIcon,
   SearchIcon,
   SettingIcon,
-  PomodoroIcon,
 } from '@/components/common/icons';
 import { useGetMeStatus } from '@/hooks/apiHook/useGetMeStatus';
 import { SpotlightProvider as MantineSpotlightProvider } from '@mantine/spotlight';
@@ -36,12 +33,12 @@ export const SpotlightProvider = ({ children }: { children: ReactNode }) => {
         onTrigger: () => router.push('/getting-started'),
         disabled,
       },
-      {
-        title: 'Lessons',
-        description: '教材一覧',
-        icon: <BookIcon size={26} />,
-        onTrigger: () => router.push('/lessons'),
-      },
+      // {
+      //   title: 'Lessons',
+      //   description: '教材一覧',
+      //   icon: <BookIcon size={26} />,
+      //   onTrigger: () => router.push('/lessons'),
+      // },
       // {
       //   title: 'Output',
       //   description: '勉強したことをアウトプットできます',
@@ -50,18 +47,18 @@ export const SpotlightProvider = ({ children }: { children: ReactNode }) => {
       //   // disabled,
       //   onTrigger: () => router.push('/output'),
       // },
-      {
-        title: 'Your Todo-app',
-        description: 'TODOリスト',
-        icon: <CheckIcon size={26} />,
-        onTrigger: () => router.push('/todo-app'),
-      },
-      {
-        title: 'Pomodoro',
-        description: 'ポモドーロ・テクニックで集中力を高める',
-        icon: <PomodoroIcon size={26} />,
-        onTrigger: () => router.push('/pomodoro'),
-      },
+      // {
+      //   title: 'Your Todo-app',
+      //   description: 'TODOリスト',
+      //   icon: <CheckIcon size={26} />,
+      //   onTrigger: () => router.push('/todo-app'),
+      // },
+      // {
+      //   title: 'Pomodoro',
+      //   description: 'ポモドーロ・テクニックで集中力を高める',
+      //   icon: <PomodoroIcon size={26} />,
+      //   onTrigger: () => router.push('/pomodoro'),
+      // },
       {
         title: 'Contact',
         description: 'お問い合わせはこちら',
@@ -90,9 +87,9 @@ export const SpotlightProvider = ({ children }: { children: ReactNode }) => {
       nothingFoundMessage="Nothing found..."
       withinPortal
       highlightQuery
-      overlayOpacity={0.3}
+      overlayProps={{ opacity: 0.3 }}
       styles={{
-        spotlight: {
+        content: {
           maxHeight: '60vh',
         },
       }}

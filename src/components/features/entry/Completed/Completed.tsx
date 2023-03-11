@@ -11,10 +11,10 @@ export const Completed: FC = () => {
   return (
     <SignboardContainer fill>
       <div className="mx-auto w-fit space-y-4 py-4 px-6">
-        <p className=" leading-loose">
-          お申し込みありがとうございます🎉 登録の手続きが完了いたしました。
-          登録いただいたメールアドレスにSlackの招待メールが届きます。
-          （3日以上経過してもメールが来ない場合はお手数ですが、お問い合わせページよりご連絡ください。）
+        <p className=" text-center leading-loose">
+          お申し込みありがとうございます🎉
+          <br />
+          ご登録のお手続きが完了いたしました。後ほど、ご登録いただいたメールアドレス宛にSlackの招待メールを送らせていただきます。（3日以上経過してもメールが来ない場合はお手数ですが、お問い合わせページよりご連絡ください。）
           Slackのインストールがまだお済みでない方は
           <a
             href="https://slack.com/intl/ja-jp/download"
@@ -23,7 +23,7 @@ export const Completed: FC = () => {
           >
             こちら
           </a>
-          からインストールすることをおすすめいたします。
+          からインストールをお願いいたします。
         </p>
         <div className="mx-auto w-fit">
           <Button

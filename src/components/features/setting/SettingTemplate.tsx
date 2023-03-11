@@ -8,10 +8,8 @@ import {
   ProfileIcon,
   SettingIcon,
 } from '@/components/common/icons';
-import { MyProfile } from '@/components/features/setting/MyProfile/MyProfile';
 import { MySubscription } from '@/components/features/setting/MySubscription/MySubscription';
-import { getStripe } from '@/libs/stripe';
-import { createStripeCheckout } from '@/useCases/checkout/apis';
+import { SettingMyProfile } from '@/components/features/setting/SettingMyProfile/SettingMyProfile';
 import { Tabs } from '@mantine/core';
 
 type Props = {
@@ -29,14 +27,6 @@ export const SettingTemplate: FC<Props> = ({
   onUpdateAccount,
   onUpdateProfile,
 }) => {
-  /* 支払い画面へ */
-  const onCheckout = async () => {
-    const response = await createStripeCheckout(account.uid);
-    const { sessionId } = response.data;
-    const stripe = await getStripe();
-    stripe?.redirectToCheckout({ sessionId });
-  };
-
   return (
     <div className="w-main mx-auto space-y-4 px-8">
       <h2>アカウント管理</h2>
@@ -58,7 +48,7 @@ export const SettingTemplate: FC<Props> = ({
         </Tabs.List>
 
         <Tabs.Panel value="profile">
-          <MyProfile
+          <SettingMyProfile
             account={account}
             onSubmitGoal={onSubmitGoal}
             onUpdateAccount={onUpdateAccount}
@@ -67,7 +57,7 @@ export const SettingTemplate: FC<Props> = ({
         </Tabs.Panel>
 
         <Tabs.Panel value="subscription" pt="xs">
-          <MySubscription plan="closer" onCheckout={onCheckout} />
+          <MySubscription plan="closer" />
         </Tabs.Panel>
 
         <Tabs.Panel value="settings" pt="xs">

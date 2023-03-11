@@ -1,4 +1,5 @@
 import '@/styles/globals.css';
+import { RecoilRoot } from 'recoil';
 import { MantineProvider } from '@/components/layouts/Providers/MantineProvider';
 
 export const parameters = {
@@ -24,7 +25,9 @@ export const decorators = [
   (Story) => {
     return (
       <MantineProvider>
-        <Story />
+        <RecoilRoot>
+          <Story />
+        </RecoilRoot>
       </MantineProvider>
     );
   },

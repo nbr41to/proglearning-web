@@ -8,11 +8,11 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     try {
-      const { text } = req.body;
+      const { content } = req.body;
       const response = await sendMessage({
         channel: process.env.SLACK_NOTI_FORM_CHANNEL_ID || '',
         mrkdwn: true,
-        text,
+        text: content,
       });
 
       if (!response.ok) {
