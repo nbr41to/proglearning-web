@@ -20,13 +20,9 @@ export const useSupabaseAuth = () => {
     [supabase.auth]
   );
 
-  const signOut = useCallback(
-    async (redirectTo?: string) => {
-      await supabase.auth.signOut();
-      await router.push(redirectTo ? redirectTo : '/login');
-    },
-    [router, supabase.auth]
-  );
+  const signOut = useCallback(async () => {
+    await supabase.auth.signOut();
+  }, [supabase.auth]);
 
   /* Development only */
   const developLogin = useCallback(async () => {
