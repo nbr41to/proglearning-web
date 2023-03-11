@@ -62,12 +62,35 @@ const EntryPage: NextPage = () => {
       <Head>
         <title>お申し込み | progLearning</title>
       </Head>
-      <EntryTemplate
-        userEmail={user?.email}
-        step={step}
-        submitAccount={submitAccount}
-        registerPayment={registerPayment}
-      />
+      <div className="sp:hidden">
+        <EntryTemplate
+          userEmail={user?.email}
+          step={step}
+          submitAccount={submitAccount}
+          registerPayment={registerPayment}
+        />
+      </div>
+
+      {/* TODO: スマホの申込みに対応する */}
+      <div className="hidden space-y-4 whitespace-pre py-4 px-6 text-center sp:block">
+        <h2>
+          PCの画面から
+          <wbr />
+          お申し込みください
+        </h2>
+        <p>
+          progLearningはPCで学習することを
+          <wbr />
+          前提としていおりますので、
+          <wbr />
+          お申し込みもPCからお願いいたします。
+        </p>
+        <p className="text-sm">
+          ※ブラウザの画面幅が狭い場合に、
+          <wbr />
+          この画面が表示される場合がございます。
+        </p>
+      </div>
     </>
   );
 };

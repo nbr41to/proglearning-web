@@ -5,6 +5,7 @@ import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/server/prisma/client';
 import { getSessionUser } from '@/server/supabase/auth';
 
+/* 自分以外のProfileを取得 */
 const ProtectedRoute: NextApiHandler = async (
   req: NextApiRequest,
   res: NextApiResponse<Profile | ErrorResponse>

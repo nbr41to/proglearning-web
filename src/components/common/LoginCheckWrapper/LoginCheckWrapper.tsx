@@ -7,11 +7,13 @@ import { useState } from 'react';
 type Props = {
   children: ReactNode;
   isOverlay?: boolean;
+  isLogin?: boolean;
 };
 
 export const LoginCheckWrapper: FC<Props> = ({
   children,
   isOverlay = false,
+  isLogin = false,
 }) => {
   const router = useRouter();
   const [opened, setOpened] = useState(false);
@@ -19,16 +21,18 @@ export const LoginCheckWrapper: FC<Props> = ({
   return (
     <>
       <div className="relative h-fit w-fit">
-        <div
-          className={clsx(
-            'absolute z-10 -m-0.5 h-[calc(100%+4px)] w-[calc(100%+4px)] cursor-pointer',
-            isOverlay &&
-              'grid place-content-center rounded bg-gray-800 font-bold text-white opacity-70'
-          )}
-          onClick={() => setOpened(true)}
-        >
-          {isOverlay && 'Sign up and open'}
-        </div>
+        {!isLogin && (
+          <div
+            className={clsx(
+              'absolute z-10 -m-0.5 h-[calc(100%+4px)] w-[calc(100%+4px)] cursor-pointer',
+              isOverlay &&
+                'grid place-content-center rounded bg-gray-800 font-bold text-white opacity-70'
+            )}
+            onClick={() => setOpened(true)}
+          >
+            {isOverlay && 'Sign up and open'}
+          </div>
+        )}
         {children}
       </div>
 

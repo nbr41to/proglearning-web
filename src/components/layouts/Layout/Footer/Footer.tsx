@@ -1,3 +1,4 @@
+import type { Status } from '@/models/status/types';
 import type { FC } from 'react';
 
 import { LoginCheckWrapper } from '@/components/common/LoginCheckWrapper';
@@ -5,7 +6,13 @@ import { siteMapPaths } from '@/components/layouts/menu';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const Footer: FC = () => {
+type Props = {
+  status?: Status | null;
+};
+
+export const Footer: FC<Props> = ({ status }) => {
+  const isLogin = !!status;
+
   return (
     <footer className="fixed bottom-0 left-0 flex h-60 w-full flex-col justify-between bg-gray-800 px-8 pt-6 text-white sp:h-40">
       <div className="flex gap-10">
@@ -42,7 +49,7 @@ export const Footer: FC = () => {
           <div className="space-y-2">
             <div className="py-1 text-sm">- User -</div>
             {siteMapPaths.user.map((path) => (
-              <LoginCheckWrapper key={path.path}>
+              <LoginCheckWrapper key={path.path} isLogin={isLogin}>
                 <Link
                   className="a-reset block w-fit cursor-pointer text-xs font-bold hover:underline"
                   href={path.path}

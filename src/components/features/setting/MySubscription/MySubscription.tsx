@@ -2,6 +2,7 @@ import type { FC } from 'react';
 
 import { CreditCardIcon } from '@/components/common/icons';
 import { useGetMeStatus } from '@/hooks/apiHook/useGetMeStatus';
+import { useLoading } from '@/hooks/stateHook/useLoading';
 import { useSupabaseAuth } from '@/hooks/supabaseHook/useSupabaseAuth';
 import { withdraw } from '@/models/account/apis';
 import { getBillingPortalUrl } from '@/useCases/updateSubscription/apis';
@@ -15,20 +16,26 @@ type Props = {
 
 export const MySubscription: FC<Props> = ({ plan }) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [isWithdrawConfirm, setIsWithdrawConfirm] = useState(false);
   const { signOut } = useSupabaseAuth();
+  useLoading(isLoading);
 
   const { data: status } = useGetMeStatus();
   const isCheckout = !!status?.checked_out;
 
   const openCustomerPortal = async () => {
     if (!status) return;
+    setIsLoading(true);
     const response = await getBillingPortalUrl(status.id);
     const { portalUrl } = response.data;
+    setIsLoading(false);
     window.open(portalUrl);
   };
   const onUnsubscribe = async () => {
+    setIsLoading(true);
     const response = await withdraw();
+    setIsLoading(false);
     if (response.status !== 200) return;
     signOut('/');
   };
