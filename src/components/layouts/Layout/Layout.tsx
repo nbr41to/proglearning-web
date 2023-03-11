@@ -1,4 +1,4 @@
-import type { Status } from '@prisma/client';
+import type { Status } from '@/models/status/types';
 import type { User } from '@supabase/supabase-js';
 import type { FC, ReactNode } from 'react';
 
