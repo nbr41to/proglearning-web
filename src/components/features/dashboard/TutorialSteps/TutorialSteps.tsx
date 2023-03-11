@@ -8,8 +8,8 @@ import {
   TouchIcon,
 } from '@/components/common/icons';
 import { SignboardContainer } from '@/components/common/SignboardContainer';
-import { Stepper } from '@mantine/core';
-import { useMemo } from 'react';
+import { LoadingOverlay, Stepper } from '@mantine/core';
+import { useState, useMemo } from 'react';
 
 type Props = {
   currentStep: number;
@@ -36,8 +36,18 @@ export const TutorialSteps: FC<Props> = ({
     return completed;
   }, [currentStep, step2Disabled, step4Disabled, step5Disabled, completed]);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onStepClickHandler = async (value: number) => {
+    if (completed) return;
+    setIsLoading(true);
+    await onStepClick(value + 1);
+    setIsLoading(false);
+  };
+
   return (
     <SignboardContainer>
+      <LoadingOverlay visible={isLoading} overlayBlur={2} />
       <div className="w-fit">
         <h3 className="text-center font-baloo">- Tutorial step -</h3>
         <div className="relative mt-3 flex w-72 rounded bg-white px-4 pt-4">
@@ -51,7 +61,7 @@ export const TutorialSteps: FC<Props> = ({
           <Stepper
             size="sm"
             active={currentStep}
-            onStepClick={(value) => !completed && onStepClick(value + 1)}
+            onStepClick={onStepClickHandler}
             orientation="vertical"
           >
             <Stepper.Step
@@ -69,6 +79,7 @@ export const TutorialSteps: FC<Props> = ({
               icon={<LeafIcon size={18} />}
               label="3. Getting Started を読む"
               description="Read the Getting Started"
+              disabled={step2Disabled}
             />
             <Stepper.Step
               icon={<ProfileIcon size={18} />}

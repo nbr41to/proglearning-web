@@ -64,7 +64,6 @@ export const DropdownMenu: FC<Props> = ({
         <Menu.Label>{email}</Menu.Label>
         <Menu.Item
           icon={<DashboardIcon size={16} />}
-          disabled={!isCheckedOut}
           onClick={() => router.push(`/dashboard`)}
         >
           Dashboard
