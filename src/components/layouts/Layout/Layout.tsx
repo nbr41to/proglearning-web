@@ -1,4 +1,4 @@
-import type { Status } from '@prisma/client';
+import type { Status } from '@/models/status/types';
 import type { User } from '@supabase/supabase-js';
 import type { FC, ReactNode } from 'react';
 
@@ -31,7 +31,7 @@ export const Layout: FC<Props> = ({
       <main className="relative z-10 mb-60 min-h-[calc(100vh-32px)] w-full bg-white pt-20 sp:mb-40">
         <div className="mx-auto max-w-[1280px]">{children}</div>
       </main>
-      <Footer />
+      <Footer status={status} />
     </>
   );
 };

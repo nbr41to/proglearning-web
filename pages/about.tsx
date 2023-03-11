@@ -5,6 +5,7 @@ import type { InferGetStaticPropsType, NextPage } from 'next';
 
 import { AboutTemplate } from '@/components/features/landing/about/AboutTemplate';
 import { getChildrenAllInBlock } from '@/server/notion/blocks';
+import Head from 'next/head';
 
 export const getStaticProps = async () => {
   const blocks = (await getChildrenAllInBlock(
@@ -23,6 +24,9 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 const AboutPage: NextPage<Props> = ({ blocks }) => {
   return (
     <>
+      <Head>
+        <title>About | progLearning</title>
+      </Head>
       <AboutTemplate blocks={blocks} />
     </>
   );
