@@ -6,7 +6,7 @@ type Props = {
   label: string;
   controls: string;
 };
-export const Humburger: FC<Props> = ({ open, onClick, label, controls }) => {
+export const Hamburger: FC<Props> = ({ open, onClick, label, controls }) => {
   return (
     <>
       <button
@@ -14,13 +14,13 @@ export const Humburger: FC<Props> = ({ open, onClick, label, controls }) => {
         onClick={onClick}
         aria-label={label}
         aria-controls={controls}
-        className={`aria-expanded:humburgerBase invisible fixed bottom-4 right-4 z-50 h-12 w-36 font-baloo sp:visible ${
+        className={`invisible fixed bottom-4 right-4 z-50 h-8 w-24 font-baloo transition duration-700 sp:visible ${
           open === true
             ? 'bg-gray-100 text-zinc-800'
             : 'bg-zinc-800 text-gray-100'
         }`}
       >
-        {open === true ? 'Touch' : 'Cloce'}
+        {open === false ? 'Menu' : 'Close'}
       </button>
     </>
   );
