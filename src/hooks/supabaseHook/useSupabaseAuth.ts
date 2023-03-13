@@ -2,11 +2,13 @@ import { baseUrl } from '@/utils/url';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
+import { useSWRConfig } from 'swr';
 
 /* 認証に関する処理 */
 export const useSupabaseAuth = () => {
   const router = useRouter();
   const supabase = useSupabaseClient();
+  const { mutate } = useSWRConfig();
 
   const signInWithGoogle = useCallback(
     async (redirectTo?: string) => {
@@ -22,7 +24,13 @@ export const useSupabaseAuth = () => {
 
   const signOut = useCallback(async () => {
     await supabase.auth.signOut();
-  }, [supabase.auth]);
+    /* SWRのcacheを削除 */
+    await mutate(
+      () => true, // which cache keys are updated
+      undefined, // update cache data to `undefined`
+      { revalidate: false } // do not revalidate
+    );
+  }, [supabase.auth, mutate]);
 
   /* Development only */
   const developLogin = useCallback(async () => {

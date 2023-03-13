@@ -33,14 +33,14 @@ export const AboutTemplate: FC<Props> = ({ blocks }) => {
   );
 
   return (
-    <div className="mx-auto flex justify-center gap-8 px-8 pt-7">
+    <div className="mx-auto flex justify-center gap-8 px-8 pt-7 sp:pt-0">
       <div className="w-aside">
         <div className="sticky top-28 max-w-[240px]">
           <TableOfContents headingList={headingList} />
         </div>
       </div>
 
-      <div className="w-main flex-grow">
+      <div className="w-main flex-grow sp:px-4">
         {blocks.map((block) => (
           <div key={block.id}>{blockToJsx(block)}</div>
         ))}

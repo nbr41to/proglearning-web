@@ -37,8 +37,8 @@ export const MySubscription: FC<Props> = ({ plan }) => {
     const response = await withdraw();
     setIsLoading(false);
     if (response.status !== 200) return;
-    await signOut();
     await router.push('/');
+    await signOut();
   };
 
   return (

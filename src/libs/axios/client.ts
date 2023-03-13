@@ -17,8 +17,8 @@ axios.interceptors.response.use(
      * 要認証ページ下における認証失敗
      * - 401 Unauthorized
      */
-    if (typeof window !== 'undefined') {
-      if (error.response?.status === 401) {
+    if (error.response?.status === 401) {
+      if (typeof window !== 'undefined') {
         window.location.href = '/login';
 
         return;

@@ -41,7 +41,7 @@ const useStyles = createStyles(() => ({
 
 export const LandingTemplate: FC = () => {
   const { classes } = useStyles();
-  const autoplay = useRef(Autoplay({ delay: 3000 }));
+  const autoplay = useRef(Autoplay({ delay: 4000 }));
 
   return (
     <div className="w-main mx-auto space-y-16 pb-60 sp:space-y-6 sp:pb-24">
