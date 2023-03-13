@@ -5,6 +5,9 @@ import { useGetMe } from '@/hooks/apiHook/useGetMe';
 import { useLoading } from '@/hooks/stateHook/useLoading';
 import { updateProfile } from '@/models/profile/apis';
 import { updateStatus } from '@/models/status/apis';
+import { showNotification } from '@mantine/notifications';
+import Router from 'next/router';
+import { useEffect } from 'react';
 
 const DashboardPage: NextPage = () => {
   const {
@@ -30,6 +33,18 @@ const DashboardPage: NextPage = () => {
     await updateProfile({ current_goal: goal });
     await mutate();
   };
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (!account) {
+      showNotification({
+        title: 'アカウントが存在しません',
+        message: 'アカウントを作成してください。',
+        color: 'red',
+      });
+      Router.push('/entry');
+    }
+  }, [isLoading, account]);
 
   if (!account) return null;
   if (!account.status) return null;
